@@ -1,0 +1,233 @@
+.catalog__tab__calculate
+	overflow: hidden
+
+// heading 
+.ctc__heading
+	opacity: 0.7
+	padding-right: 10px
+	&:hover
+		opacity: 1
+	&:after
+		margin-left: 9px
+	.__ramka
+		opacity: 0
+		.--night &
+			color: $fc
+		.--day &
+			color: $fcday
+
+	&.__active
+		opacity: 1
+		.__ramka
+			opacity: 0.2
+
+.ctc__heading-inner
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
+
+.ctc__heading:hover
+	cursor: pointer
+	color: $c
+	.--day &
+		color: $c2
+
+@media (max-width: 830px)
+	.ctc__heading-contains
+		width: 50%
+		height: 50px
+		padding-top: 5px
+
+@media (max-width: 550px)
+	.ctc__heading-contains
+		width: 100%
+
+	.ctc__heading-contains
+		padding-left: 2rem
+
+// tab 
+.ctc__item-inner
+	position: relative
+
+.ctc__item
+	position: absolute
+	top: 0
+	left: 100%
+	width: 100%
+	opacity: 0
+	display: flex
+	flex-wrap: wrap
+
+// .__active 
+.ctc__heading.__active
+	opacity: 1
+	color: $c
+	.--day &
+		color: $c2
+		&[data-comment]:after
+			color: $fc2
+
+.ctc__heading.__active:before
+	opacity: 1
+
+.ctc__item.__active
+	left: 0
+	opacity: 1
+
+.ctc__item.__outing
+	opacity: 0
+	left: -50%
+
+.ctc__item.__inting
+	left: 0
+	opacity: 1
+
+// calculate 
+.ctc__item-container
+	width: 50%
+	padding: $pl
+
+.ctc__item__img
+	max-width: 220px
+	margin: 0 auto 2rem auto
+	display: block
+	.--night &
+		opacity: 0.8
+
+.ctc__item__description p
+	font-size: 0.9rem
+
+.ctc__item__service
+	display: flex
+	padding-top: 3px
+	padding-bottom: 3px
+
+.ctc__item__service-name
+	margin-bottom: 0.5rem
+	font-size: 1.3rem
+	font-family: 'Roboto'
+
+.ctc__item__service-name:not(:first-child)
+	padding-top: 1.25rem
+	margin-top: 2.25rem
+	position: relative
+
+.ctc__item__service-name:not(:first-child):before,
+.ctc__item__service-name:not(:first-child):after
+	position: absolute
+	height: 1px
+	width: calc(100% + 30px)
+	left: -10px
+	content: ''
+
+.ctc__item__service-name:not(:first-child):before
+	top: -1px
+	background-color: $bcc
+	.--day &
+		background-color: $bcc2
+.ctc__item__service-name:not(:first-child):after
+	top: 0
+	background-color: $bc
+	.--day &
+		background-color: $bc2
+
+.ctc__item__service-name span
+	opacity: 0.2
+
+// ctc__item__service-check
+.ctc__item__service-check
+	width: 20px
+	position: relative
+	cursor: pointer
+
+.ctc__icon
+	position: absolute
+
+	top: 0
+	left: 0
+	width: 20px
+	height: 20px
+	&--check
+		opacity: 0.2
+	&--choise
+		opacity: 0.6
+	.__choise &--check
+		opacity: 0
+	.__checked &--choise
+		opacity: 0
+	.__checked & path
+		.--night &
+			fill: $fc
+		.--day &
+			fill: $fcday
+
+.ctc__item__service-options
+	width: calc(100% - 70px)
+	padding-left: $pl
+
+.ctc__item__service-price
+	width: 60px
+	text-align: right
+	padding-right: 10px
+	.--day .ctc__item__service:not(.__checked) &
+		color: $c2
+	.--day & > *
+		color: $fc2
+
+.ctc__item-price
+	display: flex
+	justify-content: flex-end
+	margin-right: -10px
+
+.ctc__item-price .ctc__item-price__border
+	width: 100px
+	display: block
+	position: relative
+	text-align: right
+
+	padding-top: 8px
+	margin-top: 8px
+	font-size: 1.3rem
+
+.ctc__item-price .ctc__item-price__border:before
+	position: absolute
+	content: ''
+	top: 0
+	right: -5px
+	width: 120px
+	height: 1px
+	background-color: $bc
+	.--day &
+		background-color: $bc2
+
+.ctc__item-price .ctc__item-price__border:after
+	position: absolute
+	content: ''
+	top: -1px
+	right: -5px
+	width: 120px
+	height: 1px
+	background-color: $bcc
+	.--day &
+		background-color: $bcc2
+
+.ctc__item-price .cod-rubl
+	width: 20px
+
+.ctc__item-price .cod-rubl::before
+	font-size: 1.35rem
+	top: 4px
+
+// media calculate 
+@media (max-width: 800px)
+	.ctc__item-container
+		width: 100%
+		padding: $pl
+
+.__checked .ctc__item__service-price,
+.__checked .ctc__item__service-options
+	opacity: 0.4
+	position: relative
+
+.__checked .ctc__item__service-price
+	text-decoration: line-through

@@ -1,0 +1,211 @@
+// forma 
+.forma
+	background-color: $bc_text
+	position: relative
+	border-bottom: 10px solid $bc
+	.--day &
+		background-color: $bc_text2
+		border-color: $border2
+
+.frm__inner
+	background: #171717
+	border-radius: 0
+	padding: 0 30px 0 30px
+	z-index: 1
+	color: $fc
+	.--day &
+		color: $fc2
+		background: $bcc2
+
+.frm__user-data-btn
+	padding: 0 15px !important
+	height: 50px
+	box-shadow: none
+	width: 98%
+	border: none
+	border-bottom: 1px $bc solid
+	background-color: $bc_text
+	margin-bottom: 3px
+	color: $fc
+	font-size: 1.2rem
+	outline: none
+	.--day &
+		color: $fc2
+		background-color: $bc_text2
+
+.frm__user-data-btn:hover
+	border-bottom: 1px $cs solid
+	.--day &
+		border-color: $c2
+
+.frm__user-data-btn::placeholder
+	color: $fc
+	font-size: $pl
+	opacity: 0.2
+	.--day &
+		color: $fc2
+.frm__user-data-btn:hover::placeholder
+	opacity: 0.8
+
+.frm__user-data-btn.__error
+	border: 1px red solid
+
+.frm__user-data-text.__error::placeholder
+	color: $c
+	font-size: 0.8rem
+	opacity: 0.8
+	.--day &
+		color: $c2
+
+.frm__user-data-btn:active
+	background-color: $c !important
+	.--day &
+		background-color: $c2 !important
+
+.frm__input-btm,
+.frm__external-button
+	font-size: .9rem
+	letter-spacing: 0.1rem
+	margin-top: 20px
+	padding: 0
+	border: 0
+	cursor: pointer
+	position: relative
+	font-weight: 700
+	color: $fc
+	background-color: $c
+	text-transform: uppercase
+	.--day &
+		color: $fc2
+		background-color: $c2
+
+// __btn-anim 
+.__btn-anim
+	position: relative
+	overflow: hidden
+	display: block
+
+	padding-top: 15px
+	padding-right: 45px
+	padding-bottom: 15px
+	padding-left: 25px
+
+.__btn-anim:before
+	top: 0
+	width: 30px
+	height: 100%
+	position: absolute
+	content: ''
+	background: linear-gradient(90deg, rgba(255,255,255,.1),rgba(255,255,255,.8),rgba(255,255,255,.4))
+	transform: skewX(-45deg)
+	animation: btn-anim 6000ms linear infinite
+	opacity: 0.2
+	.--day &
+		background: linear-gradient(90deg, rgba(240,190,55,.1),rgba(240,190,55,.8),rgba(240,190,55,.4))
+
+@keyframes btn-anim
+	0%
+		left: -600%
+
+	100%
+		left: 600%
+
+// frm__input-btm 
+.frm__input-btm:hover,
+.frm__external-button:hover
+	color: $bcc
+	background-color: $cc
+	.--day &
+		color: $bcc2
+		background-color: $cc2
+
+.frm__input-btm:active,
+.frm__external-button:active
+	transform: translate(4px, 4px)
+
+.frm__input-btm:active:after,
+.frm__external-button:active:after
+	transform: translate(0, 0)
+
+.frm__input-btm:hover:after,
+.frm__input-btm:active:after,
+.frm__external-button:hover:after,
+.frm__external-button:active:after
+	border-color: $cc
+	.--day &
+		border-color: $cc2
+
+.frm__input-btm:after,
+.frm__external-button:after
+	content: ''
+	position: absolute
+	border: 1px solid $c
+	border-top-width: 0
+	border-left-width: 0
+	width: 100%
+	height: 100%
+	top: 0
+	left: 0
+	transform: translate(4px, 4px)
+	.--day &
+		border-color: $c2
+
+.frm__personal
+	font-size: 0.8rem
+	margin-top: 20px
+	opacity: 0.2
+
+// __modal 
+.forma.frm__modal
+	position: fixed
+	opacity: 0
+	cursor: pointer
+	top: 0
+	left: 0
+	z-index: -1
+	width: 100%
+	height: 100%
+	background: none
+	padding: 15% 0
+
+.frm__modal .frm__inner
+	transform: translateY(-600px)
+	max-width: 600px
+	padding: 30px 50px 30px 30px
+	margin: 0 auto
+	cursor: default
+
+.frm__close-button
+	position: fixed
+	right: 0
+	top: 0
+	color: $fc
+	font-size: 2rem
+	background-color: $bc_text
+	width: 50px
+	height: 100%
+	line-height: 34px
+	text-align: center
+	border: 4px solid $bc
+	opacity: 0.2
+	cursor: pointer
+	padding-top: 125px
+	.--day &
+		color: $fc2
+		background-color: $bc_text2
+
+.frm__close-button:hover
+	border-color: $c
+	color: $c
+	opacity: 0.8
+	.--day &
+		color: $c2
+		border-color: $c2
+
+// .__active 
+.forma.frm__modal.__active
+	opacity: 1
+	z-index: 52
+
+.__active .frm__inner
+	transform: translateY(0)

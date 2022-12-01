@@ -1,0 +1,76 @@
+// banner-index 
+.banner-index
+	padding: 100px 0 100px
+	background-position: 80% 50%
+	background-repeat: no-repeat
+	background-size: cover
+	border-bottom: 10px solid $bc
+	margin-top: 60px
+	.--day &
+		border-color: $border2
+	&.--index
+		background-image: url('/design/template/images/banner-index/banners/night/index.jpg')
+	.--day &.--index
+		background-image: url('/design/template/images/banner-index/banners/day/index.jpg')
+	&.--saiting-creating
+		background-image: url('/design/template/images/banner-index/banners/night/creating.jpg')
+	.--day &.--saiting-creating
+		background-image: url('/design/template/images/banner-index/banners/day/creating.jpg')
+	&.--promotion
+		background-image: url('/design/template/images/banner-index/banners/night/promotion.jpg')
+	.--day &.--promotion
+		background-image: url('/design/template/images/banner-index/banners/day/promotion.jpg')
+	&.--maintenance
+		background-image: url('/design/template/images/banner-index/banners/night/maintenance.jpg')
+	.--day &.--maintenance
+		background-image: url('/design/template/images/banner-index/banners/day/maintenance.jpg')
+	&.--our-work
+		background-image: url('/design/template/images/banner-index/banners/night/our-work.jpg')
+	.--day &.--our-work
+		background-image: url('/design/template/images/banner-index/banners/day/our-work.jpg')
+
+	// btn
+	.btn-template
+		.--day &
+			background-color: $bcc2
+			&::after
+				border-color: $bcc2
+
+.bi__heading
+	font-size: 2.5rem
+	letter-spacing: 0.01rem
+	margin: 0 0 40px 0
+	font-weight: 500
+	font-family: 'Gilroy'
+	text-shadow: 1px 1px 3px rgb(0 0 0 / 30%)
+	.--day &
+		color: $fc
+	span
+		color: $c
+		font-size: 2.6rem
+		.--day &
+			color: $fc2
+		.--day .--promotion &
+			color: $c2
+
+.banner-index .container
+	border-left: none
+	border-right: none
+
+// media 
+@media (max-width: 800px)
+	.banner-index
+		background-position: 70% 0
+
+@media (max-width: 650px)
+	.banner-index
+		padding: 50px 0 50px 0
+	.bi__heading
+		font-size: 1.5rem
+		span
+			font-size: 1.6rem
+
+@media (max-width: 560px)
+	.banner-index
+		border-bottom: 1px solid $bc
+		background-position: 60% 0

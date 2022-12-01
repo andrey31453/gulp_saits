@@ -1,0 +1,18 @@
+.documents
+	padding-top: $psec
+	padding-bottom: $psec
+
+.documents__heading
+	text-align: center
+	margin-bottom: $psec
+
+.documents__items
+	display: grid
+	grid-gap: $p
+
+	body.--d &
+		grid-template-columns: 1fr 1fr 1fr
+	body.--m &
+		grid-template-columns: 1fr 1fr
+	body.--sm &
+		grid-template-columns: 1fr

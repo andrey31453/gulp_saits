@@ -1,0 +1,124 @@
+<section class='top-menu__fixed'>
+	<div class="tmf__mobile-menu">
+		<div class='container tmf__mobile-menu-container'>
+			<div class='tmf__menu-button'></div>
+			<div class='tmf__modal__phone __mobile-menu'>
+				<a class='tmf__modal__phone-wa' href='whatsapp://send?phone=+79687279889'></a>
+				<a class='tmf__modal__phone-tg' href='tg://resolve?domain=saitmyt'></a>
+				{* <a class='tmf__modal__phone-vb' href='viber://add?number=79687279889'></a> *}
+				<a class='tmf__modal__phone-number' href='tel:+79687279889'>+7(968)727-98-89</a>
+			</div>
+		</div>
+	</div>
+
+	<div class='substrate'></div>
+
+	<nav class='tmf__menu-container'>
+		<div class='container'>
+			{if $categories}
+			<ul class='tmf__item-container'>
+
+				<a class='tmf__index-link' href='/'>
+					<span class='__logo'>#</span>
+					<span class='__devise'>
+						<span>Быстрые &</span>
+						<br>Легкие сайты
+					</span>
+					<span class='__mobile'>
+						Главная
+					</span>
+				</a>
+
+				{foreach $categories as $c}
+				{if $c->visible}
+				<li class='tmf__item tmf__catalog-item'>
+					<a class='tmf__link{if $page && $page->id == $p->id} tmf__link--selected{/if}' href='catalog/{$c->url}'>
+						{$c->name}
+					</a><span class='tmf__target-for-inner-menu'></span>
+					{if $c->subcategories}
+					<div class='tmf__box'>
+						{foreach $c->subcategories as $cat}
+						{if $cat->visible}
+						<ul class='tmf__item-container'>
+							<li class='tmf__item tmf__item-2'>
+								<a class='tmf__link tmf__link-2' href='catalog/{$cat->url}'>{$cat->name}</a>
+							</li>
+						</ul>
+						{/if}
+						{/foreach}
+					</div>
+					{/if}
+				</li>
+				{/if}
+				{/foreach}
+				{/if}
+
+				{foreach $pages as $p}
+				{* Выводим только страницы из первого меню *}
+				{if $p->menu_id == 1}
+				<li class='tmf__item tmf__page-item' {if $page && $page->id == $p->id}class='selected'{/if}>
+					<a class='tmf__link{if $page && $page->id == $p->id} tmf__link--selected{/if}' data-page='{$p->id}' href='{$p->url}'>{$p->name|escape}</a>
+				</li>
+				{/if}
+				{/foreach}
+				<li class='tmf__item tmf__item-contacts' data-comment='contacts'><a class='tmf__link __contact-button'
+						href='#'>Контакты</a></li>
+						<li class='tmf__item tmf__item-theme js__themes-btn'>
+					<a class='tmf__link __theme-button' href='#'>
+						<svg class="--day" viewBox="0 0 5200 5200">
+							<path
+								d="M2615.17 1118.62c803.09,0 1454.12,651.03 1454.12,1454.12 0,803.1 -651.03,1454.13 -1454.12,1454.13 -803.09,0 -1454.12,-651.03 -1454.12,-1454.13 0,-803.09 651.03,-1454.12 1454.12,-1454.12z" />
+							<path
+								d="M3806.78 1380.44c-100.16,-100.17 -53.81,-308.9 103.51,-466.23 157.33,-157.33 366.06,-203.66 466.22,-103.51 100.16,100.16 53.81,308.9 -103.51,466.23 -157.33,157.32 -366.06,203.67 -466.22,103.51zm-2965.81 2965.8c-100.15,-100.16 -53.81,-308.89 103.52,-466.22 157.33,-157.33 366.06,-203.67 466.22,-103.52 100.16,100.16 53.81,308.9 -103.51,466.23 -157.33,157.32 -366.06,203.67 -466.23,103.51zm2965.26 -559.83c100.15,-100.16 308.89,-53.82 466.21,103.52 157.34,157.32 203.68,366.06 103.52,466.21 -100.16,100.17 -308.9,53.82 -466.22,-103.51 -157.33,-157.32 -203.67,-366.06 -103.51,-466.22zm-2947.52 -2947.51c100.15,-100.16 308.9,-53.82 466.22,103.51 157.33,157.33 203.67,366.06 103.51,466.22 -100.16,100.16 -308.89,53.81 -466.22,-103.51 -157.33,-157.33 -203.67,-366.07 -103.51,-466.22zm3458.13 1733.85c0,-141.65 180.37,-256.48 402.86,-256.48 222.5,0 402.87,114.83 402.87,256.48 0,141.64 -180.37,256.47 -402.87,256.47 -222.49,0 -402.86,-114.83 -402.86,-256.47zm-4194.27 0c0,-141.65 180.36,-256.48 402.86,-256.48 222.49,0 402.86,114.83 402.86,256.48 0,141.64 -180.37,256.47 -402.86,256.47 -222.5,0 -402.86,-114.83 -402.86,-256.47zm2492.6 1700.88c141.65,0 256.47,180.37 256.47,402.87 0,222.49 -114.82,402.86 -256.47,402.86 -141.65,0 -256.47,-180.37 -256.47,-402.86 0,-222.5 114.82,-402.87 256.47,-402.87zm0 -4168.41c141.65,0 256.47,180.37 256.47,402.86 0,222.5 -114.82,402.87 -256.47,402.87 -141.65,0 -256.47,-180.37 -256.47,-402.87 0,-222.49 114.82,-402.86 256.47,-402.86z" />
+						</svg>
+
+						<svg class="--night" viewBox="0 0 5200 5200">
+							<path
+								d="M2947.89 240.43c1199.58,227.16 2062.29,1324.7 1967.67,2570.67 -101.6,1337.99 -1268.64,2340.29 -2606.63,2238.68 -785.48,-59.64 -1455.11,-486.56 -1853.79,-1099.59 276.68,155.67 590.89,254.89 928.34,280.51 1234.46,93.74 2311.16,-830.98 2404.91,-2065.43 58.44,-769.58 -279,-1477.82 -840.5,-1924.84z" />
+							<path
+								d="M878.2 815.27c325.44,0 591.72,-341.28 591.72,-758.39 0,417.11 266.26,758.39 591.71,758.39 -325.45,0 -591.71,341.28 -591.71,758.39 0,-417.11 -266.28,-758.39 -591.72,-758.39zm-400.53 1506.38c203.78,0 370.51,-213.68 370.51,-474.87 0,261.19 166.73,474.87 370.51,474.87 -203.78,0 -370.51,213.7 -370.51,474.88 0,-261.18 -166.73,-474.88 -370.51,-474.88z" />
+						</svg>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+	</nav>
+</section>
+
+<section class='tmf__modal'>
+	<div class='substrate'>
+		<div class='tmf__modal__window'>
+			<div class='tmf__modal__window-vertical-line'>
+				<div class='tmf__modal__window-gorizontal-line'>
+
+					<div class='tmf__modal__close-button'>
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5200 5200"><polygon points="424,176 2600,2353 4776,176 5024,424 2847,2600 5024,4776 4776,5024 2600,2847 424,5024 176,4776 2353,2600 176,424 "/></svg>
+					</div>
+					<h2 class='template-heading'>Контакты</h2>
+					<div class="fat-template-separator"></div>
+					<div class='tmf__modal__phone'>
+						<a class='tmf__modal__phone-number' href='tel:+79687279889'><span
+								class='text-marker'>+7(968)727-98-89</span></a>
+						<span class="tmf__modal__phone__icon-container">
+							<a class='tmf__modal__phone-wa' href='whatsapp://send?phone=+79687279889'></a>
+							<a class='tmf__modal__phone-tg' href='tg://resolve?domain=saitmyt'></a>
+							{* <a class='tmf__modal__phone-vb' href='viber://add?number=79687279889'></a> *}
+						</span>
+					</div>
+
+					<div class='tmf__modal__mail'><a href='mailto:info@sait-myt.ru' data-comment='mail'>info@sait-myt.ru</a></div>
+					<div class='tmf__modal__addres'><span class='map-open-link' data-comment='map'>Мытищи, <span
+								class='text-marker'>улица Мира, 10/10</span></div>
+					<div class='tmf__modal__map'>
+						<div class='tmf__modal__map-close-text'>свернуть карту</div>
+						<script type='text/javascript' charset='utf-8' async
+							src='https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A285e263d7b2491f4842150bfb0e5f6bb107fa5ea0e34b06e32651fc352d1bfaf&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true'></script>
+					</div>
+					<div class='tmf__modal__shedule'>Пн-Пт: с 8:00 до 17:00</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

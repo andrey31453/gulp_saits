@@ -1,0 +1,93 @@
+.__fill-before
+	.__container
+		position: relative
+		&::before,
+		&::after
+			position: absolute
+			content: ''
+
+		&::before
+			z-index: 1
+
+			top: 0
+			bottom: 0
+			left: -2000px
+			right: calc(100%)
+
+			opacity: 0.2
+		&::after
+			z-index: 2
+
+			top: $psecl
+			bottom: 0
+			left: -2000px
+			right: calc(100% + 24px)
+
+			background-position: top right
+			background-repeat: no-repeat
+
+	// bg color
+	&.__fb--c .__container
+		background-color: $ccont
+		&::before
+			background-color: $c
+	&.__fb--ca .__container
+		background-color: $cacont
+		&::before
+			background-color: $ca
+	&.__fb--c2 .__container
+		background-color: $c2cont
+		&::before
+			background-color: $c2
+	&.__fb--c2a .__container
+		background-color: $c3acont
+		&::before
+			background-color: $c2a
+	&.__fb--c3 .__container
+		background-color: $c3cont
+		&::before
+			background-color: $c3
+	&.__fb--c3a .__container
+		background-color: $c3acont
+		&::before
+			background-color: $c3a
+
+	// icon type
+	&.__fb--c.__fb--articles .__container::after
+		background-image: url('/design/template/images/_revisions/icons/articles-c.png')
+	&.__fb--ca.__fb--articles .__container::after
+		background-image: url('/design/template/images/_revisions/icons/articles-ca.png')
+	&.__fb--c2a.__fb--articles .__container::after
+		background-image: url('/design/template/images/_revisions/icons/articles-c2a.png')
+	&.__fb--c3.__fb--articles .__container::after
+		background-image: url('/design/template/images/_revisions/icons/articles-c3.png')
+	&.__fb--about .__container::after
+		background-image: url('/design/template/images/_revisions/icons/about.png')
+	&.__fb--feedback .__container::after
+		background-image: url('/design/template/images/_revisions/icons/feedback.png')
+	&.__fb--contacts .__container::after
+		background-image: url('/design/template/images/_revisions/icons/contacts.png')
+	&.__fb--fips .__container::after
+		background-image: url('/design/template/images/_revisions/icons/fips.png')
+	&.__fb--idea .__container::after
+		background-image: url('/design/template/images/_revisions/icons/idea.png')
+	&.__fb--franchajzing .__container::after
+		background-image: url('/design/template/images/_revisions/icons/franchajzing.png')
+	&.__fb--proizvoditeli .__container::after
+		background-image: url('/design/template/images/_revisions/icons/proizvoditeli.png')
+	&.__fb--optovye-kompanii .__container::after
+		background-image: url('/design/template/images/_revisions/icons/optovye-kompanii.png')
+	&.__fb--reklama .__container::after
+		background-image: url('/design/template/images/_revisions/icons/reklama.png')
+	&.__fb--kontakty .__container::after
+		background-image: url('/design/template/images/_revisions/icons/kontakty.png')
+	&.__fb--litsenziya .__container::after
+		background-image: url('/design/template/images/_revisions/icons/litsenziya.png')
+	&.__fb--roznichnye-magaziny .__container::after
+		background-image: url('/design/template/images/_revisions/icons/roznichnye-magaziny.png')
+	&.__fb--c.__fb--mktu .__container::after
+		background-image: url('/design/template/images/_revisions/icons/mktu-c.png')
+	&.__fb--ca.__fb--mktu .__container::after
+		background-image: url('/design/template/images/_revisions/icons/mktu-ca.png')
+	&.__fb--c3a.__fb--mktu .__container::after
+		background-image: url('/design/template/images/_revisions/icons/mktu-c3a.png')

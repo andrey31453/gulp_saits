@@ -1,0 +1,44 @@
+.tc__item-price
+	width: 60%
+	padding-left: $p
+	padding-right: $p
+	@media (max-width: 800px)
+		width: 100%
+		padding-top: $psec
+	.__btn
+		margin-bottom: $psec
+
+// price__declamation
+.tc__price__declamation span
+	border-bottom: 1px dashed $c
+
+// price__heading
+.tc__price__heading
+	margin-bottom: $pl
+	font-weight: 500
+	font-size: 1.2rem
+	&:not(:first-child)
+		margin-top: $psec
+
+// price-table
+.tc__price-table
+	width: 100%
+	margin-bottom: $psec
+
+.tc__price-table__td
+	padding: 5px 30px
+	border-bottom: 1px solid #cccccc50
+	&:first-child
+		@media (max-width: 600px)
+			font-size: 1rem
+	&:last-child
+		text-align: right
+		padding-left: 50px
+		@media (max-width: 400px)
+			padding-left: $p
+	.tc__price-table__tr:last-child &
+		border-bottom: none
+	@media (max-width: 400px)
+		font-size: 1rem
+		padding-left: 5px
+		padding-right: 5px

@@ -1,0 +1,22 @@
+// btn 
+.slider__btn
+	position: absolute
+	top: 0
+	bottom: 0
+	width: 5%
+	cursor: pointer
+	z-index: 7
+	padding-bottom: 3 * $p + 12px
+	&.--prev
+		left: 0%
+	&.--next
+		right: 0%
+	&.--unload
+		opacity: 0
+	&:hover
+		path
+			fill: $c2
+	svg
+		width: 80%
+		margin-left: auto
+		margin-right: auto

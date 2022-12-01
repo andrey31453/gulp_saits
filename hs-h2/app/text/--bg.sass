@@ -1,0 +1,49 @@
+.text.--bg
+	position: relative
+	overflow: hidden
+	font-family: 'montserrat_bold'
+	font-size: $fz + 1px
+	h2
+		font-size: $fzh2 + 6px
+		opacity: $ops
+		font-family: 'montserrat_extra_bold'
+	.text__wrapper
+		color: $fc2
+	.text__wrapper
+		position: relative
+		z-index: 2
+	.text__overlay
+		position: absolute
+
+		top: -$blur
+		bottom: -$blur
+		left: -$blur
+		right: -$blur
+		z-index: 0
+
+		filter: blur($blur)
+
+		background-position: center
+		background-size: cover
+		background-repeat: no-repeat
+		&::before
+			position: absolute
+			z-index: 1
+			content: ''
+
+			top: 0
+			bottom: 0
+			left: 0
+			right: 0
+
+			background: $bc2
+			opacity: $ops
+		&.--index
+			background-image: url('/images/text/backgrounds/bg0.jpg')
+		&.--economiya
+			background-image: url('/images/text/backgrounds/bg1.jpg')
+		&.--ekologichnost
+			background-image: url('/images/text/backgrounds/bg2.jpg')
+	&.--not-img
+		.text__content
+			width: 100%

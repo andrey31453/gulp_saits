@@ -1,0 +1,49 @@
+.cfb__hide-btn,
+.cfb__hover-btn
+	display: block
+
+	width: 40px
+	height: 40px
+	padding: 7px
+
+	background: $grad
+	border: 1px $fc240
+	border-radius: 5px
+	cursor: pointer
+	svg
+		width: 24px
+		height: 24px
+	path
+		fill: $fc2
+	&:hover
+		border-color: $c50
+		border: 1px $c50 solid
+		box-shadow: -$ps * 0.5 $ps * 0.5 $ps $c25
+		background: linear-gradient($deg, $fc2, $fc2)
+		path
+			fill: $c
+
+.cfb__hide-btn
+	opacity: 0
+	transform: translateX(200px)
+
+	margin-bottom: $p
+	&:nth-child(1)
+		transition: transform 300ms 0ms, opacity 300ms 0ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+	&:nth-child(2)
+		transition: transform 300ms 100ms, opacity 300ms 100ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+	&:nth-child(3)
+		transition: transform 300ms 200ms, opacity 300ms 200ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+	&:nth-child(4)
+		transition: transform 300ms 300ms, opacity 300ms 300ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+	.callback--fixed-btn:hover &
+		transform: translateX(0px)
+		opacity: 1
+		&:nth-child(1)
+			transition: transform 300ms 300ms, opacity 300ms 300ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+		&:nth-child(2)
+			transition: transform 300ms 200ms, opacity 200ms 200ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+		&:nth-child(3)
+			transition: transform 300ms 100ms, opacity 300ms 100ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms
+		&:nth-child(4)
+			transition: transform 300ms 0ms, opacity 300ms 0ms, background-color 300ms 0ms, box-shadow 300ms 0ms, border-color 300ms 0ms

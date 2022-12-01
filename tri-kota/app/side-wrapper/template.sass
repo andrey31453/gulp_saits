@@ -1,0 +1,35 @@
+.side-wrapper
+	position: relative
+	z-index: 0
+	&::before
+		position: absolute
+		content: ''
+
+		top: 0
+		bottom: -10000px
+		left: 0
+		right: 0
+
+		opacity: 0.6
+		background-image: url('/design/template/images/side-wrapper/background/right.png')
+		background-position: top right
+		background-repeat: no-repeat
+
+	.main & .__container
+		position: relative
+
+		padding-top: 0
+		padding-bottom: 0
+		&::before
+			position: absolute
+			content: ''
+
+			top: 0
+			bottom: -10000px
+			left: -2000px
+			right: calc(100% + 100px + 48px)
+
+			opacity: 0.6
+			background-image: url('/design/template/images/side-wrapper/background/left.png')
+			background-position: top right
+			background-repeat: repeat

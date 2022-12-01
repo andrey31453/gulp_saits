@@ -1,0 +1,18 @@
+.category-main
+	position: relative
+
+	background-color: $bc
+	&::before,
+	&::after
+		position: absolute
+		content: ''
+
+		top: -24px
+		left: 0
+		right: 0
+	&::before
+		height: 24px
+		background-color: $bc
+	&::after
+		height: 4px
+		background-color: $c

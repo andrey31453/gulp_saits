@@ -1,0 +1,166 @@
+// gallery__pages 
+.gallery__pages
+	overflow: hidden
+	border-bottom: 10px solid $bc
+	.--day &
+		border-color: $border2
+
+.gp__top
+	display: flex
+	justify-content: space-between
+
+.gp__gallery-container
+	position: relative
+	height: 600px
+
+// gp__gallery-numberling 
+.gp__gallery-numberling-inner
+	display: flex
+	justify-content: center
+	align-content: center
+
+.gp__gallery-numberling__btn
+	position: relative
+	width: 30px
+	height: 30px
+	cursor: pointer
+	.--night &
+		opacity: 0.4
+	.--day &
+		opacity: 0.6
+
+.gp__gallery-numberling__btn:hover
+	.--night &
+		opacity: 0.8
+	.--day &
+		opacity: 1
+
+.gp__gallery-numberling__btn.__dont-action
+	cursor: auto
+	.--night &
+		opacity: 0.05
+	.--day &
+		opacity: 0.2
+
+.gp__gallery-numberling__btn svg
+	position: absolute
+
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	path
+		.--night &
+			fill: $fc
+
+// gp__gallery-numberling__number 
+.gp__gallery-numberling__number
+	font-size: 1.8rem
+
+.gp__gallery-numberling__number.__active-number
+	opacity: 0.8
+	padding-left: 20px
+	font-weight: bold
+
+.gp__gallery-numberling__number.__pages-quantity
+	opacity: 0.2
+	padding-right: 20px
+
+// gp__page 
+.gp__page
+	position: absolute
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+
+	display: flex
+	justify-content: center
+	flex-wrap: wrap
+
+	transition: all 800ms ease
+	.--night &
+		background-color: $bc2
+	.--day &
+		background-color: $bc_gallery_day
+
+.gp__page__item
+	padding: 10px
+	display: flex
+	justify-content: space-evenly
+	flex-direction: column
+	width: 30%
+	height: 50%
+	position: relative
+
+.gp__page::before
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	bottom: 0
+	content: ''
+	background-color: $c
+	opacity: 0.1
+	z-index: 0
+	.--day &
+		background-color: $c2
+
+@media (max-width: 900px)
+	.gp__page__item
+		width: 45%
+@media (max-width: 600px)
+	.gp__page__item
+		width: 90%
+.gp__page__img
+	min-width: 50%
+	max-width: 90%
+	width: auto
+	margin: 0 auto
+	max-height: calc(100% - 60px)
+
+.gp__page__text
+	text-align: center
+	font-family: 'Roboto'
+	font-weight: 700
+	letter-spacing: 0
+	opacity: 0.85
+
+	position: absolute
+	bottom: 15px
+	left: -10px
+	left: center
+	width: 100%
+	.--night &
+		color: $bc
+	.--day &
+		color: $fcday
+
+// __outing 
+.gp__page.__outing
+	transform: translateX(-1200px)
+	opacity: 0
+
+// __btn-anim 
+.gp__btn-anim
+	overflow: hidden
+
+.gp__btn-anim:before
+	top: 0
+	left: -10%
+	width: 60px
+	height: 100%
+	position: absolute
+	content: ''
+	background: linear-gradient(90deg, $c10, $c50, $c30)
+	transform: skewX(-45deg)
+	animation: gp__btn-anim 6000ms linear infinite
+	animation-delay: 2000ms
+	opacity: 0.15
+
+@keyframes gp__btn-anim
+	0%
+		left: -300%
+
+	100%
+		left: 400%

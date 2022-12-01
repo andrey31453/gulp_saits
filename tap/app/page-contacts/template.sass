@@ -1,0 +1,49 @@
+// _page-contacts
+.page-contacts .container
+	margin-top: $psec
+	margin-bottom: $psec
+	margin-right: auto
+	margin-left: auto
+	border-radius: $p
+	@media (max-width: $dxl)
+		max-width: calc(100% - 50px)
+.page-contacts:not(.__map-for-footer) .container
+	background-color: $cb
+	color: $ct
+
+	padding-top: $psec
+	padding-bottom: $psec
+	padding-right: $pl
+	padding-left: $pl
+
+.page-contacts.__map-for-footer .container
+	padding-left: 0
+	padding-right: 0
+
+.pc__item
+	padding-top: $pl
+	padding-bottom: $pl
+	width: 50%
+	padding-left: 10%
+	padding-right: 10%
+	@media (max-width: $dm)
+		width: 100%
+
+.pc__heading
+	padding-bottom: $pl
+	span
+		border-bottom: 2px solid $c
+		padding-bottom: $ps
+		padding-left: $ps
+		padding-right: $ps
+
+.pc__item__svg svg
+	height: 40px
+	padding-right: $ps
+	padding-left: $ps
+
+// ymaps 
+.page-contacts > ymaps
+	overflow: hidden
+ymaps *
+	transition: 0ms all

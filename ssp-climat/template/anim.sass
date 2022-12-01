@@ -1,0 +1,39 @@
+%anim
+	overflow: hidden
+	position: relative
+	display: block
+	&:before
+		top: 0
+		left: -25%
+		width: 3%
+		height: 100%
+		position: absolute
+		content: ''
+		background: linear-gradient(90deg, #ffffff30,#ffffff, #ffffff30)
+		transform: skewX(-45deg)
+		animation: anim 12000ms linear infinite
+%anim-small
+	&:before
+		opacity: 0.75
+		width: 10%
+%anim-5
+	&:before
+		animation-delay: 10000ms
+%anim-4
+	&:before
+		animation-delay: 8000ms
+%anim-3
+	&:before
+		animation-delay: 6000ms
+%anim-2
+	&:before
+		animation-delay: 4000ms
+%anim-1
+	&:before
+		animation-delay: 2000ms
+
+@keyframes anim
+	0%
+		left: -8000px
+	100%
+		left: 8000px

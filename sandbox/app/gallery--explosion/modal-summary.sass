@@ -1,0 +1,20 @@
+.gem__summary
+	position: absolute
+	z-index: 175
+
+	bottom: 0
+	left: -100vw
+
+	min-width: 35%
+	padding: $p $pl $p $p
+
+	background-color: $ca
+	white-space: nowrap
+	overflow: hidden
+	&-title
+		color: $fc2
+	&-description
+		color: $fc
+		opacity: $ops
+	.gallery--explosion__modal--opened &
+		left: 0

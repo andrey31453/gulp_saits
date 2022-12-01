@@ -1,0 +1,25 @@
+.mtf__m-menu-button
+	width: 60px
+	cursor: pointer
+	padding-left: $ps
+	padding-right: $ps
+	svg
+		width: 40px - $ps
+	path
+		fill: $ct2
+	&:hover
+		path
+			fill: $c
+	@media (min-width: 850px)
+		display: none
+	@media (max-width: 375px)
+		width: 40px
+
+.__close
+	display: none
+
+.__active
+	.__close
+		display: block
+	.__list
+		display: none

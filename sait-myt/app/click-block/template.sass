@@ -1,0 +1,116 @@
+// click-block 
+.click-block
+	overflow: hidden
+	position: relative
+
+.click-block:before
+	position: absolute
+	content: ''
+	top: calc(50% - 10px)
+	left: 0
+	width: 100%
+	height: 10px
+	background-color: $bc
+	z-index: 0
+	.--day &
+		background-color: $border2
+
+.cb__text
+	padding: $pl 1.5rem 1.5rem 1.5rem
+	cursor: pointer
+	border: 10px solid $cs
+	background-color: $bc_text
+	display: inline-block
+	font-size: 1.2rem
+	text-transform: uppercase
+	z-index: 1
+	position: relative
+	margin: 30px 0 40px
+	.--day &
+		background-color: $bc_text2
+		border-color: $border2
+
+.cb__text:hover
+	border: 10px solid #ccc
+
+.cb__text *
+	color: $fc
+	.--day &
+		color: $fc2
+
+.cb__text:hover *
+	color: $c
+	.--day &
+		color: $c2
+
+.cb__text:hover *:before
+	opacity: 1
+
+// cb__modal 
+.cb__modal
+	position: fixed
+	opacity: 0
+	cursor: pointer
+	top: 0
+	left: 0
+	z-index: -1
+	width: 100%
+	height: 100%
+	padding: 15% 0
+
+.cb__inner
+	transform: translateY(-600px)
+	max-width: 600px
+	padding: 30px 70px 30px 30px
+	margin: 0 auto
+	cursor: default
+	background-color: $bc_text
+	.--day &
+		background-color: $bc_text2
+
+.cb__close-button
+	position: fixed
+	right: 0
+	top: 0
+	color: $fc
+	font-size: 2rem
+	background-color: $bc_text
+	width: 50px
+	height: 100%
+	line-height: 34px
+	text-align: center
+	border: 4px solid $bc
+	opacity: 0.2
+	cursor: pointer
+	padding-top: 125px
+	.--day &
+		background-color: $bc_text2
+		color: $fc2
+
+.cb__close-button:before
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	content: ''
+
+	background-image: url('/design/template/images/click-block/icons/close__white.png')
+	background-repeat: no-repeat
+	background-position: 50% 50%
+	background-size: 25px
+
+.cb__close-button:hover
+	border-color: $cs
+	opacity: 1
+
+.cb__close-button:hover:before
+	background-image: url('/design/template/images/click-block/icons/close__blue.png')
+
+// .__active 
+.cb__modal.__active
+	opacity: 1
+	z-index: 52
+
+.__active .cb__inner
+	transform: translateY(0)

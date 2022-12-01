@@ -1,0 +1,19 @@
+.a__item
+	width: 24%
+	@media (max-width: 1000px)
+		width: 48%
+	@media (max-width: 750px)
+		width: 100%
+		&:not(:last-child)
+			margin-bottom: $p
+.a__img
+	width: 80px
+	img
+		width: auto
+		display: block
+		margin-left: auto
+		margin-right: auto
+
+.a__text
+	width: calc(100% - 80px)
+	align-items: flex-start

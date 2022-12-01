@@ -1,0 +1,45 @@
+.articles__classes
+	padding-top: $pl
+	padding-bottom: $pl
+
+.articles__classes__link
+	position: relative
+
+	padding-top: $ps
+	padding-bottom: $pl
+	width: 115px
+
+	font-size: $fzh1 + 8px
+	color: $fc2
+	border-radius: $br
+	@media (max-width: 400px)
+		width: 80px
+	&:hover
+		color: $fc2
+	//--c
+	&.--ca
+		color: $fc
+		background-color: $ca
+		&:hover
+			background-color: $c4
+			color: $fc
+	&.--c
+		background-color: $c
+		&:hover
+			background-color: $c3a
+	&.--c2
+		background-color: $c2
+		&:hover
+			background-color: $c2a
+	// before
+	&::before
+		position: absolute
+		content: 'класс'
+
+		bottom: $ps
+		left: 0
+		right: 0
+
+		font-size: $fz
+
+		text-align: center

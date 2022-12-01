@@ -1,0 +1,32 @@
+.mktu__heading
+	display: inline-block
+
+	padding: $ps $pl $ps $pl * 2
+	margin-right: $pl
+
+	font-size: $fzh1 + 8px
+	color: $fc2
+	.__fb--c &
+		background-color: $c
+	.__fb--ca &
+		color: $fc
+		background-color: $ca
+	.__fb--c3a &
+		background-color: $c3a
+
+.mktu__item
+	position: relative
+	padding-top: $pl
+	padding-bottom: $pl
+
+	width: 22%
+	@media (max-width: $m)
+		width: 48%
+.mktu__img
+	max-width: 60%
+	&.--full
+		max-width: 100%
+
+.mktu__item-heading
+	padding-top: $pl
+	font-weight: bold

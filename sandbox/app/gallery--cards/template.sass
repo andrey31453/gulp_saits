@@ -1,0 +1,27 @@
+.gallery__cards
+	overflow: hidden
+	background-color: $bc2
+	color: $fc2
+	height: 100vh
+
+.gc__slide
+	height: 80vh
+	border-radius: $pl
+	margin: $p
+	cursor: pointer
+	flex: 1
+	position: relative
+	overflow: hidden
+	&.__active__gc
+		flex: 10
+
+.gc__slide__text
+	position: absolute
+	font-size: $fzh1
+	bottom: $pl
+	left: $pl
+	opacity: 0
+	transition: opacity 300ms ease-in 0ms
+	.__active__gc &
+		opacity: 1
+		transition: opacity 300ms ease-in 400ms

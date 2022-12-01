@@ -1,0 +1,17 @@
+.cb__item
+	width: calc(50% - 48px)
+	padding-left: (2 * $pl + 60px) !important
+
+	background-color: $c
+	color: $fc2
+
+	background-size: auto
+	background-position: $pl ($pl + $fz * 0.5)
+	&.--calc
+		background-image: url('/design/template/images/app/callback/icons/calc.png')
+	&.--price
+		background-image: url('/design/template/images/app/callback/icons/price.png')
+	@media (max-width: 750px)
+		width: 100%
+.cb__text
+	padding-bottom: $pl

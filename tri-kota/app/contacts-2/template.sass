@@ -1,0 +1,64 @@
+.contacts-2
+	position: relative
+	z-index: 1
+
+	font-family: 'DIN Pro Medium'
+	font-size: 36px
+	overflow: hidden
+	.__btn
+		margin-bottom: ($menu_h - 40px) / 2
+		height: 40px
+		font-size: $fz
+	.main & .__container
+		padding-top: 0
+		padding-bottom: 0
+
+.c2__wrapper
+	@media (max-width: 740px)
+		justify-content: center
+.c2__col
+	padding-left: 2 * $pl
+	@media (max-width: 740px)
+		padding-left: 0
+	&.--with-bg
+		position: relative
+		&::before
+			position: absolute
+			content: ''
+
+			top: 0
+			bottom: 0
+			left: -2000px
+			right: 100%
+
+			background-image: url('/design/template/images/contacts-2/icons/1.png')
+			background-size: contain
+			background-position: center right
+			background-repeat: repeat-x
+			@media (max-width: 740px)
+				opacity: 0
+
+.c2__link
+	height: $menu_h
+	align-items: center
+	&.--mail
+		font-size: 29.5px
+		color: $c2
+		path
+			fill: $c2
+		&:hover
+			color: $ca
+			path
+				fill: $ca
+	&.--phone
+		color: $c
+		path
+			fill: $c
+		&:hover
+			color: $ca
+			path
+				fill: $ca
+
+.c2__icon
+	height: 0.6 * $menu_h
+	padding-right: $p

@@ -1,0 +1,149 @@
+.navbar
+	z-index: 70
+
+body.--sm .navbar
+	.social
+		svg
+			height: 20px
+		a
+			width: 28px
+			height: 28px
+
+.n-hidden-menu
+	ul
+		padding: 0
+	li
+		margin-bottom: 0
+	a
+		padding: 10px
+		display: block
+		&:hover
+			background-color: $c
+			color: $fc2
+
+.navbar-brand
+	svg
+		height: 50px
+	path
+		fill: url(#temp)
+	&:hover
+		path
+			fill: $c
+	body.--m:not(.--sm) &
+		margin-bottom: $ps
+
+.navbar-btn,
+.overlay-nav
+	cursor: pointer
+
+.navbar-btn
+	&.--close
+		svg.--open
+			display: none
+	&.--open
+		svg.--close
+			display: none
+
+.navbar-svg-cont
+	width: 62px
+	height: 62px
+
+	border: 1px transparent
+	border-radius: $rad
+	background: $grad
+	body.--sm &
+		width: 42px
+		height: 42px
+	.navbar-btn:hover &
+		border: 1px $c50 solid
+		box-shadow: -$ps * 0.5 $ps * 0.5 $ps $c25
+		background: linear-gradient($deg, $fc2, $fc2)
+		path
+			fill: $c
+	svg
+		&.--close
+			width: 40px
+			body.--sm &
+				width: 26px
+		&.--open
+			width: 30px
+			body.--sm &
+				width: 18px
+	path
+		fill: $fc2
+
+.navbar
+	font-size: 1.1 * $fz
+
+.navbar-links
+	z-index: -2
+	width: 100%
+	display: block
+	position: absolute
+	left: 0
+
+	overflow-y: hidden
+	transition: 500ms ease
+	padding-top: 0px
+	padding-bottom: 0px
+	padding-left: 0px
+	padding-right: 0px
+	top: 0
+	transform: translateY(-120%)
+	box-shadow: none !important
+	opacity: 0
+	.--select
+		font-size: $fz + 1px
+		font-family: 'montserrat_semi_bold'
+		color: $c
+	a:hover
+		color: $ca
+	&.active
+		padding-top: 1.25rem !important
+		padding-bottom: 0.625rem
+		transform: translateY(0%)
+		opacity: 1
+		body.--m &
+			top: 102px
+		body.--sm &
+			top: 80px
+		body.--d &
+			top: 75px
+
+.navbar
+	.block,
+	.navbar__phone,
+	.navbar__social,
+	.navbar__contacts,
+	.navbar__right,
+	.navbar-brand,
+	.navbar__location
+		body.--d &
+			height: $menu_h
+	.navbar__phone
+		padding-left: 10px
+		padding-right: 10px
+		&:hover
+			color: $ca
+
+.navbar__left
+	body.--m &
+		flex-direction: column-reverse
+	body.--sm &
+		justify-content: center
+
+.navbar__contacts
+	body.--m &
+		height: 100%
+		flex-direction: column
+
+.navbar__phone
+	body.--m &
+		margin-bottom: $ps
+	body.--sm &
+		font-size: $fzs
+		margin-top: $ps
+
+.navbar__social
+	body.--sm &
+		margin-bottom: $ps

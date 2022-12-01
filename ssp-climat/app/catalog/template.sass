@@ -1,0 +1,47 @@
+.c__heading
+	margin-bottom: $psec
+	display: inline-block
+	text-align: center
+
+.c__item-link
+	width: calc(50% - 48px)
+
+	background-color: $bc
+	color: $fc
+	@media (max-width: 750px)
+		width: 100%
+	&:hover::before
+		border-color: $c2
+
+// img-container
+.c__item-img-container
+	width: 30%
+
+.c__item-img
+	width: 90%
+	margin: $p auto
+
+// text-container
+.c__item-text-container
+	width: 70%
+
+.c__item-name
+	color: $c
+	.c__item-link:hover &
+		color: $c2
+
+.c__item-text
+	position: relative
+	padding-bottom: $p
+	font-size: $fzmin
+	.c__item-link:hover &
+		color: $fc
+
+.c__item-array
+	height: 35px
+	path
+		fill: $c
+	.c__item-link:hover &
+		padding-left: $pl * 2
+		path
+			fill: $c2

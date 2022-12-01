@@ -1,0 +1,165 @@
+// modal img
+.gc__modal
+	position: fixed
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+	z-index: -1
+	opacity: 0
+	&.__active
+		z-index: 60
+		opacity: 1
+
+// modal-image-gorizontal
+.gc__modal-image-gorizontal
+	transform: translateY(-600px)
+	position: fixed
+	top: 0
+	left: 7%
+	width: 86%
+	height: 100vh
+	opacity: 0
+	z-index: 65
+	.__active &
+		transform: translateY(0)
+		opacity: 1
+
+// modal-image-vertical
+.gc__modal-image-vertical
+	position: relative
+	overflow: auto
+	.__desktop &
+		width: 800px
+	.__mobile &
+		display: flex
+		flex-direction: column
+		justify-content: space-between
+		background-color: $bcalt
+	.--day .__mobile &
+		background-color: $bcalt2
+
+// close-slaider
+.gc__close-slaider
+	float: right
+	font-size: 5em
+	line-height: 1rem
+	cursor: pointer
+	opacity: 0.7
+	.__active &:hover
+		color: $c
+		.--day &
+			color: $c2
+// slaider-name
+.gc__slaider-name
+	padding: $pl
+	color: $fc
+	background-color: $bc
+	z-index: 90
+	.__desktop &
+		position: sticky
+		top: 0
+		right: 50px
+		left: 0
+	.__mobile &
+		width: 352px
+
+// change-type
+.gc__change-type
+	position: fixed
+	bottom: 20px
+	padding: $pl
+	background-color: $bc
+	color: $fc
+	left: calc(50% - 100px)
+	opacity: 0
+	width: 210px
+	cursor: pointer
+	z-index: -1
+	&:hover
+		color: $c
+		.--day &
+			color: $c2
+	&.__active
+		z-index: 85
+		opacity: 1
+
+// prev / next
+.gc__prev-slaid,
+.gc__next-slaid
+	position: absolute
+	top: 0
+	width: 7%
+	height: 100%
+	opacity: 0
+	z-index: 85
+	cursor: pointer
+	opacity: 0.7
+	svg
+		width: 50%
+		margin: 0 auto
+	path
+		fill: $fc
+	&:hover
+		path
+			fill: $c
+.gc__prev-slaid
+	left: 0
+	.__active &:hover
+		box-shadow: 1px 0 5px 0 $cs
+.gc__next-slaid
+	right: 0
+	.__active &:hover
+		box-shadow: -1px 0 5px 0 $cs
+
+.__active
+	.gc__prev-slaid:hover,
+	.gc__next-slaid:hover
+		background-color: $bc10
+		opacity: 1
+		.--day &
+			background-color: $fc10
+
+// modal-img
+.gc__modal-img
+	max-width: 100%
+
+// modal-image-container
+.gc__modal-image-container
+	overflow: auto
+	.__desktop &
+		position: absolute
+		max-width: 100%
+	.__mobile &,
+	.__mobile &::before
+		position: fixed
+
+		top: 75px
+		left: calc(50% - 176px)
+
+		height: 655px
+		width: 352px
+	.__mobile &
+		z-index: 75
+		background-color: $bc
+	.--day .__mobile &
+		background-color: $bc2
+	.__mobile &::before
+		z-index: 80
+		content: ''
+
+		background-image: url('/design/template/images/gallery-catalog/icons/fon.png')
+		background-repeat: no-repeat
+		background-size: cover
+
+// modal-img
+.gc__modal-img
+	.__desktop &
+		max-width: 100%
+		max-height: 100%
+	.__mobile &
+		width: 315px
+		height: auto
+		padding-top: 32px
+		padding-left: 37px
+		padding-bottom: 34px

@@ -1,0 +1,52 @@
+.franshiza__heading
+	opacity: $ops
+
+.franshiza__form
+	padding-top: $p
+	padding-bottom: $p
+
+	font-size: $fzh3
+	font-family: 'montserrat_semi_bold'
+	& > *
+		height: 60px
+
+		color: $fc2 !important
+		border-radius: $rad
+
+.franshiza__input
+	background-image: linear-gradient($deg, $bc3, $bc3, $bc3, $bc3g)
+	background-color: $bc3 !important
+	text-align: center
+	&::placeholder
+		text-align: center
+	body.--d &
+		width: 65%
+	body.--m &
+		width: 100%
+
+.franshiza__btn
+	background: $grad
+	body.--d &
+		width: calc(35% - #{$p})
+	body.--m &
+		margin-top: $p
+		width: 100%
+	&:hover
+		background: $grada
+
+.franshiza__agreement
+	padding-top: $ps
+	color: $fc !important
+	font-size: $fz
+	font-family: 'montserrat_regular'
+	&:hover
+		cursor: pointer
+	label:hover
+		cursor: pointer
+
+.franshiza__description
+	font-family: 'montserrat_regular'
+
+.franshiza__img-cont,
+.franshiza__img
+	width: 100%

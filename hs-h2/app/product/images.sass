@@ -1,0 +1,40 @@
+.product__mini-image,
+.product__image
+	border-radius: $rad
+
+// mini-image
+.product__mini-images
+	@media (max-width: 600px)
+		flex-direction: row
+
+.product__mini-image
+	border: 2px $bc solid
+	cursor: pointer
+	@media (max-width: 600px)
+		width: 25%
+	&:not(:last-child)
+		margin-bottom: $p
+	&.--active
+		border-color: $c
+
+// image
+.product__images,
+.product__image
+	transition: all 500ms ease
+
+.product__images
+	position: relative
+
+.product__image
+	position: absolute
+
+	top: $p
+	left: $p
+
+	width: calc(100% - 2 * #{$p})
+
+	opacity: 0
+	&:not(.--active)
+		pointer-events: none
+	&.--active
+		opacity: 1

@@ -1,0 +1,40 @@
+// ft__form 
+.ft__form-wrapper
+	width: 40%
+	position: relative
+	border: 4px solid $bc
+	color: $fc2
+	padding: $pl
+	@media (max-width: $m)
+		width: 100%
+		margin-top: $psec
+
+.ft__form	.__btn
+	height: 50px
+
+.f__user-data-btn
+	padding: 0 $p
+	height: 50px
+	box-shadow: none
+	width: 100%
+	border: none
+	border-bottom: 1px $bc80 solid
+	margin-top: $p
+	margin-bottom: $ps
+	background: rgba(255, 255, 255, 0.15)
+	color: $fc2
+	font-size: $fzh3
+	&:hover
+		border-color: $c60
+	&:active
+		background-color: $c !important
+	// placeholder
+	&::placeholder
+		color: $fc2
+		font-size: $fz
+	// error
+	&.__error
+		border: 1px $c solid
+	&.__error::placeholder
+		color: $c
+		font-weight: bold

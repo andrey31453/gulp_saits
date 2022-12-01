@@ -1,0 +1,23 @@
+<section class="footer--pages __alt __separator">
+	<div class="__container">
+
+
+		<!-- wrapper -->
+		<div class="fc__wrapper __f">
+
+			<a class="fc__link __fcolc" href="/#catalog">
+				<span>Каталог</span>
+			</a>
+			{foreach $pages as $p}
+			{if $p->menu_id == 1}
+			<a class="fc__link __fcolc" href="{$p->url}">
+				<span>{$p->name}</span>
+			</a>
+			{/if}
+			{/foreach}
+
+		</div>
+		<!-- /wrapper -->
+
+	</div>
+</section>

@@ -1,0 +1,50 @@
+.contacts
+	padding-top: $pl
+	padding-bottom: $pl
+
+.contacts__wrapper
+	width: 100%
+	@media (max-width: 750px)
+		flex-direction: column
+		align-items: center
+.contacts__col
+	min-width: 32%
+	@media (max-width: 750px)
+		min-width: 100%
+		flex-direction: column
+		&:not(:last-child),
+		& > *:not(:last-child)
+			margin-bottom: $p
+
+.contacts__logo
+	max-width: 250px
+	path:nth-child(1)
+		fill: $c2
+	path:nth-child(2)
+		fill: $c
+	path:nth-child(3)
+		fill: $fc
+	&:hover
+		path
+			fill: $c2
+
+.--phone-mail
+	margin-right: $pl
+
+.contacts__item
+	width: 100%
+	& > *
+		height: 100%
+		min-height: 30px
+	&:not(:last-child)
+		margin-bottom: $ps
+
+.contacts__icon
+	margin-right: $p
+	width: 28px
+	&.--mail
+		padding-top: 3px
+
+.contacts__text
+	width: 150px
+	font-weight: $fwh

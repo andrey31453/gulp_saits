@@ -1,0 +1,43 @@
+// go-top__quadr	
+.go-top__quadr
+	position: fixed
+	bottom: 15px
+	left: 15px
+	width: 30px
+	height: 30px
+	border: 1px solid $bcorder
+	background-color: $bc
+	cursor: pointer
+
+	opacity: 0
+	z-index: 10
+	.--day &
+		background-color: $bc2
+		border-color: $border2
+
+.go-top__quadr:before
+	position: absolute
+	content: ''
+	top: 0
+	left: 0
+	bottom: 0
+	right: 0
+
+	background-image: url('/design/template/images/go-top__quadr/icons/up-ffffff.svg')
+	background-repeat: no-repeat
+	background-position: 53% 46%
+	background-size: auto 35%
+	opacity: 0.6
+
+.go-top__quadr.__active
+	opacity: 1
+
+.go-top__quadr:hover
+	opacity: 1
+	background-color: $bcorder
+	.--day &
+		background-color: $border2
+
+.go-top__quadr:hover:before
+	opacity: 1
+	background-image: url('/design/template/images/go-top__quadr/icons/up-05a4fa.svg')

@@ -1,0 +1,26 @@
+.partners__items
+	justify-content: flex-start
+
+.partners__item
+	width: 12.5%
+	position: relative
+	&::before
+		position: absolute
+		content: ''
+
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+
+		opacity: 0.5
+		background-color: $bc
+	&:hover::before
+		opacity: 0
+
+.partners__img
+	width: 80%
+	height: auto
+
+	margin-left: auto
+	margin-right: auto

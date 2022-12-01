@@ -1,0 +1,44 @@
+.tc__item-details
+	width: 60%
+	padding-top: $pl + $fzh1 - $fzh3
+	padding-right: $pl
+	padding-left: $pl
+	padding-bottom: $pl
+	align-items: flex-start
+	@media (max-width: $m)
+		width: 100%
+		padding: $p $ps
+	.__btn
+		margin-top: $psec
+		@media (max-width: $m)
+			margin-top: $pl
+
+// heading
+.tc__item-details__heading
+	margin-bottom: $pl
+	font-weight: 500
+	font-size: $fzh3
+	&:not(:first-child)
+		margin-top: $psec
+
+// steps
+.tc__item-details__table
+	width: 100%
+
+.tc__item-details__td
+	border-bottom: 1px solid #cccccc20
+	&:first-child
+		color: $c
+		font-size: 50px
+		font-weight: bold
+		padding: $p $p
+	&:last-child
+		padding: $p $p $p 0
+	.tc__item-details__tr:last-child &
+		border-bottom: none
+	@media (max-width: 400px)
+		padding-left: 5px
+		padding-right: 5px
+
+.tc__item-details__td__heading
+	font-size: $fzh3

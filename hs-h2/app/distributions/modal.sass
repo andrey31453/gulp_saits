@@ -1,0 +1,59 @@
+.distributions__modal
+	position: relative
+	z-index: -1
+
+	width: 90%
+	margin: $p 0
+	padding: 2*$p
+
+	max-width: 800px
+	min-height: 60%
+
+	background-color: $bc
+	border-radius: $rad
+	cursor: auto
+	overflow: auto
+	.distributions__modal__item-city-cont[data-locations-show='false']
+		display: none
+
+.distributions__modal-border-cont
+	position: relative
+	&::before
+		position: absolute
+		content: ''
+
+		top: - 1.5 * $p
+		bottom: - 1.5 * $p
+		left: - 1.5 * $p
+		right: - 1.5 * $p
+
+		border: 4px solid $fc60
+		border-radius: $rad
+
+.distributions__modal__close-btn
+	position: absolute
+	z-index: 2
+
+	top: -25px
+	right: -25px
+
+	width: 50px
+	height: 50px
+
+	cursor: pointer
+
+	svg
+		opacity: $op
+		width: 35px
+	path
+		fill: $fc
+	&:hover
+		svg
+			opacity: 1
+		path
+			fill: $c
+	body.--sm &
+		top: -30px
+		right: -30px
+		svg
+			width: 25px

@@ -1,0 +1,31 @@
+h1, h2, h3,
+.h1, .h2, .h3
+	margin-top: 0
+	margin-bottom: $pl
+
+	font-family: 'DIN Pro Bold'
+	font-weight: $fwh
+	text-transform: uppercase
+	&:not(:first-child)
+		margin-top: 2.5 * $pl
+	&:not(.mktu__heading):not(.articles__heading):not(.mktu__item-heading):not(.articles__akciya-heading) span
+		padding: $ps / 2 $pl
+		color: $fc2
+		background-color: $c
+		border-radius: $br
+	.--cntrl &
+		color: $c2
+		span
+			background-color: $c2
+
+h1, .h1
+	color: $fc2
+	font-size: $fzh1
+
+h2, .h2
+	color: $c
+	font-size: $fzh2
+
+h3, .h3
+	color: $c
+	font-size: $fzh3

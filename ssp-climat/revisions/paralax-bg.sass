@@ -1,0 +1,89 @@
+body
+	position: relative
+	> *:not(.__substrate):not(.bg-img):not(.b1c-bg):not(.b1c-form)
+		position: relative
+		z-index: 1
+
+.bg-img
+	position: fixed
+	content: ''
+	z-index: 0
+
+	top: 0%
+	left: 0
+	right: 0
+	bottom: 0%
+
+	background-image: url('/design/template/images/revisions/background/1920.jpg')
+	background-size: cover
+	background-repeat: repeat-y
+
+section.__cntrl,
+section.__alt
+	position: relative
+	overflow: hidden
+	&::before,
+	&::after
+		position: absolute
+		content: ''
+		z-index: 0
+
+		top: -50%
+		left: 0
+		right: 0
+		bottom: 0
+	& > *:not(.__substrate)
+		position: relative
+		z-index: 1
+
+section.__cntrl
+	&::before
+		animation: before-anim 6000ms linear infinite
+		background: linear-gradient(90deg, $bc60, $bc, $bc, $bc, $bc, $bc, $bc60)
+	&::after
+		animation: after-anim 9000ms linear infinite
+		background: linear-gradient(30deg, $bc, $bc, #2dc5ff, $bc, $bc)
+
+section.__cntrl--reverse
+	background: linear-gradient(-30deg, $bc, $bc, #2dc5ff, $bc, $bc)
+
+section.__alt
+	color: $fc2
+	&::before
+		background-color: $bc2
+		animation: before-anim 12000ms linear infinite
+	&::after
+		background: linear-gradient(30deg, $bc2, $bc2, $c2, $bc2, $bc2)
+		animation: after-anim 18000ms linear infinite
+
+section.__alt--reverse
+	&::after
+		background: linear-gradient(-30deg, $bc2, $bc2, $c2, $bc2, $bc2)
+
+section:not(.__cntrl):not(.__alt):not(.__modal)
+	background-color: $bc
+
+@keyframes before-anim
+	0%
+		opacity: 0.5
+	50%
+		opacity: 0.1
+	100%
+		opacity: 0.5
+
+@keyframes after-anim
+	0%
+		top: -50%
+		opacity: 0.5
+	25%
+		top: 0%
+		opacity: 0.2
+	50%
+		top: -50%
+		opacity: 0.5
+	75%
+		top: -100%
+		opacity: 0.2
+	100%
+		top: -50%
+		opacity: 0.5

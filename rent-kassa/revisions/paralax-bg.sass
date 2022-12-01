@@ -1,0 +1,16 @@
+body
+	position: relative
+	&:after
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		content: ''
+		background-image: url('/design/template/images/background/1980.jpg')
+		background-size: 100% auto
+		background-repeat: repeat-y
+		z-index: 0
+	> *
+		position: relative
+		z-index: 1

@@ -1,0 +1,37 @@
+.t__bottom
+	@media (min-width: $m)
+		padding-top: $psec
+		padding-bottom: $psec
+	@media (max-width: $m)
+		padding-top: 0
+		padding-bottom: 0
+
+.t__bottom__item
+	width: 30%
+	padding: $p
+	color: $fc2
+	text-align: center
+	border: $border
+	@media (max-width: $m)
+		margin: $pl 0
+		padding: $ps
+		width: 80%
+		border: $border_m
+	& > *
+		padding-bottom: $p
+		@media (max-width: $m)
+			padding-bottom: $ps
+
+.t__bottom__item-img
+	width: 35%
+	display: block
+	margin-left: auto
+	margin-right: auto
+	padding-top: $p
+	@media (max-width: $m)
+		padding-top: $ps
+	path:nth-child(2n)
+		fill: $fc2
+
+.t__bottom__item-heading
+	font-size: $fzh3

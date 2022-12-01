@@ -1,0 +1,44 @@
+html,
+body
+	margin: 0
+	font-family: 'DIN Pro', sans-serif
+	font-size: $fz
+	font-weight: $fw
+	background-color: $bc
+	color: $fc
+
+p
+	text-indent: $p
+	margin-top: 0
+	margin-bottom: $p
+	@media (min-width: 550px)
+		text-align: justify
+	a
+		text-decoration: underline
+
+ol,
+ul
+	padding-left: $p
+	margin: 0 0 $p $pl
+li
+	margin-bottom: $ps
+
+a
+	text-decoration: none
+	cursor: pointer
+	color: $c2a
+	&:hover
+		color: $c2
+
+table
+	caption-side: bottom
+	border-collapse: collapse
+
+input, button
+	outline: none
+
+*:focus-visible
+	outline: none
+
+*, ::after, ::before
+	box-sizing: border-box

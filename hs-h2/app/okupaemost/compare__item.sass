@@ -1,0 +1,86 @@
+.okupaemost__compare__item
+	position: relative
+	border-radius: $rad
+	body.--d &,
+	body.--m &
+		min-height: 210px
+	body.--sm &
+		min-height: 50px
+
+.okupaemost__compare__item:not(.--data-cont)
+	overflow: hidden
+
+	color: $fc2
+	font-size: $fzh3
+	font-family: 'montserrat_bold'
+	body.--sm &
+		font-size: $fzm
+	& > span
+		position: relative
+		z-index: 2
+	&:before,
+	&:after
+		position: absolute
+		z-index: 1
+		content: ''
+
+		bottom: 0
+		left: 0
+		right: 0
+
+		border-radius: $rad
+	&:before
+		top: 0
+
+		background: $bc2
+		opacity: 0.4
+	&:after
+		top: 80%
+
+		background: linear-gradient(to top, $c, #00000000)
+		opacity: 0.8
+		body.--sm &
+			opacity: 0
+
+.okupaemost__compare__item:not(.--data-cont):hover,
+.okupaemost__compare__item.--active
+	color: $c
+	&:before
+		opacity: 0.7
+	&:after
+		opacity: 0
+
+.okupaemost__compare__item:not(.--data-cont):hover
+	&:before
+		opacity: 0.95
+
+// images
+.okupaemost__compare__image-bg
+	position: absolute
+
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+
+	transition: 300ms all linear
+	border-radius: $rad
+	.okupaemost__compare__item:hover &
+		transform: scale(1.2)
+
+@keyframes cursor
+	0%
+		opacity: 1
+	69%
+		opacity: 1
+	70%
+		opacity: 0
+	100%
+		opacity: 0
+
+.okupaemost__compare__cursor
+	display: inline-block
+	color: $fc2
+	.--rewrite-active &
+		color: $fc
+		animation: cursor 1200ms linear infinite

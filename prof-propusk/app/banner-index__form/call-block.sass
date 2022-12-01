@@ -1,0 +1,29 @@
+.bif__call-block
+	position: relative
+	border: 2px solid $ct2
+	padding: $pl
+	font-size: $fzh3
+	text-transform: uppercase
+	&::before
+		position: absolute
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+		content: ''
+		background: linear-gradient(45deg, #333333, #33333360, #333333)
+		opacity: 0.4
+	& > *
+		position: relative
+		z-index: 1
+
+.bif__call-block__text
+	padding-bottom: $pl
+	.__phone
+		font-size: 30px
+		font-weight: bold
+		padding-bottom: $ps
+		padding-top: $ps
+		margin-bottom: $p
+		display: inline-block
+		border-bottom: 1px dashed $c

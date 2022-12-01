@@ -1,0 +1,34 @@
+.dnd__placeholders
+	width: 600px
+	font-weight: bold
+
+.dnd__placeholder
+	width: 150px
+	min-height: 66px
+	padding-top: $pl
+	padding-bottom: $pl
+	border-radius: $pl
+	&.__hovered
+		background-color: $bc40
+
+.dnd__item
+	background-color: $bc
+	color: $fc
+	width: 150px
+	height: 66px
+	border: 1px solid $fc40
+	box-shadow: 4px 4px 6px $bc40
+	border-radius: $pl
+	padding: $p $pl
+	text-align: center
+	cursor: grab
+	&:not(:last-child)
+		margin-bottom: $pl
+	&:active
+		cursor: grabbing
+	&.__draggable
+		border: 1px solid #eee
+		background-color: #8ed7e9
+		box-shadow: none
+	&.__hide
+		display: none

@@ -1,0 +1,15 @@
+- const images = require(__dirname + '/app/gallery--explosion/images.json')
+
+section.gallery--explosion.--cntrl
+	.ge__wrapper
+		h2.ge__heading Explosion gallery
+
+		.ge__gallery.__f
+			each image in images
+				.ge__gallery-item
+					a.ge__card-link(href=image.src target='_blank' data-title=image.title data-description=image.description)
+						.ge__card-content.__fcolc
+							h3.ge__card-title=image.title
+							p.ge__card-description=image.description
+						.ge__card-hover
+						img.ge__card-image(src=image.src alt=image.title)

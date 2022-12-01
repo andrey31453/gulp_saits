@@ -1,0 +1,46 @@
+// footer-line__contacts 
+.footer-line__contacts
+	position: fixed
+	bottom: 0
+	left: 0
+	right: 0
+	top: calc(100vh - 60px)
+	background-color: $bc_text
+
+	border-top: 10px solid $bc
+	text-align: center
+	z-index: 50
+	.--day &
+		background-color: $bc_text2
+		border-color: $border2
+
+.footer-line__contacts .container
+	border: none
+	padding-top: 0
+	padding-bottom: 0
+
+.footer-line__contacts .tmf__modal__phone
+	padding-left: 0
+
+.footer-line__contacts .tmf__modal__phone::before
+	opacity: 0
+
+.footer-line__contacts .tmf__modal__phone-number
+	color: $fc
+	opacity: 0.8
+	.--day &
+		color: $fc2
+
+.footer-line__contacts .tmf__modal__phone-number:hover
+	opacity: 1
+
+.footer__pages-list
+	padding-bottom: 50px
+
+// media 
+@media (max-width: 560px)
+	.footer-line__contacts
+		display: none
+
+	.footer__pages-list
+		padding-bottom: 0

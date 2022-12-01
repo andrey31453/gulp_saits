@@ -1,0 +1,47 @@
+.footer-line
+	padding-top: 0
+	padding-bottom: 0
+	color: $ct2
+	.container
+		@media (max-width: 700px)
+			justify-content: center
+		& > *
+			height: $menu_height
+			@media (max-width: 500px)
+				height: 100px
+
+.fl__copyright
+	@media (max-width: 700px)
+		display: none
+.fl__phone
+	@media (max-width: 500px)
+		padding-left: 60px
+.fl__phone-item
+	padding-left: $p
+	padding-right: $p
+	color: $c
+	font-size: $fzh1
+.fl__phone-svg
+	height: 30px
+
+//	social
+.fl__phone-item
+	color: $ct2
+	&.__wa
+		path
+			fill: #00c83c
+	&.__tg
+		path
+			fill: #00a7e3
+	&.__vb
+		path
+			fill: #8a51a2
+	@media (max-width: 500px)
+		padding-top: 5px
+		padding-bottom: 5px
+
+.fl__phone-item:hover
+	background-color: $c
+	color: $ct2
+	path
+		fill: $ct2

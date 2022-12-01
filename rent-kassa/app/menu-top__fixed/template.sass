@@ -1,0 +1,52 @@
+.menu-top__fixed
+	padding-top: 0
+	padding-bottom: 0
+.mtf__menu-container
+	font-size: $fz
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: $menu_height
+	z-index: 70
+	background-color: $bc2
+	color: $fc2
+
+	&::before
+		position: absolute
+		top: 10
+		height: $menu_border_height
+		left: 0
+		right: 0
+		background-color: $fc
+		@media (min-width: $m_btn)
+			content: ''
+
+	&::after
+		position: absolute
+		top: 100%
+		bottom: - $menu_border_height
+		left: 0
+		right: 0
+		background-color: $fc
+		@media (min-width: $m_btn)
+			content: ''
+
+.mtf__menu-container > .container
+	padding-top: 0
+	padding-bottom: 0
+	@media (max-width: 602px)
+		padding-left: 0
+		padding-right: 0
+
+.mtf__menu__item
+	text-transform: uppercase
+	height: $menu_height
+	padding-left: $p
+	padding-right: $p
+	@media (max-width: 420px)
+		padding-left: $ps
+		padding-right: $ps
+	&:hover
+		background-color: $c
+		color: $fc2

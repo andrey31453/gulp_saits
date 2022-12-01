@@ -1,0 +1,46 @@
+<section class="menu __mb js__menu">
+	<div class="__container --alt">
+		<!-- menu__links -->
+		<div class="menu__links __f">
+			<a class="menu__link __fcolc __desktop" href="/">
+				<img
+					class="menu__logo"
+					src="/design/template/images/_template/template-icon/logo-en.png"
+				/>
+			</a>
+
+			<a class="menu__link __fcolc __mobile" href="/"> Главная </a>
+
+			<!-- categories -->
+			{foreach $categories as $c} {if $c->visible}
+
+			<a
+				class="menu__link __fcolc {if $category->id == $c->id} selected{/if}"
+				data-id="{$c->id}"
+				href="catalog/{$c->url}"
+			>
+				{$c->name|escape}
+			</a>
+
+			{/if} {/foreach}
+			<!-- /categories -->
+
+			<!-- pages -->
+			{foreach $pages as $p}
+			<!-- Выводим только страницы из первого меню -->
+			{if $p->menu_id == 1}
+
+			<a
+				class="menu__link __fcolc {if $page && $page->id == $p->id} selected{/if}"
+				data-page="{$p->id}"
+				href="{$p->url}"
+			>
+				{$p->name|escape}
+			</a>
+
+			{/if} {/foreach}
+			<!-- /pages -->
+		</div>
+		<!-- /menu__links -->
+	</div>
+</section>

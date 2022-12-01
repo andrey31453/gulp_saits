@@ -1,0 +1,85 @@
+.form__modal-callback
+	position: fixed
+	z-index: 70
+	top: -100vh
+	left: 0
+
+	width: 100%
+	height: 100vh
+
+	opacity: 0
+	cursor: pointer
+	background: none
+	transition-duration: 300ms
+	&.--active
+		opacity: 1
+		top: 0
+
+.fmc__form
+	position: relative
+	z-index: 80
+
+	padding: 2 * $pl (2 * $pl + 20px) 2 * $pl 2 * $pl
+	border-radius: .375rem
+
+	width: 90%
+	max-width: 600px
+	background-color: #f6f6f6
+	overflow: hidden
+
+	cursor: auto
+	body.--sm &
+		width: 98%
+		padding: $pl $p
+
+.fmc__input-wrapper
+	height: 110px
+
+.fmc__label
+	padding-bottom: $ps
+
+.fmc__input
+	padding: $ps
+
+	min-height: 60px
+	width: 100%
+	border: 2px solid #c4c4c4
+	font-size: $fz
+	border-radius: .375rem
+
+	opacity: 0.9
+	&:hover
+		border-color: $c
+
+.fmc__submit-btn
+	width: 100%
+	font-weight: bold
+	text-align: center
+
+.fmc__agreement
+	margin-bottom: $p
+	color: $fc !important
+	font-size: $fz
+	font-family: 'montserrat_regular'
+	&:hover
+		cursor: pointer
+	label:hover
+		cursor: pointer
+
+.fmc__close-btn
+	position: absolute
+
+	right: 20px
+	top: -12px
+
+	font-size: 80px
+	opacity: $ops
+
+	cursor: pointer
+	body.--sm &
+		font-size: 70px
+		right: 5px
+		top: -30px
+	&:hover
+		opacity: 1
+		color: $c

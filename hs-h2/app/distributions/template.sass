@@ -1,0 +1,18 @@
+.distributions__wrapper
+	position: fixed
+	z-index: -1
+
+	top: -100vh
+	bottom: 100vh
+	left: 0
+	right: 0
+
+	opacity: 0
+	cursor: pointer
+
+	transition: all 300ms linear
+	.--active &
+		z-index: 100
+		opacity: 1
+		top: 0
+		bottom: 0

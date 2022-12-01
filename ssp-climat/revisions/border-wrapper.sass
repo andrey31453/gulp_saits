@@ -1,0 +1,22 @@
+.__border-wrapper
+	position: relative
+	padding: $pl 2 * $pl 2 * $pl $pl
+	margin: $pl 0 2 * $pl $pl
+	@media (max-width: 500px)
+		padding: $p 2 * $p 2 * $p $p
+		margin: $p 0 2 * $p $p
+	&::before
+		position: absolute
+		content: ''
+
+		top: -$pl
+		left: -$pl
+
+		width: 100%
+		height: 100%
+		border: 4px solid $c
+		@media (max-width: 500px)
+			top: -$p
+			left: -$p
+	&.bw__cntrl::before
+		border-color: $c2

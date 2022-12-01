@@ -1,0 +1,27 @@
+<div id="footer"></div>
+<section class="footer__catalog__pages __anim __bi __back-substrate __back-substrate__dark">
+	<div class="container">
+		<div class="fcp__content-container __flex __fais __fw">
+
+			<div class="fcp__category-container">
+				<h2 class="fcp__heading"><span>Продукция</span></h2>
+				<div class="fcp__category __flex __fw">
+					{foreach $categories as $c}
+					<a class="fcp__category-link" href="{$c->url}">{$c->name}</a>
+					{/foreach}
+				</div>
+			</div>
+
+			<div class="fcp__pages-container">
+				<div class="fcp__pages __flex __fw">
+					{foreach $pages as $p}
+					{if $p->menu_id == 1}
+					<a class="fcp__pages-link" href="{$p->url}">{$p->name}</a>
+					{/if}
+					{/foreach}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</section>

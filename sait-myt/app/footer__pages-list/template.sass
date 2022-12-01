@@ -1,0 +1,64 @@
+// footer__pages-list 
+.fpl__row
+	display: flex
+	flex-wrap: wrap
+
+.fpl__column
+	width: 50%
+
+// content 
+.fpl__heading
+	padding-bottom: 5px
+	.--night &
+		opacity: 0.2
+	.--day &
+		color: $c2
+
+.fpl__link
+	display: block
+
+	position: relative
+	padding-top: 5px
+	padding-bottom: 5px
+	padding-left: 1.2rem
+	.--night &
+		color: $fc
+	.--day &
+		color: $fc2
+	&:hover
+		.--night &
+			color: $cc
+		.--day &
+			color: $cc2
+
+.fpl__link:before
+	position: absolute
+	top: 0
+	left: 0
+	bottom: 0
+	width: 1.2rem
+	content: '#'
+	font-size: 1.5rem
+	opacity: 0.2
+	.--night &
+		color: $fc
+	.--day &
+		color: $fc2
+
+.fpl__link:hover
+	color: $c
+	.--day &
+		color: $c2
+
+.fpl__link:hover:before
+	color: $c
+	opacity: 1
+	.--day &
+		color: $c2
+
+@media (max-width: 600px)
+	.fpl__column
+		width: 100%
+
+	.fpl__column:last-child
+		padding-top: 20px

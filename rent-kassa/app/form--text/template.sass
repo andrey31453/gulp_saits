@@ -1,0 +1,36 @@
+.form--text
+	padding-top: $psec
+	padding-bottom: $psec
+
+.ft__heading
+	margin-top: $psec
+	margin-bottom: $psec
+
+	font-size: $fzh1
+	text-align: center
+
+.ft__form__post
+	padding-top: 2 * $pl
+	span
+		color: $c
+
+.ft__form__sign
+	padding-top: 3 * $pl
+	color: $c
+	text-align: right
+	font-size: $fzh3
+	span
+		position: relative
+		padding-right: 100px
+		&::before
+			position: absolute
+			content: ''
+
+			right: 0
+			top: -30px
+			width: 100px
+			height: 100px
+
+			background-image: url('/design/template/images/form--text/icons/sign.png')
+			background-size: contain
+			background-repeat: no-repeat

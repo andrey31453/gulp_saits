@@ -1,0 +1,42 @@
+.documents__item-link
+	position: relative
+	display: block
+	padding: $ps
+
+	border: 2px solid transparent
+	& > *
+		position: relative
+		z-index: 1
+	&::before
+		position: absolute
+		z-index: 0
+		content: ''
+
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+
+		background-color: $bc
+		border: 2px solid transparent
+		border-radius: $rad
+	&:hover::before
+		border-color: $c
+
+.documents__item-img
+	margin: $ps auto 0 auto
+
+	width: 90%
+	body.--sm &
+		width: 60%
+
+.documents__item-description
+	margin: $p $ps $ps $ps
+
+	font-family: 'montserrat_semi_bold'
+	font-size: $fzh3
+	text-align: center
+
+	opacity: $ops
+	.documents__item-link:hover &
+		opacity: 1

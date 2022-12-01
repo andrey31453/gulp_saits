@@ -1,0 +1,20 @@
+.__btn
+	display: flex
+	justify-content: center
+	align-items: center
+	align-content: center
+
+	width: 260px
+	height: 60px
+
+	background: linear-gradient(to right, $c2a, $c2c)
+
+	cursor: pointer
+	&:hover
+		background: linear-gradient(to right, $c, $ca)
+
+.--cntrl
+	.__btn
+		border: 2px solid $c
+		&:not(:hover)
+			background: none

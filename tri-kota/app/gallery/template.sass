@@ -1,0 +1,154 @@
+.gallery__modal:not(.--active)
+	display: none
+
+.gallery__img-list
+	display: flex
+	justify-content: center
+	flex-wrap: wrap
+
+.gallery__img
+	margin: 3px
+	border: 1px solid $fc
+
+.gallery__img:hover
+	border: 1px solid $c
+	cursor: pointer
+
+.gallery__modal-image-inner-inner-container
+	transform: translateY(100vh)
+	position: fixed
+	z-index: 65
+
+	top: 0
+	left: 20%
+	width: 60%
+	height: 80%
+	z-index: 65
+	opacity: 0
+	display: flex
+	justify-content: center
+	align-content: center
+	@media (max-width: 660px)
+		width: 100%
+		left: 0
+
+.gallery__modal-image-inner-container
+	display: flex
+	justify-content: center
+	align-content: center
+	flex-direction: column
+.gallery__modal-image-container
+	display: flex
+	justify-content: center
+	position: relative
+
+	max-width: 100%
+	max-height: 100%
+
+.gallery__modal-window
+	max-width: 100%
+	max-height: 100%
+	box-shadow: 0px 0px 10px 0px $fc60
+
+// buttons 
+.gallery__close-slaider
+	position: absolute
+	z-index: 75
+
+	top: -50px
+	right: -50px
+	font-size: 5em
+	width: 50px
+	height: 50px
+	border-radius: 60px
+	line-height: 1rem
+	color: $fc2
+	&:hover
+		color: $fc2
+	@media (max-width: 550px)
+		top: 5px
+		right: 50px
+		font-size: 4em
+
+.gallery__prev-slaid,
+.gallery__next-slaid
+	position: fixed
+	z-index: 70
+
+	top: 0
+	width: 100px
+	height: 100%
+	cursor: pointer
+	display: flex
+	flex-direction: row
+	svg
+		width: 50%
+		margin: 0 auto
+	path
+		fill: $fc2
+	&:hover
+		path
+			fill: $c
+	@media (max-width: 550px)
+		width: 50px
+.gallery__prev-slaid
+	left: 0
+.gallery__next-slaid
+	right: 0
+
+// --active 
+.gallery__prev-slaid,
+.gallery__next-slaid,
+.gallery__close-slaider
+	opacity: 0
+
+.gallery__modal.--active
+	.gallery__prev-slaid,
+	.gallery__next-slaid,
+	.gallery__close-slaider
+		opacity: 0.7
+
+	.gallery__prev-slaid:hover,
+	.gallery__next-slaid:hover
+		background-color: #00000010
+		opacity: 1
+
+	.gallery__close-slaider:hover
+		color: $c
+
+	.gallery__prev-slaid:hover
+		box-shadow: 1px 0 5px 0 $fc60
+
+	.gallery__next-slaid:hover
+		box-shadow: -1px 0 5px 0 $fc60
+
+	.gallery__modal-image-inner-inner-container
+		transform: translateY(100px)
+		opacity: 1
+
+// страница со всеми галлереями
+.gallery__heading
+	padding-top: $pl
+.gallery__gallery-target
+	position: relative
+	margin-right: $pl
+	position: relative
+	margin-left: 30px
+	&.--active
+		color: $c
+		border-bottom: 1px dashed $c
+	&::before
+		position: absolute
+		left: -30px
+		top: 20%
+		bottom: 0
+		width: 30px
+		content: '.'
+		font-size: 3rem
+		padding-left: 12px
+		line-height: 0
+
+// import-multi-gallery
+.import-multi-gallery
+	padding-top: $pl
+	padding-bottom: $pl

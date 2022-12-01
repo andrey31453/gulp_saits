@@ -1,0 +1,119 @@
+// border-box 
+*, ::after, ::before
+	box-sizing: border-box
+
+// container 
+.container
+	width: 100%
+	padding-left: $p
+	padding-right: $p
+	margin-left: auto
+	margin-right: auto
+	max-width: $dxl - 80px
+
+@media (max-width: $ds)
+	.container
+		padding-left: $ps
+		padding-right: $ps
+
+// основные теги 
+html,
+body
+	margin: 0
+	font-family: Roboto Condensed,sans-serif
+	font-size: $fz
+	font-weight: $fw
+	background-color: $cb
+	color: $ct
+	overflow-wrap: break-word
+
+h3, .h3, h2, .h2, h1, .h1
+	margin-top: 0
+	margin-bottom: 0
+	font-weight: $fwh
+h1, .h1
+	font-size: $fzh1
+h2, .h2
+	font-size: $fzh2
+h3, .h3
+	font-size: $fzh3
+
+p
+	margin-top: 0
+	margin-bottom: $p
+
+ol,
+ul
+	padding-top: 0
+	padding-bottom: $p
+	padding-left: $p
+	margin-top: 0
+	margin-bottom: 0
+li
+	margin-bottom: $ps
+
+a, button
+	text-decoration: none
+	color: inherit
+a:hover, button:hover
+	color: $ct
+
+table
+	caption-side: bottom
+	border-collapse: collapse
+
+input, button
+	outline: none
+*:focus-visible
+	outline: none
+
+// подключение шрифтов 
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 300
+	font-style: normal
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-l.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-l.woff") format("woff")
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 300
+	font-style: italic
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-l-i.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-l-i.woff") format("woff")
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 400
+	font-style: normal
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-r.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-r.woff") format("woff")
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 400
+	font-style: italic
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-i.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-i.woff") format("woff")
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 700
+	font-style: normal
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-b.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-b.woff") format("woff")
+@font-face
+	font-family: "Roboto Condensed"
+	font-weight: 700
+	font-style: italic
+	font-display: swap
+	src: url("/design/template/fonts/roboto_condensed/roboto_condensed-b-i.woff2") format("woff2"), url("/design/template/fonts/roboto_condensed/roboto_condensed-b-i.woff") format("woff")
+
+@font-face
+	font-family: 'Roboto'
+	font-style: normal
+	font-weight: $fw
+	src: local('Roboto'), local('RobotoCn-Regular'), url('/design/template/fonts/roboto-condensed.woff') format('woff'), url('/design/template/fonts/roboto-condensed.ttf') format('truetype')
+	font-display: fallback
+@font-face
+	font-family: 'Gilroy'
+	font-style: normal
+	font-weight: $fw
+	src: local('Gilroy'), local('Gilroy'), url('/design/template/fonts/gilroy-woff/Gilroy-Regular.woff') format('woff'), url('/design/template/fonts/gilroy-ttf/Gilroy-Regular.ttf') format('truetype')
+	font-display: fallback

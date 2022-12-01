@@ -1,0 +1,44 @@
+.fcont__wrapper
+	width: 100%
+	@media (max-width: 800px)
+		text-align: center
+
+.fcont__col
+	width: 27.5%
+	@media (max-width: 800px)
+		width: 100%
+		&:not(:last-child)
+			margin-bottom: 2 * $pl
+
+.fcont__logo
+	@media (max-width: 800px)
+		width: 350px
+		max-width: 100%
+	path:nth-child(1)
+		fill: $c2
+	path:nth-child(2)
+		fill: $c
+	path:nth-child(3)
+		fill: $fc2
+	&:hover
+		path
+			fill: $c2
+
+.fcont__item
+	&:not(:last-child)
+		margin-bottom: 2 * $pl
+	@media (max-width: 800px)
+		justify-content: center
+
+.fcont__icon
+	width: 25px
+
+.fcont__text
+	padding-left: $p
+	font-size: $fzh3
+	align-items: flex-start
+	div:not(:last-child)
+		margin-bottom: $p
+	span,
+	a
+		font-weight: $fwh

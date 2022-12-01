@@ -1,0 +1,79 @@
+<!-- форма в теле страницы -->
+<section class="forma __bi __anim __back-substrate __back-substrate__dark">
+	<div class="container">
+		<div class="frm__inner">
+			<form class="frm__form frm__form__internal __form__internal" action="" method="post"
+				enctype="multipart/form-data">
+				<div class="frm__user-data">
+					<div class="frm__user-data-text"></div>
+					<input class="frm__user-data-btn" type="text" name="frm__user-name" placeholder="Имя" />
+				</div>
+
+				<div class="frm__user-data">
+					<input best="true" class="frm__user-data-btn" type="text" name="frm__user-phone" data-required="true"
+						placeholder="Номер телефона *" />
+				</div>
+
+				<button class="frm__input-btm" type="submit" name="frm__input-btm">
+					Отправить
+				</button>
+
+				<div class="frm__personal">
+					Нажимая на кнопку "Отправить", вы даете согласие на обработку
+					персональных данных
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+
+<!-- всплывающая форма -->
+<section class="forma frm__modal __modal" data-close="true">
+	<div class="frm__inner">
+		<div class="frm__close-button" data-close="true">&times;</div>
+		<form class="frm__form frm__form__external __form__external" action="" method="post" enctype="multipart/form-data">
+			<div class="frm__user-data">
+				<div class="frm__user-data-text"></div>
+				<input class="frm__user-data-btn" type="text" name="frm__user-name" placeholder="Имя" />
+			</div>
+
+			<div class="frm__user-data">
+				<input best="true" class="frm__user-data-btn" type="text" name="frm__user-phone" data-required="true"
+					placeholder="Номер телефона *" />
+			</div>
+
+			<button class="frm__input-btm" type="submit" name="frm__input-btm">
+				Отправить
+			</button>
+
+			<div class="frm__personal">
+				* Нажимая на кнопку "Отправить", вы даете согласие на обработку
+				персональных данных
+			</div>
+		</form>
+	</div>
+	<div class="substrate" data-close="true"></div>
+</section>
+
+<!-- кнопка позвонить -->
+<button class="frm__external-button __external-button __fixed-btn">
+	<svg viewBox="0 0 512 512" data-name="phone">
+		<path
+			d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z">
+		</path>
+	</svg>
+</button>
+
+{php} if (isset($_POST["frm__input-btm"]) && isset($_POST["antirobotpro"]) &&
+$_POST["antirobotpro"] == "gdfg56FG423er") { $to = "info@stroym-vse.ru"; $subject
+= "Заявка на сайт"; $charset = "utf-8"; $un = strtoupper(uniqid(time())); $head
+= "Mime-Version: 1.0\r\n"; $head .= "Content-Type:multipart/mixed;"; $head .=
+"boundary=\"__________".$un."\"\n\n"; $body =
+"____________".$un."\nContent-Type:text/html; charset=$charset\r\n"; $msg =
+"Текстовое поле: ".$_POST["frm__user-name"]."\n<br />". "*Текстовое поле:
+".$_POST["frm__user-phone"]."\n<br />". ""; $body .= "Content-Transfer-Encoding:
+8bit\n\n".$msg."\n\n"; mail($to, $subject, $body, $head); print "
+<script>
+	alert('Сообщение успешно отправлено!'); window.location = '".$_SERVER['REQUEST_URI']."';
+</script>
+"; } {/php}

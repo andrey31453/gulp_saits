@@ -1,0 +1,52 @@
+body
+	position: relative
+	&:after
+		position: fixed
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		content: ''
+		background-image: url('/design/template/images/background/bg.jpg')
+		background-size: 100% auto
+		background-repeat: repeat-y
+		z-index: 0
+	> *
+		position: relative
+		z-index: 1
+
+.__back-substrate
+	position: relative
+	&:after
+		position: absolute
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		background-color: $cb2
+		content: ''
+		opacity: 0.5
+	&__dark:after
+		opacity: 0.8
+	> .container
+		z-index: 1
+		position: relative
+
+.template-heading
+	text-align: center
+	overflow: hidden
+	padding-bottom: $psec
+	span
+		position: relative
+		&:before, &:after
+			position: absolute
+			top: 55%
+			content: ""
+			height: 2px
+			background-color: $c
+		&:before
+			right: calc(100% + 5px)
+			left: -1000px
+		&:after
+			left: calc(100% + 5px)
+			right: -1000px

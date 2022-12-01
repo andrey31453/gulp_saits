@@ -1,0 +1,137 @@
+// faq 
+.faq
+	border-bottom: 10px solid $bc
+	.--day &
+		border-color: $border2
+
+.container__faq
+	padding: 0
+
+.faq__item:nth-child(2n+1) .faq__item-header
+	background-color: $bc_text
+	.--day &
+		background-color: $bc_text2
+
+// .faq__item-header 
+.faq__item-header
+	font-size: 1.1rem
+	width: 100%
+	padding: 15px 50px
+	text-align: left
+	cursor: pointer
+	z-index: 2
+	color: $fc
+	background-color: $bc_text
+	border: none
+	border-bottom: 1px solid $bc
+	position: relative
+	opacity: 0.7
+	.faq--active &
+		border-width: 0
+	.--day &
+		background-color: $bc_text2
+		color: $fc2
+
+.faq__item:last-child .faq__item-header
+	border-bottom: none
+
+.faq__item-header-inner
+	font-size: 1.6rem
+	width: 17px
+	display: inline-block
+	color: $c
+	opacity: 0
+	padding-left: 7px
+	padding-right: 8px
+	.--day &
+		color: $c2
+
+.faq__item-header-inner:first-child
+	margin-left: -17px
+
+.faq__item-header:hover .faq__item-header-inner
+	opacity: 1
+
+.faq__item-header:hover
+	opacity: 1
+
+.faq__item-header-icons
+	& svg
+		position: absolute
+
+		top: 18px
+		right: 20px
+		width: 20px
+		height: 20px
+	// change icons
+	.--plus
+		opacity: 0.7
+	.--minus
+		opacity: 0
+	.faq--active &
+		.--plus
+			opacity: 0
+		.--minus
+			opacity: 0.7
+
+// icons hover
+.--night
+	.faq__item-header path
+		fill: $fc
+	.faq__item-header:hover path
+		fill: $c
+.--day
+	.faq__item-header path
+		fill: $fc2
+	.faq__item-header:hover path
+		fill: $c2
+
+.faq__item-body
+	max-height: 0
+	padding: 0 39px
+	overflow: hidden
+	line-height: 1.4rem
+	transition: max-height 600ms linear, padding 300ms linear 300ms
+
+// --active 
+.faq--active .faq__item-header-inner
+	opacity: 0.2
+	color: $fc
+	.--day &
+		color: $fc2
+
+.faq--active .faq__item-header:hover .faq__item-header-inner
+	color: $c
+	.--day &
+		color: $c2
+
+.faq--active .faq__item-body
+	max-height: 800px
+	border: 1px solid $c
+	margin-bottom: 2px
+	padding: 30px 37px
+
+	transition: all 600ms linear
+	.--day &
+		border-color: $c2
+
+.faq--active .faq__item-body
+	margin-bottom: 0
+
+.faq--active:last-child .faq__item-body
+	margin-bottom: 1px
+
+.__faq-separate
+	margin-top: 10px
+	margin-bottom: 20px
+	// margin-left: -37px
+	width: calc(100% + 74px)
+
+// media 
+@media (max-width: 800px)
+	.faq--active .faq__item-body
+		overflow-y: auto
+
+@media (max-width: 600px)
+	.faq__item-header
+		padding-left: 10px

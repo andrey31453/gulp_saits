@@ -1,0 +1,21 @@
+.go-top__quadr
+	position: fixed
+	bottom: 10px
+	left: 10px
+	width: 45px
+	height: 45px
+	border: 1px solid $cs
+	background-color: $cb2
+	cursor: pointer
+	z-index: 10
+	opacity: 0
+	&.__active
+		opacity: 1
+	svg
+		width: 80%
+		padding-left: 20%
+		padding-top: 25%
+	&:hover
+		border-color: $cst
+		path
+			fill: $cb

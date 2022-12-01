@@ -1,0 +1,21 @@
+.__anim
+	overflow: hidden
+	position: relative
+	display: block
+	&:before
+		top: 0
+		left: -25%
+		width: 3%
+		height: 100%
+		position: absolute
+		content: ''
+		background: linear-gradient(90deg, #ffffff30,#ffffff, #ffffff30)
+		transform: skewX(-45deg)
+		animation: anim 12000ms linear infinite
+		opacity: 0.15
+
+@keyframes anim
+	0%
+		left: -8000px
+	100%
+		left: 8000px

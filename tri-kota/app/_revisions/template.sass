@@ -1,0 +1,53 @@
+.header
+	position: relative
+	margin-top: (2 / 3) * $menu_h
+	&::before
+		position: absolute
+		content: ''
+
+		left: 0
+		right: 0
+
+		height: (2 / 3) * $menu_h
+		background-color: $c
+		top: - (2 / 3) * $menu_h
+	@media (max-width: 550px)
+		margin-top: 0
+		&::before
+			height: 0
+
+.main
+	overflow: hidden
+	.__container
+		padding-top: $psecl
+		padding-bottom: $psecl
+	@media (max-width: $m)
+		.__container
+			padding-top: $psec
+			padding-bottom: $psec
+
+.footer
+	position: relative
+	padding-bottom: (5 / 3) * $menu_h
+	&::before,
+	&::after
+		position: absolute
+		content: ''
+
+		left: 0
+		right: 0
+	&::before
+		bottom: (2 / 3) * $menu_h
+		height: $menu_h
+
+		background-color: $c2
+	&::after
+		bottom: 0
+		height: (2 / 3) * $menu_h
+
+		background-color: $c
+	@media (max-width: 550px)
+		padding-bottom: 0
+		&::before,
+		&::after
+			height: 0

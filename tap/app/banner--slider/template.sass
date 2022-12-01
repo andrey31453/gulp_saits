@@ -1,0 +1,90 @@
+// banner-index 
+.banner__slider
+	width: 100%
+	height: 100vh
+	overflow: hidden
+	position: relative
+	& > * > *
+		position: relative
+		z-index: 1
+// bs__slider-item 
+.bs__slider-item
+	position: absolute
+	top: 0
+	width: 100%
+	height: 100%
+	left: 100%
+	background-position: 100% 50%
+.bs__slider-item.__active
+	left: 0
+.bs__slider-item.__left
+	left: -100%
+
+.bs__slider-item.__index
+	background-image: url('/design/template/images/banner__slider/banners/banner_1.jpg')
+
+// bs__slider-item__content 
+.bs__slider-item__content
+	width: 88%
+	margin-left: 6%
+	height: 100%
+	padding-bottom: 3 * $p + 12px
+
+// btn 
+.bs__btn
+	position: absolute
+	top: 0
+	width: 5%
+	cursor: pointer
+	z-index: 10
+	padding-bottom: 3 * $p + 12px
+	&.__prev
+		left: 0%
+		&:hover
+			box-shadow: 1px 1px 1px $cs
+	&.__next
+		right: 0%
+		&:hover
+			box-shadow: -1px 1px 1px $cs
+	&.__unload
+		opacity: 0
+	&:hover
+		background-color: #00000010
+		path
+			fill: $c
+	svg
+		width: 80%
+		margin-left: auto
+		margin-right: auto
+
+// bs__indicator-item 
+.bs__indicator-list
+	position: absolute
+	bottom: 3 * $p
+	z-index: 10
+.bs__indicator-item
+	height: 1 * $p
+	width: 4 * $p
+	margin-left: $ps
+	margin-right: $ps
+	background-color: $cb
+	cursor: pointer
+	&.__active,
+	&:hover
+		background-color: $c
+
+// bi__heading 
+.bs__heading
+	font-size: 52px
+	line-height: 48px
+	letter-spacing: 0.1px
+	font-weight: 500
+	color: $ct2
+	& span
+		font-weight: bold
+		text-shadow: 1px 1px 1px $cb2
+	@media (max-width: 400px)
+		font-size: 1.5rem
+
+.banner__slider .frm__external-button
+	margin-top: 3 * $p

@@ -1,0 +1,22 @@
+.product__main
+	display: grid
+
+	grid-gap: $p
+	body.--d &
+		grid-template-areas: 'g1 g2 g2 g2 g2 g2 g3 g3 g3' 'g4 g4 g4 g4 g5 g5 g5 g5 g5'
+	body.--m &
+		grid-template-areas: 'g1 g2 g2 g2' 'g3 g3 g3 g3' 'g4 g4 g5 g5'
+		@media (max-width: 600px)
+			grid-template-areas: 'g2' 'g1' 'g3' 'g4' 'g5'
+
+.product
+	&__mini-images
+		grid-area: g1
+	&__images
+		grid-area: g2
+	&__specifications
+		grid-area: g3
+	&__description
+		grid-area: g4
+	&__complectation
+		grid-area: g5

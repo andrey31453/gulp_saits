@@ -1,0 +1,41 @@
+.tc__item-inner
+	position: relative
+
+.tc__item
+	position: absolute
+	top: 0
+	left: 100%
+	width: 100%
+	opacity: 0
+
+	padding-top: 50px
+	@media (max-width: 800px)
+		padding-top: 0
+	// active
+	&.__active
+		left: 0
+		opacity: 1
+	&.__outing
+		opacity: 0
+		left: -50%
+	&.__inting
+		left: 0
+		opacity: 1
+
+.tc__content-block-separator
+	position: relative
+	padding-top: 2 * $pl
+	padding-bottom: 2 * $pl
+	margin-left: auto
+	margin-right: auto
+	width: 100%
+	&::before
+		position: absolute
+		content: ''
+
+		top: calc(50% - 2px)
+		left: 0
+		right: 0
+		height: 1px
+
+		background-color: $fc240

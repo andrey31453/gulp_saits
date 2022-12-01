@@ -1,0 +1,80 @@
+// catalog-list 
+.catalog-list
+	overflow: hidden
+	.container
+		background-color: $cb
+		color: $ct
+		margin-top: $psec
+		margin-bottom: $psec
+		padding-top: $psec
+		padding-bottom: $psec
+		padding-right: $pl
+		padding-left: $pl
+		border-radius: $p
+	// cl__heading 
+	.container.__cntrl
+		background-color: $cb2
+		color: $c
+		text-transform: uppercase
+		text-align: center
+		padding-top: $pl
+		padding-bottom: $pl
+		.template-heading
+			padding-bottom: 0
+			margin-bottom: 0
+
+.cl__item
+	margin-top: $psec
+	margin-bottom: $psec
+	width: 48%
+	@media (max-width: $ds)
+		width: 96%
+
+// cl__category-description 
+.cl__category-description
+	width: 94%
+	min-width: 330px
+	margin-left: auto
+	margin-right: auto
+
+// .cl__item-link 
+.cl__item-link:hover
+	.cl__item-img
+		border: 1px solid $c
+	.cl__item-name
+		color: $c
+
+.cl__item-img
+	width: 100%
+	border: 1px solid $ct
+.cl__item-name
+	text-transform: uppercase
+	font-size: $fzh2
+	padding-top: $pl
+	padding-bottom: $pl
+	font-weight: bold
+	span
+		border-bottom: 1px dashed $c
+
+.cl__item-price
+	text-align: right
+	font-size: $fzh3
+	padding-top: $pl
+	span
+		position: relative
+		margin-right: 25px
+		&::before,
+		&::after
+			position: absolute
+			top: 0
+			color: $c
+			bottom: 0
+		&::before
+			left: -25px
+			right: 100%
+			content: 'от'
+			text-align: left
+		&::after
+			left: calc(100% + 5px)
+			right: 20px
+			content: '\20BD'

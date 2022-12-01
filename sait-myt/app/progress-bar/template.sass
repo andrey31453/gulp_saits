@@ -1,0 +1,41 @@
+.progress-bar
+	width: 0
+	height: 10px
+	background-color: $c
+	position: fixed
+	left: 0
+	top: 50px
+	z-index: 50
+	opacity: 0.8
+	.--day &
+		background-color: $c2
+
+@media (max-width: 560px)
+	.progress-bar
+		top: 59px
+		height: 1px
+
+// __pb-anim 
+.__pb-anim
+	overflow: hidden
+	display: block
+
+.__pb-anim:before
+	top: 0
+	left: -10%
+	width: 10%
+	height: 100%
+	position: absolute
+	content: ''
+	background: linear-gradient(90deg, #ffffff30,#ffffff, #ffffff30)
+	transform: skewX(-45deg)
+	animation: pb-anim 6000ms linear infinite
+	animation-delay: 4000ms
+	opacity: 0.75
+
+@keyframes pb-anim
+	0%
+		left: -3000px
+
+	100%
+		left: 3000px

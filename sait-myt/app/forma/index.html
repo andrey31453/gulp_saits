@@ -1,0 +1,57 @@
+<!-- обычная форма -->
+<section class="forma">
+	<div class="container">
+		<div class="frm__inner">
+			<form class="frm__form frm__form__internal" action="" method="post" enctype="multipart/form-data">
+				<div class="frm__user-data">
+					<div class="frm__user-data-text"></div>
+					<input class="frm__user-data-btn" type="text" name="name" placeholder="Имя" />
+				</div>
+
+				<div class="frm__user-data">
+					<input best="true" class="frm__user-data-btn" type="text" name="phone" data-required="true"
+						placeholder="Номер телефона *" />
+				</div>
+
+				<button class="frm__input-btm" type="submit" name="frm__input-btm">
+					<span class=" __btn-anim">Отправить</span>
+				</button>
+
+				<div class="frm__personal">Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных.
+					Но, честно говоря, мы не будем их обрабатывать. И почти никто не будет. Просто у нас в стране законы такие -
+					мы обязаны вас предупредить))</div>
+			</form>
+		</div>
+	</div>
+</section>
+<!-- <button class="frm__external-button __btn-anim"><span class=" __btn-anim">Уточнить цену</span></button> -->
+
+
+<!-- всплывающая форма -->
+<!-- <button class="frm__external-button">Уточнить цену</button> -->
+<section class="forma frm__modal" data-close="true">
+	<div class="substrate" data-close="true">
+		<div class="frm__inner">
+			<div class="frm__close-button" data-close="true">&times;</div>
+			<form class="frm__form frm__form__external" action="" method="post" enctype="multipart/form-data">
+				<div class="frm__user-data">
+					<div class="frm__user-data-text"></div>
+					<input class="frm__user-data-btn" type="text" name="name" placeholder="Имя" />
+				</div>
+
+				<div class="frm__user-data">
+					<input best="true" class="frm__user-data-btn" type="text" name="phone" data-required="true"
+						placeholder="Номер телефона *" />
+				</div>
+
+				<button class="frm__input-btm" type="submit" name="frm__input-btm">
+					<span class=" __btn-anim">Отправить</span>
+				</button>
+
+				<div class="frm__personal">* Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных
+					данных
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

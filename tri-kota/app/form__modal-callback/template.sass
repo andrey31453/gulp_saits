@@ -1,0 +1,76 @@
+.form__modal-callback
+	position: fixed
+	z-index: 50
+	top: -100vh
+	left: 0
+
+	width: 100%
+	height: 100vh
+
+	opacity: 0
+	cursor: pointer
+	background: none
+	transition-duration: 450ms
+	&.--active
+		opacity: 1
+		top: 0
+	.__btn
+		color: $fc
+		background-color: $bc
+		height: 40px
+
+.fmc__form
+	position: relative
+	z-index: 80
+
+	padding: $pl 60px $p $pl
+	border-radius: $br
+
+	width: 90%
+	max-width: 600px
+	background-color: $c
+	color: $fc2
+	overflow: hidden
+
+	cursor: auto
+	& > *
+		position: relative
+		z-index: 90
+	&::before
+		position: absolute
+		content: ''
+		z-index: 85
+
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+
+		background-color: $c2cont
+
+.fmc__label
+	font-size: $fzmin
+
+.fmc__input
+	padding: $ps
+	margin-bottom: $p
+
+	min-height: 30px
+	width: 100%
+	border: 1px solid $c2
+	border-radius: $br
+
+	font-size: $fz
+
+.fmc__close-btn
+	position: absolute
+
+	right: 8px
+	top: -20px
+
+	font-size: 60px
+	color: $fc
+
+	cursor: pointer
+	&:hover
+		color: $c

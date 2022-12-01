@@ -1,0 +1,460 @@
+{if $page->id == 23}<section class="banner-index__form js__bif __cntrl">
+	<div class="container">
+		<div class="bif__wrapper __fcol __fse">
+			<h1 class="bif__heading"><span>Акция</span> Бесплатная регистрация в РНИС + трекер в подарок</h1>
+			<div class="bif__buttons-container"><a class="bif__link __btn js__link">МКАД</a> <a
+					class="bif__link __btn js__link">ТТК</a> <a class="bif__link __btn js__link">СК</a></div>
+			<h1 class="bif__heading">Пропуск в Москву<br>от <span>10 000</span> / год</h1>
+			<div class="bif__call-block">
+				<div class="bif__call-block__text">Звоните<br><a class="__phone"
+						href="tel:+79647778282">+7(964)777-82-82</a><br>Или оставьте свой номер и мы перезвоним</div>
+				<form class="bift__form bift__form js__form" action="" method="post" enctype="multipart/form-data"><label
+						class="bif__user-data"><input best="true" class="bif__user-data-btn" type="text" name="bif__user-phone"
+							data-required="true" placeholder="Номер телефона *"></label> <button class="bif__btn __btn js__btn"
+						type="submit" name="bif__btn">Получить консультацию по оформлению пропуска</button></form>
+			</div>
+		</div>
+	</div>
+</section>{php} if (isset($_POST["bif__btn"]) && isset($_POST["antirobotpro"]) && $_POST["antirobotpro"] ==
+"gdfg56FG423er") { $to = "info@profi-propusk.ru"; $subject = "Заявка на обратный звонок"; $charset = "utf-8"; $un =
+strtoupper(uniqid(time())); $head = "Mime-Version: 1.0\r\n"; $head .= "Content-Type:multipart/mixed;"; $head .=
+"boundary=\"----------".$un."\"\n\n"; $body = "------------".$un."\nContent-Type:text/html; charset=$charset\r\n"; $msg
+= "Номер телефона: ".$_POST["bif__user-phone"]."\n<br>". ""; $body .= "Content-Transfer-Encoding: 8bit\n\n".$msg."\n\n";
+mail($to, $subject, $body, $head); print "
+<script>alert('Сообщение успешно отправлено!'); window.location = '".$_SERVER['REQUEST_URI']."';</script>"; } {/php}
+<section class="between-section">Оплата после получения пропуска</section>
+<section class="text __steps">
+	<div class="container">
+		<div class="t__wrapper __f">
+			<div class="t__item"><span>Вы присылаете нам цветные копии необходимых документов на электронную почту или
+					привозите в офис. Документы проходят проверку на штрафы или наличие каких-либо ошибок или неточностей</span>
+			</div>
+			<div class="t__item"><span>Заключаем договор в эл. виде или приезжаете к нам в офис. Оформление пропуска из
+					Личного кабинета Заказчика, на портале mos.ru</span></div>
+			<div class="t__item"><span>Когда пропуск оформлен, к Вам в Личный кабинет приходит уведомление о получении
+					пропуска или проверяете его статус на сайте Департамента транспорта города Москвы<br><br><a class="__btn"
+						target="_blank" href="https://transport.mos.ru/gruzoviki/reestr">Проверить пропуск</a></span></div>
+			<div class="t__item"><span>Оплачиваете наши услуги в течение двух дней после получения пропуска</span></div>
+		</div>
+	</div>
+</section>
+<section class="between-section bs__heading __alt">Цены</section>
+<div id="price"></div>
+<section class="tab-content js__tc __cntrl">
+	<div class="container">
+		<div class="tc__heading-inner __f __fc">
+			<h3 class="tc__heading __btn __active">МКАД</h3>
+			<h3 class="tc__heading __btn">ТТК</h3>
+			<h3 class="tc__heading __btn">СК</h3>
+		</div>
+		<div class="tc__item-inner">
+			<div class="tc__item __active">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">МКАД</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content/images/mkad.jpg">
+				</div>
+				<div class="tc__item-price">
+					<p class="tc__price__declamation"><span>Обязателен</span> для автотранспорта <span>грузоподъемность</span>
+						которого составляет более <span>3.5т</span></p>
+					<div class="tc__price__heading"><span>Цены</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День + Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Разовый</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="tc__price__heading"><span>Время</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">с 7:00 до 23:00</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">с 23:00 до 7:00</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Заказать пропуск</div>
+					<p class="tc__price__declamation">Запрет по экологическому классу <span>ниже 2</span></p>
+					<p class="tc__price__declamation">Для транспорта, чья <span>грузоподъемность выше 12 тонн</span> действуют
+						дополнительные ночные ограничения</p>
+				</div>
+			</div>
+			<div class="tc__item">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">ТТК</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content/images/ttk.jpg">
+				</div>
+				<div class="tc__item-price">
+					<p class="tc__price__declamation"><span>Обязателен</span> для автотранспорта <span>грузоподъемность</span>
+						которого составляет более <span>1т</span></p>
+					<div class="tc__price__heading"><span>Цены</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День + Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Разовый</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="tc__price__heading"><span>Время</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">с 7:00 до 23:00</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">с 23:00 до 7:00</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Заказать пропуск</div>
+					<p class="tc__price__declamation">Запрет по экологическому классу <span>ниже 3</span></p>
+				</div>
+			</div>
+			<div class="tc__item">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">Садовое кольцо</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content/images/sk.jpg">
+				</div>
+				<div class="tc__item-price">
+					<p class="tc__price__declamation"><span>Обязателен</span> для автотранспорта <span>грузоподъемность</span>
+						которого составляет более <span>1т</span></p>
+					<div class="tc__price__heading"><span>Цены</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День + Ночь</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Разовый</td>
+								<td class="tc__price-table__td js__price-value">14000</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="tc__price__heading"><span>Время</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">День</td>
+								<td class="tc__price-table__td js__price-value">с 7:00 до 23:00</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">Ночь</td>
+								<td class="tc__price-table__td js__price-value">с 23:00 до 7:00</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Заказать пропуск</div>
+					<p class="tc__price__declamation">Запрет по экологическому классу <span>ниже 3</span></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="text __why">
+	<div class="container">
+		<div class="t__wrapper __f">
+			<div class="t__item">
+				<div class="t__item__text"><span>Доступные цены! В наше время, активного роста цен на товары и услуги, мы
+						стремимся сохранить цены на достаточно низком уровне, для Вашего удобства и материального комфорта</span>
+				</div>
+			</div>
+			<div class="t__item">
+				<div class="t__item__text"><span>Наша компания работает официально, только с полным комплектом документов для
+						получения пропуска! При оформлении пропуска без полного комплекта документов, и на чужие организации очень
+						велик риск аннуляции пропуска в кратчайшие сроки</span></div>
+			</div>
+			<div class="t__item">
+				<div class="t__item__text"><span>Полноценная и качественная консультация по получению пропуска. Индивидуальный
+						подход к проверке документов и их оформлению</span></div>
+			</div>
+			<div class="t__item">
+				<div class="t__item__text"><span>Возможны дополнительные скидки или бонусы при заказе от 10ти пропусков</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="between-section bs__heading __alt">Документы</section>
+<div id="documents"></div>
+<section class="tab-content __copy js__tc__copy __cntrl">
+	<div class="container">
+		<div class="tc__after-item-text">
+			<p><span>Официальное оформление на Вашу компанию или ИП</span></p>
+		</div>
+		<div class="tc__heading-inner __f __fc">
+			<h3 class="tc__heading __btn __active">Физические лица</h3>
+			<h3 class="tc__heading __btn">ИП</h3>
+			<h3 class="tc__heading __btn">Юридические лица</h3>
+		</div>
+		<div class="tc__item-inner">
+			<div class="tc__item __active">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">Физические лица</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content__copy/images/fl.png">
+				</div>
+				<div class="tc__item-price">
+					<div class="tc__price__heading"><span>Необходимые документы</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">1.</td>
+								<td class="tc__price-table__td">Копия Свидетельство о регистрации ТС (для ТТК и СК с отметкой о евро-3 и
+									выше)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">2.</td>
+								<td class="tc__price-table__td">Копия Диагнастической карты (ТО)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">3.</td>
+								<td class="tc__price-table__td">Копия прав водителя</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">4.</td>
+								<td class="tc__price-table__td">Договор аренды с Компанией или ИП заказчиком (образец при необходимости
+									предоставим)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">5.</td>
+								<td class="tc__price-table__td">Маршрут движения ТС (частые точки заезда в Москву, погрузки или выгрузки
+									ТС)</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Оформить пропуск</div>
+				</div>
+			</div>
+			<div class="tc__item">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">ИП</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content__copy/images/ip.png">
+				</div>
+				<div class="tc__item-price">
+					<div class="tc__price__heading"><span>Необходимые документы</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">1.</td>
+								<td class="tc__price-table__td">Копия Свидетельство о регистрации ТС (для ТТК и СК с отметкой о евро-3 и
+									выше)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">2.</td>
+								<td class="tc__price-table__td">Копия Диагнастической карты (ТО)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">3.</td>
+								<td class="tc__price-table__td">Копия прав водителя</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">4.</td>
+								<td class="tc__price-table__td">Копия реквизитов ИП и паспорта владельца ИП, с пропиской</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">5.</td>
+								<td class="tc__price-table__td">Договор лизинга, если автомобиль не в собственности заявителя (копия)
+								</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">6.</td>
+								<td class="tc__price-table__td">Договор с контрагентом</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">7.</td>
+								<td class="tc__price-table__td">Маршрут движения ТС (частые точки заезда в Москву, погрузки или выгрузки
+									ТС)</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Оформить пропуск</div>
+				</div>
+			</div>
+			<div class="tc__item">
+				<div class="tc__item-img">
+					<div class="tc__item-img__heading">Юридические лица</div><img class="tc__item-img__img"
+						src="/design/template/images/tab-content__copy/images/ul.png">
+				</div>
+				<div class="tc__item-price">
+					<div class="tc__price__heading"><span>Необходимые документы</span></div>
+					<table class="tc__price-table">
+						<tbody>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">1.</td>
+								<td class="tc__price-table__td">Копия Свидетельство о регистрации ТС (для ТТК и СК с отметкой о евро-3 и
+									выше)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">2.</td>
+								<td class="tc__price-table__td">Копия Диагнастической карты (ТО)</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">3.</td>
+								<td class="tc__price-table__td">Копия прав водителя</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">4.</td>
+								<td class="tc__price-table__td">Копия реквизитов фирмы</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">5.</td>
+								<td class="tc__price-table__td">Договор лизинга, если автомобиль не в собственности заявителя (копия)
+								</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">6.</td>
+								<td class="tc__price-table__td">Договор с контрагентом</td>
+							</tr>
+							<tr class="tc__price-table__tr">
+								<td class="tc__price-table__td">7.</td>
+								<td class="tc__price-table__td">Маршрут движения ТС (частые точки заезда в Москву, погрузки или выгрузки
+									ТС)</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="__btn btn__alt js__btn-call-form">Оформить пропуск</div>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="tc__after-item-text">
+				<p>Все присылаемые Вами копии должны быть сканами и хорошо читаемы!</p>
+				<p>Если нет возможности прислать нам сканированные копии на почту, то всегда можно их сделать у нас в офисе.
+					Оформление пропуска происходит только через личный кабинет вашей организации или ИП с помощью ЭЦП</p>
+			</div>
+			<div class="tc__after-item-text">
+				<p>Документы для оформления ночного пропуска такие же как и у дневного</p>
+			</div>
+			<div class="tc__after-item-text">
+				<p>С 1 октября 2013 года пропуска для въезда грузового транспорта в Москву выдаются только в электронном виде.
+					Никаких пропусков на бумажном носителе не выдают. Подача заявления и получения пропуска происходят в
+					электронном виде. Отправления документов и ответ на запрос осуществляется на портале <a
+						href="https://www.mos.ru/">mos.ru</a></p>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="text __white">
+	<div class="container">
+		<div class="t__heading __fcol __fc"><span>История компании</span></div>
+		<div class="t__wrapper">
+			<p>Компания « Семь Холмов» начала свою деятельность в 2015 году. Основными приоритетами были выбраны крупные
+				компании, а для сотрудничества с ними нужно было быть надежным и стабильным партнером. К сожалению, ставка на
+				крупные компании не оправдалась (их штат юристов тоже должен был себя чем-то оправдывать), но сам принцип работы
+				остался. И только благодаря ему наша компания смогла удержаться и развиться на этом очень неспокойном рынке.
+				Многие наши конкуренты влезали в разные авантюрные мероприятия, пытаясь заработать больше, но их опыт показывает
+				потерю клиентской базы, имени, а у некоторых - и бизнеса. Мы не хотим допускать таких ошибок и не рискуем.</p>
+			<p>Для нас важен каждый звонок и заданный Вами вопрос. Даже если Вы клиент не нашей компании, а просто хотите
+				получить консультацию нашего юриста по вопросу оформления пропусков</p>
+			<div class="__btn btn__cntrl js__btn-call-form">Проконсультироваться</div>
+		</div>
+	</div>
+</section>
+<div class="f__fixed-btn js__fixed-btn js__btn-call-form __fixed-btn"><svg viewBox="0 0 512 512" data-name="phone">
+		<path
+			d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z">
+		</path>
+	</svg></div>
+<section class="forma __content-section __cntrl">
+	<div class="container">
+		<div class="f__inner">
+			<form class="ft__form js__ft__form" action="" method="post" enctype="multipart/form-data">
+				<div class="f__user-data">
+					<div class="f__user-data-text"></div><input class="f__user-data-btn" type="text" name="f__user-name"
+						placeholder="Имя">
+				</div>
+				<div class="f__user-data"><input best="true" class="f__user-data-btn" type="text" name="f__user-phone"
+						data-required="true" placeholder="Номер телефона *"></div><button class="f__btn __btn js__btn-in-form"
+					type="submit" name="f__btn">Отправить</button>
+				<div class="f__personal">Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных</div>
+			</form>
+		</div>
+	</div>
+</section>
+<section class="forma __modal __f __fc __fcol" data-close="true">
+	<div class="f__inner __f __fc">
+		<div class="f__close-button __fcol __fc" data-close="true"><span data-close="true">&times;</span></div>
+		<div>
+			<div class="f__phone __f __fc"><a class="f__phone-item __fcol __fc" href="whatsapp://send?phone=+79032580779"><svg
+						class="f__phone-svg __wa"
+						style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+						viewBox="0 0 5200 5200" data-name="whatsapp">
+						<path
+							d="M4835.31 3594.01c-122,-62.11 -727.54,-359.34 -840.66,-399.26 -113.12,-42.14 -195.19,-62.11 -277.26,62.11 -82.07,124.21 -317.19,399.25 -390.38,483.54 -70.98,82.07 -144.18,93.16 -266.17,31.06 -723.1,-361.55 -1197.77,-645.47 -1674.66,-1463.94 -126.43,-217.38 126.43,-201.85 361.55,-672.08 39.92,-82.07 19.96,-153.05 -11.1,-215.16 -31.05,-62.11 -277.26,-667.64 -379.29,-913.85 -99.81,-239.56 -201.84,-206.29 -277.26,-210.72 -70.98,-4.44 -153.05,-4.44 -235.12,-4.44 -82.07,0 -215.16,31.06 -328.28,153.05 -113.12,124.21 -430.31,421.44 -430.31,1026.98 0,605.54 441.4,1191.11 501.29,1273.18 62.11,82.07 867.27,1324.2 2102.75,1858.76 780.77,337.15 1086.87,365.99 1477.25,308.32 237.34,-35.49 727.54,-297.23 829.57,-585.58 102.03,-288.35 102.03,-534.56 70.98,-585.57 -28.84,-55.46 -110.91,-86.51 -232.9,-146.4l0 0z">
+						</path>
+					</svg> </a><a class="f__phone-item __fcol __fc" href="tg://resolve?domain=sspmed"><svg
+						class="f__phone-svg __tg" viewBox="-32 0 512 512" data-name="telegram-plane">
+						<path
+							d="M446.7 98.6l-67.6 318.8c-5.1 22.5-18.4 28.1-37.3 17.5l-103-75.9-49.7 47.8c-5.5 5.5-10.1 10.1-20.7 10.1l7.4-104.9 190.9-172.5c8.3-7.4-1.8-11.5-12.9-4.1L117.8 284 16.2 252.2c-22.1-6.9-22.5-22.1 4.6-32.7L418.2 66.4c18.4-6.9 34.5 4.1 28.5 32.2z">
+						</path>
+					</svg> </a><a class="f__phone-item __fcol __fc" href="viber://add?number=79259058997"><svg
+						class="f__phone-svg __vb"
+						style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+						viewBox="0 0 5200 5200" data-name="viber">
+						<path
+							d="M3851.55 2209.15c7.36,158.04 -229.72,169.07 -237.06,11.03 -20.22,-404.31 -209.51,-600.94 -599.11,-623 -158.04,-9.19 -143.34,-246.25 12.87,-237.06 512.73,27.56 797.58,321.6 823.3,849.03zm373.07 207.66c18.37,-779.19 -468.63,-1389.32 -1393.01,-1457.32 -156.2,-11.03 -139.67,-248.1 16.54,-237.07 1065.89,77.19 1633.75,810.44 1613.53,1699.91 -1.83,158.04 -240.74,150.69 -237.06,-5.51l0 -0.01zm863.73 246.26c1.84,158.04 -237.07,159.89 -237.07,1.84 -11.02,-1497.76 -1008.92,-2313.71 -2219.98,-2322.9 -156.21,-1.84 -156.21,-237.07 0,-237.07 1354.41,9.19 2444.19,944.59 2457.05,2558.13zm-207.66 1802.82l0 3.67c-198.48,349.17 -569.7,735.1 -951.95,611.97l-3.67 -5.51c-387.77,-108.43 -1301.12,-578.89 -1878.17,-1038.32 -297.71,-235.23 -569.7,-512.73 -779.2,-779.2 -189.29,-237.07 -380.41,-518.24 -566.02,-856.39 -391.44,-707.52 -477.82,-1023.62 -477.82,-1023.62 -123.12,-382.25 260.96,-753.47 611.97,-951.94l3.67 0c169.07,-88.22 330.8,-58.81 439.22,71.67 0,0 227.88,271.98 325.28,406.14 91.89,124.97 215.02,325.28 279.34,437.38 112.1,200.31 42.27,404.3 -68,488.84l-220.53 176.42c-112.1,90.05 -97.4,257.29 -97.4,257.29 0,0 327.12,1236.79 1549.22,1549.21 0,0 167.23,14.7 257.28,-97.4l176.42 -220.53c84.54,-110.26 288.53,-180.1 488.84,-68 270.15,152.54 613.81,389.6 841.69,604.62 128.64,104.75 158.04,264.63 69.83,433.7l0 0z">
+						</path>
+					</svg> </a><a class="f__phone-item __fcol __fc" href="tel:+79032580779"><span>+7 (903) 258-07-79</span></a>
+			</div>
+			<form class="ft__form ft__form__external" action="" method="post" enctype="multipart/form-data">
+				<div class="f__user-data">
+					<div class="f__user-data-text"></div><input class="f__user-data-btn" type="text" name="f__user-name"
+						placeholder="Имя">
+				</div>
+				<div class="f__user-data"><input best="true" class="f__user-data-btn" type="text" name="f__user-phone"
+						data-required="true" placeholder="Номер телефона *"></div><button class="f__btn __btn js__btn-in-form"
+					type="submit" name="f__btn">Обратный звонок</button>
+				<div class="f__personal">* Нажимая на кнопку "Отправить", вы даете согласие на обработку персональных данных
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="__substrate" data-close="true"></div>
+</section>{php} if (isset($_POST["f__btn"]) && isset($_POST["antirobotpro"]) && $_POST["antirobotpro"] ==
+"gdfg56FG423er") { $to = "info@profi-propusk.ru"; $subject = "Заявка на сайт"; $charset = "utf-8"; $un =
+strtoupper(uniqid(time())); $head = "Mime-Version: 1.0\r\n"; $head .= "Content-Type:multipart/mixed;"; $head .=
+"boundary=\"----------".$un."\"\n\n"; $body = "------------".$un."\nContent-Type:text/html; charset=$charset\r\n"; $msg
+= "Имя: ".$_POST["f__user-name"]."\n<br>"."Телефон: ".$_POST["f__user-phone"]."\n<br>". ""; $body .=
+"Content-Transfer-Encoding: 8bit\n\n".$msg."\n\n"; mail($to, $subject, $body, $head); print "
+<script>alert('Сообщение успешно отправлено!'); window.location = '".$_SERVER['REQUEST_URI']."';</script>"; }
+{/php}{/if}

@@ -1,0 +1,87 @@
+// border-box 
+*, ::after, ::before
+	box-sizing: border-box
+
+p
+	margin-top: 0
+	margin-bottom: $p
+
+ol,
+ul
+	padding-top: 0
+	padding-bottom: $p
+	padding-left: $p
+	margin-top: 0
+	margin-bottom: 0
+li
+	margin-bottom: $ps
+
+input, button
+	outline: none
+*:focus-visible
+	outline: none
+
+p
+	margin-top: 0
+	margin-bottom: 1rem
+
+body
+	margin: 0
+	font-family: 'Gilroy', Arial, system-ui
+	font-size: $fz
+	font-weight: $fw
+	letter-spacing: 1px
+	overflow-wrap: break-word
+	&.--night
+		color: $fc
+		background-color: $bc_text
+	&.--day
+		color: $fcday
+		background-color: $bc_text2
+
+h3, .h3, h2, .h2, h1, .h1
+	margin-top: 0
+	margin-bottom: 0
+	font-weight: $fwh
+	text-transform: uppercase
+	letter-spacing: 0
+	font-family: 'Roboto'
+
+h1, .h1
+	font-size: $fzh1
+h2, .h2
+	font-size: $fzh2
+h3, .h3
+	font-size: $fzh3
+
+ol,
+ul
+	padding-left: 2rem
+	margin-top: 0
+	margin-bottom: 1rem
+
+li
+	margin-bottom: 0.2rem
+
+table
+	caption-side: bottom
+	border-collapse: collapse
+
+figure
+	margin: 0 0 1rem
+
+img,
+svg
+	vertical-align: middle
+
+a
+	text-decoration: none
+	.--night &
+		color: $c
+	.--day &
+		color: $c2
+	&:hover
+		.--night &
+			color: $fc
+		.--day &
+			color: $cc2

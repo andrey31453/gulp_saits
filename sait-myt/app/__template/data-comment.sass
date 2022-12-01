@@ -1,0 +1,106 @@
+// data-comment 
+*[data-comment]
+	position: relative
+
+*[data-comment]:after
+	position: absolute
+
+	font-size: 0.8rem
+	height: 1.5rem
+	z-index: 0
+	text-transform: lowercase
+	.--night &
+		color: $fc
+		opacity: 0.2
+	.--day &
+		color: $c2
+
+*[data-comment]:hover:after
+	opacity: 1
+
+*[data-comment='contacts']:after
+	content: 'тел e-mail адрес'
+	bottom: -3px
+	left: 3px
+	width: 120px
+
+*[data-comment='map']:after
+	content: 'посмотреть на карте'
+	bottom: -20px
+	left: 100px
+
+*[data-comment='mail']:after
+	content: 'прислать бриф'
+	bottom: -20px
+	right: 0
+
+*[data-comment='vizitka']:after
+	content: 'презентация компании'
+	width: 145px
+	bottom: -20px
+	left: 0
+
+*[data-comment='landing']:after
+	content: 'презентация услуги'
+	bottom: -20px
+	left: 0
+
+*[data-comment='korporat']:after
+	content: 'привлечение клентов'
+	bottom: -20px
+	left: 0
+
+*[data-comment='IM']:after
+	content: 'продажа онлайн'
+	bottom: -20px
+	left: 0
+
+*[data-comment='sale']:after
+	content: 'ещё дешевле'
+	bottom: -20px
+	left: 0
+
+*[data-comment='all-inclisive']:after
+	content: 'сделаем красиво'
+	bottom: -20px
+	left: 0
+
+*[data-comment='individ']:after
+	content: 'точная настройка под вас'
+	bottom: -20px
+	left: 0
+
+*[data-comment='brif']:after
+	content: 'работа по плану'
+	bottom: -20px
+	left: 0
+
+*[data-comment='sopr']:after
+	content: 'поддержка и развитие'
+	bottom: -20px
+	left: 0
+
+*[data-comment='sopr-sopr']:after
+	content: 'недорого и удобно'
+	bottom: -20px
+	left: 1.7rem
+
+*[data-comment='backup']:after
+	content: 'нужен всем'
+	bottom: -20px
+	left: 1.7rem
+
+*[data-comment='direct']:after
+	content: 'как себе'
+	bottom: -20px
+	left: 1.7rem
+
+*[data-comment='seo']:after
+	content: 'долго дорого надежно'
+	bottom: -20px
+	left: 1.7rem
+
+*[data-comment='dorabotka']:after
+	content: 'вы не узнаете свой сайт'
+	bottom: -20px
+	left: 1.7rem

@@ -1,0 +1,58 @@
+section
+	padding-top: $psec
+	padding-bottom: $psec
+
+p
+	margin-top: 0
+	margin-bottom: $p
+
+.container
+	width: 100%
+	padding: 0 $psec
+	margin: 0 auto
+	max-width: 1140px
+
+@media (max-width: 450px)
+	.container
+		padding: 0 6px
+
+@media (max-width: 350px)
+	.container
+		padding: 0 3px
+
+input, button
+	outline: none
+
+html,
+body
+	margin: 0
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+	font-size: $fz
+	font-weight: $fw
+	background-color: $cb
+	color: $ct
+
+ol,
+ul
+	padding-left: $p
+	margin-top: 0
+	margin-bottom: $p
+li
+	margin-bottom: 0.2rem
+
+a
+	text-decoration: none
+	color: inherit
+	cursor: pointer
+a:hover
+	color: $c
+
+table
+	caption-side: bottom
+	border-collapse: collapse
+
+*:focus-visible
+	outline: none
+
+*, ::after, ::before
+	box-sizing: border-box

@@ -1,0 +1,33 @@
+.__btn
+	text-transform: uppercase
+	font-weight: bold
+	text-decoration: none
+	padding: $p $pl
+	display: inline-block
+	position: relative
+	background-color: $bc
+	color: $fc
+	border: none
+	cursor: pointer
+	margin-top: $p
+	@media (max-width: 500px)
+		padding-left: $p
+		padding-right: $p
+
+	&:hover
+		box-shadow: 0 10px 20px $bc220
+		background-color: $c2
+		color: $fc2
+	&:active
+		transform: translateY(4px)
+		box-shadow: 0 5px 10px $bc220
+	&.__btn--cntrl
+		background-color: $c
+		color: $fc2
+		&:hover
+			background-color: $c2
+	&.__btn--alt
+		background-color: $c2
+		color: $fc2
+		&:hover
+			background-color: $c

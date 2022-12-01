@@ -1,0 +1,78 @@
+// _footer__contacts
+.footer__contacts
+	position: relative
+	&::before
+		position: absolute
+		z-index: 0
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+		content: ''
+		opacity: 0.3
+		background: linear-gradient(-45deg, $cb40, $c, $cb40)
+	> *
+		position: relative
+		z-index: 1
+
+.footer__contacts .container
+	position: relative
+	border: 4px solid $ct
+	margin-top: $psec
+	margin-bottom: $psec
+	margin-right: auto
+	margin-left: auto
+	@media (max-width: $dxl)
+		max-width: calc(100% - 50px)
+.footer__contacts:not(.__map-for-footer) .container
+	background-color: $cb99
+	color: $ct
+
+	padding-top: $psec
+	padding-bottom: $psec
+	padding-right: $pl
+	padding-left: $pl
+
+.footer__contacts.__map-for-footer
+	border-top: 4px solid $c
+	padding-top: 0
+	padding-bottom: 0
+	.container
+		padding-left: 0
+		padding-right: 0
+
+.fc__heading
+	position: absolute
+	top: -30px
+	left: -30px
+
+	height: 60px
+	width: 150px
+	background-color: $cb2
+	border: 4px solid $ct2
+
+	font-size: $fzh2
+	font-weight: bold
+	color: $ct2
+	text-transform: uppercase
+	@media (max-width: 450px)
+		left: -20px
+.fc__item
+	padding-top: $pl
+	padding-bottom: $pl
+	width: 50%
+	padding-left: 10%
+	padding-right: 10%
+	@media (max-width: $dm)
+		width: 100%
+
+.fc__item__svg svg
+	height: 40px
+	padding-right: $ps
+	padding-left: $ps
+
+// ymaps 
+.footer__contacts > ymaps
+	overflow: hidden
+ymaps *
+	transition: 0ms all

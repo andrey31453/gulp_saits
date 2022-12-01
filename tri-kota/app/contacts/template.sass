@@ -1,0 +1,30 @@
+.contacts
+	background-color: $c2
+	color: $fc2
+
+	font-family: 'DIN Pro Medium'
+	font-size: $fzh2
+	.__btn
+		font-size: 14px
+
+.contacts__wrapper
+	@media (max-width: 500px)
+		justify-content: center
+
+.contacts__link
+	height: $menu_h
+	color: $fc2
+	&:not(:first-child)
+		padding-left: $ps
+	&:not(:last-child)
+		padding-right: $ps
+	&:hover
+		color: $ca
+		path
+			fill: $ca
+
+.contacts__icon
+	height: 0.6 * $menu_h
+	padding-right: $p
+	path
+		fill: $fc2

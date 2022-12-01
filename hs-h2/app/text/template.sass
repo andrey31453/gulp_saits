@@ -1,0 +1,38 @@
+.text
+	padding-top: $psec
+	padding-bottom: $psec
+	.__fcolc
+		align-items: flex-start
+	.text__marker
+		body.--d &
+			max-width: 60%
+		body.--m &
+			max-width: 100%
+	&.--reverse .text__wrapper
+		flex-direction: row-reverse
+
+.text__marker
+	background: $grad
+	color: $fc2
+	text-transform: uppercase
+	font-family: 'montserrat_bold'
+	display: inline-block
+	padding: 0.5 * $ps $ps
+	margin-bottom: $p
+
+.text__content
+	body.--d &
+		width: 60%
+	body.--m &
+		width: 100%
+
+.text__img
+	body.--d &
+		width: 40%
+	body.--m &
+		width: 100%
+	img
+		width: 80%
+		max-width: 300px
+		margin-left: auto
+		margin-right: auto

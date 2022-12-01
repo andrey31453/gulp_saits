@@ -1,0 +1,40 @@
+/* gallery-catalog */
+.gallery-catalog
+	border-bottom: 10px solid $bc
+	.--day &
+		border-color: $border2
+// item
+.gc__item-list
+	padding-top: $pl
+
+.gc__item
+	position: relative
+	width: 31%
+	cursor: pointer
+	border: 1px solid $fc60
+	margin-bottom: $pl
+	&:hover
+		border: 1px solid $c60
+		color: $c
+		.--day &
+			color: $c2
+			border-color: $c260
+	@media (max-width: $dm)
+		width: 48%
+	@media (max-width: $ds)
+		width: 100%
+
+.gc__item-img
+	width: 100%
+
+.gc__item-text
+	position: absolute
+	bottom: 0
+	left: 0
+	right: 0
+	padding-top: $p
+	padding-bottom: $p
+	background-color: $bc
+	text-align: center
+	.--day &
+		background-color: $bc2

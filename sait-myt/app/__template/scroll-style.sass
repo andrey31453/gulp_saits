@@ -1,0 +1,19 @@
+// фон скроллбара
+::-webkit-scrollbar
+	width: 1.5 * $ps + 2px
+// btn-s
+::-webkit-scrollbar-button
+	display: none
+// пустое пространство под индикатором прокрутки
+::-webkit-scrollbar-track
+	background: $bc
+	.--day &
+		background: $border2
+// индикатор прокрутки
+::-webkit-scrollbar-thumb
+	background: linear-gradient(to bottom, $c, $cc)
+	border: solid 1px $bc
+	.--day &
+		background: linear-gradient(to bottom, $c2, $cc2)
+		border-color: $border2
+		border-width: 0

@@ -1,0 +1,39 @@
+.h3, .h3, h2, .h2, h1, .h1
+	padding-bottom: $pl
+	margin-top: 0
+	margin-bottom: $pl
+	font-weight: $fwh
+	text-transform: uppercase
+
+	color: $c
+.h3, .h3, h2, .h2
+	position: relative
+
+	&::after
+		position: absolute
+		content: ''
+
+		bottom: 0px
+		left: 0
+
+		width: 100px
+		height: 4px
+
+		background-color: $c
+	.__alt &,
+	.__cntrl &
+		color: $fc2
+		&::after
+			background-color: $fc2
+
+h1, .h1
+	font-size: $fzh1
+	line-height: $fzh1 + 4px
+
+h2, .h2
+	font-size: $fzh2
+	line-height: $fzh2 + 2px
+
+h3, .h3
+	font-size: $fzh3
+	line-height: $fzh3 + 2px

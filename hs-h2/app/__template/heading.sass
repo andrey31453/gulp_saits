@@ -1,0 +1,30 @@
+h1, h2, h3,
+.h1, .h2, .h3
+	margin-top: 0
+	margin-bottom: $p
+
+	font-family: 'montserrat_semi_bold'
+	text-transform: uppercase
+	&.__temp
+		color: $c
+	&:not(:first-child)
+		margin-top: $p
+		margin-bottom: $p
+
+h1, .h1
+	body.--d &
+		font-size: $fzh1
+	body.--m &
+		font-size: $fzh1m
+
+h2, .h2
+	body.--d &
+		font-size: $fzh2
+	body.--m &
+		font-size: $fzh2m
+
+h3, .h3
+	body.--d &
+		font-size: $fzh3
+	body.--m &
+		font-size: $fzh3m

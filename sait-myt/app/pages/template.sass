@@ -1,0 +1,112 @@
+// _pages__promotion
+.page
+	border-bottom: 10px solid $bc
+	.--day &
+		border-color: $border2
+	.__text-opacity
+		.--day &
+			color: $fcday
+			opacity: 0.8
+
+// page__item 
+.page__item
+	display: flex
+	flex-wrap: wrap
+
+.page__item-container
+	width: 50%
+	padding: $pl
+
+.page__item__img
+	width: 220px
+	margin: 0 auto 2rem auto
+	display: block
+	&.__opacity
+		opacity: 0.8
+
+.page__item__description p
+	font-size: 0.9rem
+
+// page__item__service 
+.page__item__service-name
+	font-family: 'Roboto'
+	text-transform: uppercase
+	margin-bottom: $pl
+	font-size: 1.1rem
+
+	display: flex
+	justify-content: space-between
+	align-items: baseline
+
+.page__item__service-option
+	width: 100%
+	padding-left: 2rem
+	opacity: 0.6
+	padding-bottom: 0.4rem
+	&:hover
+		opacity: 1
+
+.page__item__service-name .__ramka
+	opacity: 0.2
+
+.page__item__service-name .__text-opacity
+	font-size: 1.2rem
+	.--day &
+		color: $c2
+
+.page__item__service-name .cod-rubl
+	height: 23px
+
+.page__item__service-name .cod-rubl:before
+	top: 5px
+
+.page__item__service-check
+	width: 20px
+	position: relative
+	cursor: pointer
+
+.page__item__service-check svg
+	position: absolute
+	top: 0
+	left: 0
+
+	width: 20px
+	height: 20px
+	opacity: 0.8
+
+.page__item__service-check svg
+	left: -2rem
+
+.page__item__service-check:hover svg
+	opacity: 1
+
+// page__item__services__tarif__separator 
+.page__item__services__tarif__separator
+	width: calc(100% + 20px)
+	height: 1px
+	background-color: $bc
+	position: relative
+	margin-left: -10px
+	margin-top: $pl
+	margin-bottom: $pl
+	.--day &
+		background-color: $bc2
+
+.page__item__services__tarif__separator:after
+	left: 0
+	top: -1px
+	width: 100%
+	height: 1px
+	position: absolute
+	content: ''
+	background-color: $bcc
+	.--day &
+		background-color: $bcc2
+
+//media 
+@media (max-width: 900px)
+	.page__item-container
+		width: 100%
+
+	.page__item__service-name
+		max-width: 355px

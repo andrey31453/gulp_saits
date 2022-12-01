@@ -1,0 +1,61 @@
+.__btn
+	text-transform: uppercase
+	font-weight: bold
+	text-decoration: none
+	padding: $p $pl
+	display: inline-block
+	position: relative
+	background-color: $bc
+	color: $fc
+	border: none
+	cursor: pointer
+	margin-top: $p
+	// animated
+	animation: move-in-bottom 500ms ease-out
+	animation-fill-mode: backwards
+	@media (max-width: 500px)
+		padding-left: $p
+		padding-right: $p
+
+	&:hover
+		transform: translateY(-4px)
+		box-shadow: 0 10px 20px $bc220
+		background-color: $bc
+		color: $fc
+	&:active
+		transform: translateY(0px)
+		box-shadow: 0 5px 10px $bc220
+	&::after
+		content: ""
+		background-color: $bc
+		display: inline-block
+		height: 100%
+		width: 100%
+		position: absolute
+		top: 0
+		left: 0
+		z-index: -1
+		transition: 0ms all
+	&:hover::after
+		transform: scaleX(1.4) scaleY(1.6)
+		opacity: 0
+		transition: 300ms all
+	&.btn__cntrl
+		background-color: $bc2
+		color: $fc2
+		&::after
+			background-color: $bc2
+	&.btn__alt
+		background-color: $c
+		color: $fc2
+		&::after
+			background-color: $c
+
+@keyframes move-in-bottom
+	0%
+		opacity: 0
+		transform: translateY(20px)
+
+	100%
+		opacity: 1
+		transform: translateY(0px)

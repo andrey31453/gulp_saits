@@ -1,0 +1,39 @@
+// banner-index__form 
+.banner-index__form
+	padding-top: 0
+	padding-bottom: 50px
+	background-image: url('/design/template/images/banner-index__form/backgrounds/1980.jpg')
+	background-position: 100% 50%
+	background-repeat: no-repeat
+	background-size: cover
+	position: relative
+	height: calc(100vh - 80px + 4px) // 100vh - $menu_height
+	@media (max-width: 550px), (max-height: 800px)
+		height: 1000px
+	&::before
+		position: absolute
+		content: ''
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		opacity: 0.4
+		background: radial-gradient($bc2, $bc220)
+	&::after
+		position: absolute
+		content: ''
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+		opacity: 0.4
+		background: linear-gradient(135deg, $c, $c20)
+	> *
+		position: relative
+		z-index: 1
+	> .container
+		height: 100%
+
+.bif__wrapper
+	max-width: 600px
+	height: 100%

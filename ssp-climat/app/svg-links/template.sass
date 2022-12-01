@@ -1,0 +1,30 @@
+.svg-links
+	padding-top: $pl
+	padding-bottom: $pl
+
+	border-top: 1px solid $c60
+
+.svg-links__link
+	width: 10%
+	@media (max-width: 1000px)
+		width: 20%
+	@media (max-width: 600px)
+		width: 33%
+	@media (max-width: 450px)
+		width: 45%
+	&:hover
+		path
+			fill: $c2
+
+.svg-links__svg-cont
+	height: 80px
+	svg
+		height: 80%
+		&.--big
+			height: 100%
+
+.svg-links__heading
+	height: 32px
+	text-align: center
+	font-size: $fzmin
+	line-height: $fzmin + 2px

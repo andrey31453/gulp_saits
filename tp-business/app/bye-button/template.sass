@@ -1,0 +1,64 @@
+.bye-button
+	position: fixed
+
+	top: 0
+	bottom: 0
+	left: 0
+	right: 0
+
+	display: flex
+	justify-content: center
+	align-items: center
+
+	background: linear-gradient(105deg,#d7dae1,#d9f3e6,#d7dae1)
+
+.bye-button__form
+	width: 80%
+	max-width: 600px
+	height: 200px
+	padding: 20px
+
+	display: flex
+	justify-content: space-between
+	align-items: center
+
+	border-radius: 6px
+
+	background: linear-gradient(55deg,#ffffff,#fcfcfc,#fafafa)
+	color: #202024
+
+.bye-button__form__value
+	height: 50px
+	width: 65%
+
+	background-image: linear-gradient(105deg,#d7dae1,#d7dae1,#d7dae1,#d9f3e6)
+	border-radius: 6px
+	text-align: center !important
+	text-transform: uppercase
+	font-weight: bold
+
+	letter-spacing: 1px
+	border: 0
+	font-size: 24px
+	&::placeholder
+		font-size: 18px
+	&::-webkit-inner-spin-button
+		display: none
+
+.bye-button__form__submit
+	height: 50px
+	width: calc(35% - 20px)
+
+	border-radius: 6px
+	background: linear-gradient(105deg,#00b601,#00b601,#00b601,#0c6d1c)
+	text-align: center
+	text-transform: uppercase
+	font-weight: bold
+	letter-spacing: 1px
+	color: #fff
+	border: 0
+	cursor: pointer
+
+	font-size: 14px
+	&:hover
+		background: linear-gradient(105deg,#0c6d1c, #0c6d1c)

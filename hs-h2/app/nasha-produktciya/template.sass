@@ -1,0 +1,69 @@
+.services
+	padding-top: $psec
+	padding-bottom: $psec
+	img
+		object-fit: cover
+	h3
+		margin-top: 0
+		margin-bottom: 0
+	div h2
+		margin-bottom: 0
+		font-size: 28px
+		font-family: 'montserrat_extra_bold'
+	li
+		font-size: 18px
+	.card
+		position: relative
+
+		max-width: 450px
+		border: 2px solid $bc
+		border-radius: .450rem
+		margin: 0 auto
+		font-family: 'montserrat_bold'
+		&::before
+			position: absolute
+			content: ''
+
+			top: -2px
+			bottom: -2px
+			left: -2px
+			right: -2px
+
+			background: linear-gradient($deg, $bc, $bc)
+			border-radius: .475rem
+		&:hover::before
+			background: $grad
+		@media (max-width: 1023px)
+			max-width: 500px
+			margin: 0 auto
+@media (min-width: $d)
+	.services
+		li
+			opacity: 0.8
+	.services .card:hover	li
+		opacity: 1
+
+.overlay-card
+	background: rgba(51, 51, 51, 0.55)
+	.card:hover &
+		background: rgba(51, 51, 51, 0.9)
+
+.services__separator
+	position: relative
+
+	padding-top: $p
+	padding-bottom: $p
+
+	opacity: 0
+	&::before
+		position: absolute
+		content: ''
+
+		top: calc(50% - 2px)
+		left: 25%
+		width: 50%
+		height: 4px
+
+		background-color: $fc2
+	.services a:hover &
+		opacity: $op

@@ -1,0 +1,17 @@
+<section class="footer--catalog __alt __alt--reverse __separator">
+	<div class="__container">
+		<!-- wrapper -->
+		<div class="fcat__wrapper">
+			{foreach $categories as $c}
+			<a class="fcat__link __fcolc" href="catalog/{$c->url}">
+				<span>{$c->name}</span>
+			</a>
+			{/foreach} {foreach $categories as $c}
+			<a class="fcat__link __fcolc" href="catalog/{$c->url}">
+				<span>{$c->name}</span>
+			</a>
+			{/foreach}
+		</div>
+		<!-- /wrapper -->
+	</div>
+</section>

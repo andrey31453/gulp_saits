@@ -1,0 +1,29 @@
+<section class="catalog __alt" id="catalog">
+	<div class="__container">
+		<div class="__f __fc">
+			<h2 class="c__heading">Каталог холодильного оборудования</h2>
+		</div>
+
+		<div class="c__item-list __f">
+			{foreach $categories as $c} {if $c->visible}
+			<a class="c__item-link __border-wrapper __f" href="catalog/{$c->url}">
+				<div class="c__item-img-container">
+					<img class="c__item-img" src="/files/categories/{$c->image}" />
+				</div>
+
+				<div class="c__item-text-container">
+					<h3 class="c__item-name">{$c->name}</h3>
+					<div class="c__item-text">{$c->meta_description}</div>
+					<div class="c__item-text">
+						<svg class="c__item-array" viewBox="0 0 448 512">
+							<path
+								d="M313.941 216H12c-6.627 0-12 5.373-12 12v56c0 6.627 5.373 12 12 12h301.941v46.059c0 21.382 25.851 32.09 40.971 16.971l86.059-86.059c9.373-9.373 9.373-24.569 0-33.941l-86.059-86.059c-15.119-15.119-40.971-4.411-40.971 16.971V216z"
+							></path>
+						</svg>
+					</div>
+				</div>
+			</a>
+			{/if} {/foreach}
+		</div>
+	</div>
+</section>

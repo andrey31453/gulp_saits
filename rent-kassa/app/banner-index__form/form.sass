@@ -1,0 +1,29 @@
+.bif__user-data-btn
+	padding: 0 $pl
+	height: 50px
+	box-shadow: none
+	width: 100%
+	border: none
+	border-bottom: 1px $bc80 solid
+	margin-bottom: 3px
+	background: rgba(255, 255, 255, 0.15)
+	color: $fc2
+	font-size: $fzh3
+	&:hover
+		border-color: $c60
+	&:active
+		background-color: $c
+	// placeholder
+	&::placeholder
+		color: $fc2
+		font-size: $fz
+	// error
+	&.__error
+		border: 1px $c solid
+	&.__error::placeholder
+		color: $c
+		font-weight: bold
+
+.bif__btn
+	width: 100%
+	text-align: left

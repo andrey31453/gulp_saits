@@ -1,0 +1,27 @@
+// between-section 
+.between-section
+	position: absolute
+	left: calc(50% - 300px)
+	z-index: 5
+
+	width: 600px
+	padding: 20px
+
+	text-align: center
+	text-transform: uppercase
+	font-weight: bold
+	font-size: $fzh2
+
+	background-color: $c
+	color: $ct2
+	&.__cntrl
+		background-color: $cb2
+		color: $ct2
+	&.__alt
+		background-color: $cb
+		color: $ct
+		border: 4px solid $c
+		font-size: $fzh1
+	@media (max-width: 650px)
+		width: 90%
+		left: 5%

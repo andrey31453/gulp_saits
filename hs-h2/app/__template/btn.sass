@@ -1,0 +1,21 @@
+.__btn
+	display: flex
+	justify-content: center
+	align-items: center
+	align-content: center
+
+	width: 260px
+	height: 60px
+
+	background: $bc2
+
+	cursor: pointer
+	body.--sm &
+		padding: $ps
+		width: 240px
+		height: 40px
+	path
+		fill: $fc2
+	&:hover
+		box-shadow: -$ps * 0.5 $ps * 0.5 $ps $c25
+		background: $ca

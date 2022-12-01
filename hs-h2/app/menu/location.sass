@@ -1,0 +1,29 @@
+.navbar__location
+	align-items: center
+	cursor: pointer
+	body.--d &
+		margin-left: $pl
+	body.--m &
+		font-size: $fzs
+		margin-top: $ps
+		margin-bottom: $ps
+	body.--sm &
+		display: none
+	span
+		padding-left: $ps
+		padding-right: $ps
+	path
+		fill: $fc
+	&:hover
+		path
+			fill: $c
+
+.navbar__location-icon
+	opacity: $ops
+
+	body.--m &
+		height: 20px
+	body.--d &
+		height: 28px
+	.navbar__location:hover &
+		opacity: 1

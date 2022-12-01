@@ -1,0 +1,24 @@
+.menu
+	background-color: $c2a
+	font-family: 'DIN Pro Medium'
+	font-size: $fzh3
+
+.menu__link
+	height: 100px
+
+	color: $fc2
+	text-transform: uppercase
+	&:not(:first-child)
+		padding-left: $ps
+	&:not(:last-child)
+		padding-right: $ps
+	&:hover
+		color: $ca
+	@media (max-width: 805px)
+		width: 50%
+	@media (max-width: 550px)
+		width: 100%
+		height: 50px
+
+.menu__logo
+	height: 80%

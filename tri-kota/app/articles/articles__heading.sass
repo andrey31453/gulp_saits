@@ -1,0 +1,91 @@
+.articles__heading
+	position: relative
+
+	min-height: 60px
+	padding: 0 $pl
+	margin-top: 2 * $psec
+
+	overflow: hidden
+	border-radius: $br
+	color: $fc2
+	@media (max-width: 660px)
+		margin-top: $pl
+	&.--sub
+		min-height: 40px
+	&:not(.--sub)
+		padding-right: 100px + $ps
+		padding-left: 100px + $ps
+		@media (max-width: 800px)
+			padding-right: 50px + $ps
+			padding-left: 50px + $ps
+	&:hover
+		color: $fc2
+	&.--c0,
+	&.--ca
+		color: $fc
+	&.--c0
+		background-color: $c4
+	&.--c
+		background-color: $c
+	&.--ca
+		background-color: $ca
+		&:hover
+			color: $fc
+	&.--c2
+		background-color: $c2
+	&.--c2a
+		background-color: $c2a
+	&.--c3
+		background-color: $c3
+	&.--c3a
+		background-color: $c3a
+
+// heading-before-icons,
+// heading-after-icons 
+a.articles__heading:hover
+	color: $fc !important
+	background-color: $c4
+	path
+		fill: $fc
+	.articles__heading-after-icons
+		right: -15px
+
+.articles__heading
+	.articles__heading-before-icons,
+	.articles__heading-after-icons
+		position: absolute
+		z-index: 1
+
+		top: 0
+		bottom: 0
+	.articles__heading-before-icons
+		left: 0
+		width: 100px
+		border-radius: 0
+		@media (max-width: 800px)
+			width: 50px
+	.articles__heading-after-icons
+		right: 0
+		width: 80px
+		background: none
+		@media (max-width: 800px)
+			width: 40px
+.articles__heading-after-icons
+	svg
+		height: 35px
+		@media (max-width: 800px)
+			height: 25px
+	path
+		fill: $fc2
+	.--ca & path
+		fill: $fc
+
+.articles__heading-before-icons
+	svg
+		height: 50px
+		@media (max-width: 800px)
+			height: 35px
+	path
+		fill: $fc2
+	.--ca & path
+		fill: $fc

@@ -1,0 +1,23 @@
+.__delimiter
+	position: relative
+
+	margin-bottom: $p
+	padding-bottom: $p + 4px
+	@media (max-width: $m)
+		padding-bottom: $ps + 2px
+	&::before
+		position: absolute
+		content: ""
+
+		bottom: 0
+		left: calc(50% - 50px)
+		width: 100px
+		height: 4px
+
+		background-color: $c
+		@media (max-width: $m)
+			height: 2px
+	&.d--cntrl
+		padding-top: $p + 4px
+		&::before
+			bottom: 100%

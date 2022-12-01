@@ -1,0 +1,119 @@
+.mt__links
+	position: relative
+	width: 100%
+	@media (max-width: 750px)
+		position: fixed
+		z-index: 65
+
+		top: -200vh
+		left: 0
+		right: 0
+
+		border-top: 4px solid $fc2
+		border-bottom: 4px solid $fc2
+		background-color: $bc2
+		.--active &
+			top: $menu_height + 4px
+
+// link
+.mt__link
+	position: relative
+
+	padding-left: $p
+	padding-right: $p
+
+	text-transform: uppercase
+	height: $menu_height
+	cursor: pointer
+	@media (max-width: 750px)
+		width: 50%
+		text-align: center
+		justify-content: center
+		align-items: center
+	@media (max-width: 500px)
+		width: 100%
+		height: 40px
+	@media (max-width: 420px)
+		padding-left: $ps
+		padding-right: $ps
+
+// btn
+.mt__btn
+	position: relative
+	margin-left: $p
+
+	width: 35px + 2 * $ps
+	height: $menu_height
+	svg
+		position: absolute
+		top: calc(50% - 20px)
+		left: $ps
+		width: 35px
+		&.--close
+			opacity: 0
+		.mt__link:hover &
+			&.--open
+				opacity: 0
+			&.--close
+				opacity: 1
+
+// sub-links
+.mt__sub-links
+	@media (min-width: 751px)
+		position: fixed
+
+		padding-top: $p
+		padding-bottom: $pl
+
+		top: -100vh
+		left: 0
+		right: 0
+		opacity: 0
+		z-index: 100
+
+		background-color: $bc2
+		transition: 0ms 300ms top, 300ms opacity
+
+		overflow: auto
+		.mt__link--submenu:hover ~ &,
+		&:hover
+			top: $menu_height
+
+			opacity: 1
+			transition: 0ms top, 300ms opacity
+	@media (max-width: 750px)
+		border-top: 4px solid $bc
+
+.mt__link.--sub
+	position: relative
+	z-index: 100
+
+	width: 25%
+	@media (max-width: 800px)
+		width: 50%
+	@media (max-width: 500px)
+		width: 100%
+		height: 40px
+
+// substrate
+.mt__substrate
+	@media (min-width: 751px)
+		position: fixed
+		top: -100vh
+		left: 0
+		right: 0
+
+		height: 100vh
+		background: $bc280
+		backdrop-filter: blur(3px)
+		opacity: 0
+		cursor: pointer
+		transition: 0ms 300ms top, 300ms opacity
+		.mt__link--submenu:hover ~ &
+			top: $menu_height
+			opacity: 1
+			transition: 0ms top, 300ms opacity
+
+.--desktop
+	@media (max-width: 750px)
+		display: none

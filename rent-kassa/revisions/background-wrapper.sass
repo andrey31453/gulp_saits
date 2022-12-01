@@ -1,0 +1,38 @@
+section:not(.__not-background-wrapper):not(.between-section):not(.__modal):not(.banner-index__form),
+.__background-wrapper
+	position: relative
+	&::before
+		position: absolute
+		top: 0
+		left: 0
+		bottom: 0
+		right: 0
+		content: ''
+		z-index: 0
+
+		background-color: $bc
+		opacity: 0.9
+	& > .container
+		position: relative
+		z-index: 1
+	&.__cntrl
+		color: $fc2
+		&::before
+			background-color: $bc2
+			opacity: 0.95
+		&::after
+			background-color: $bc2
+			opacity: 0.5
+	&::after
+		position: absolute
+		z-index: 0
+		top: 0
+		bottom: 0
+		left: 0
+		right: 0
+		content: ''
+		opacity: 0.35
+		background: linear-gradient(-45deg, $bc40, $c, $bc40)
+	> *
+		position: relative
+		z-index: 1

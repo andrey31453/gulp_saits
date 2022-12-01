@@ -1,0 +1,35 @@
+// _footer__contacts
+.footer__contacts
+	padding-top: $psecs
+	padding-bottom: 1px
+	&::before
+		background: linear-gradient(-45deg, $bc40, $c, $bc40)
+
+.footer__contacts > .container
+	position: relative
+	max-width: 600px
+
+	padding: $pl
+
+	margin-top: $psec
+	margin-bottom: $psec
+	margin-right: auto
+	margin-left: auto
+
+	background-color: $bc
+	color: $fc
+	@media (max-width: $dxl)
+		max-width: calc(100% - 50px)
+
+.fc__item
+	padding-top: $pl
+	padding-bottom: $pl
+
+	text-align: center
+
+.fc__item__heading
+	font-size: $fz
+.fc__item__svg
+	width: 28px
+	height: 28px
+	padding-right: $ps
