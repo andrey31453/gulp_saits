@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Node.js
+node_modules/
+dist/
+local/
+npm-debug.log*
+yarn-error.log*
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+Desktop.ini

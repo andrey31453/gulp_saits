@@ -5,10 +5,18 @@
 // состояние разработки сайта
 const production = false
 
+// режим сборки:
+// true  — сборка на локальный хост (папка dist + browser-sync)
+// false — сборка по FTP сразу на сервер
+const is_local = true
+
+// папка локальной сборки
+const local_dist = 'dist'
+
 // папка на хостинге
 const project_folder = 'trikota24'
 const template_folder = 'public_html/design/template'
-const folder = `${project_folder}/${template_folder}`
+const folder = is_local ? local_dist : `${project_folder}/${template_folder}`
 
 //
 // SRC правила
@@ -227,7 +235,13 @@ const get_ftp_access = () => {
 		pass: `${base_ftp.pass}`,
 	})
 }
-const access = get_ftp_access()
+
+// вывод файлов: локально в папку dist или по FTP на сервер
+const access = is_local
+	? {
+			dest: (path) => dest(path),
+	  }
+	: get_ftp_access()
 
 // создание header.tpl
 const build_header = () => {
@@ -266,6 +280,11 @@ const build_footer = () => {
 // очистка папки local
 const del_local = () => {
 	return del('local/')
+}
+
+// очистка папки локальной сборки
+const del_dist = () => {
+	return del(`${local_dist}/`)
 }
 
 // создание локальных индексов
@@ -418,17 +437,44 @@ const toWatch = () => {
 	for (let i = 0; i < main_html.length; i++) {
 		watch(
 			main_html[i].src,
-			series(build_local, build_main, build_local, build_main)
+			series(build_local, build_main, build_local, build_main, sync_reload)
 		)
 	}
-	watch(header_src, series(build_header))
-	watch(footer_src, series(build_footer))
-	watch(sass_src, series(build_sass))
-	watch(js_src, series(build_js))
+	watch(header_src, series(build_header, sync_reload))
+	watch(footer_src, series(build_footer, sync_reload))
+	watch(sass_src, series(build_sass, sync_reload))
+	watch(js_src, series(build_js, sync_reload))
 
-	watch(images_src, series(export_images))
-	watch(json_src, series(export_json))
-	watch(files_src, series(export_files))
+	watch(images_src, series(export_images, sync_reload))
+	watch(json_src, series(export_json, sync_reload))
+	watch(files_src, series(export_files, sync_reload))
+}
+
+//
+// локальный сервер (browser-sync)
+//
+
+// запуск локального сервера на папке dist
+const sync_init = (done) => {
+	if (is_local) {
+		sync.init({
+			server: {
+				baseDir: local_dist,
+			},
+			port: 3000,
+			notify: false,
+			open: true,
+		})
+	}
+	done()
+}
+
+// перезагрузка браузера после изменений
+const sync_reload = (done) => {
+	if (is_local) {
+		sync.reload()
+	}
+	done()
 }
 
 //
@@ -438,9 +484,29 @@ const toWatch = () => {
 exports.del = series(del_local) // очистка папки локал
 exports.min = series(get_app_min_img, get_src_min_img) // минимизация всех изображений в папке src
 
-// выполнение всех программ и ватчинг
+// сборка на локальный хост (одноразово, без watcher и сервера)
+exports.build = series(
+	del_local,
+	del_dist,
+	build_local,
+	build_sass,
+	build_js,
+
+	build_header,
+	build_footer,
+
+	export_images,
+	export_json,
+	export_fonts,
+	export_files,
+
+	build_main
+)
+
+// выполнение всех программ, запуск локального сервера и ватчинг
 exports.default = series(
 	del_local,
+	del_dist,
 	build_local,
 	build_sass,
 	build_js,
@@ -454,5 +520,6 @@ exports.default = series(
 	export_files,
 
 	build_main,
+	sync_init,
 	toWatch
 )
