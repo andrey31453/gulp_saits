@@ -10,14 +10,13 @@ const auto_prefixer = require('gulp-autoprefixer')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify-es').default
 const image_min = require('gulp-imagemin')
-const ftp = require('vinyl-ftp')
 const del = require('del')
 const set_header = require('gulp-header')
 const set_footer = require('gulp-footer')
 const gulp_if = require('gulp-if')
 const fs = require('fs') // чтение файлов
+const { Transform } = require('stream')
 
-// неиспользуемые
 const sync = require('browser-sync').create() // создание локал хоста
 
 //
@@ -25,11 +24,11 @@ const sync = require('browser-sync').create() // создание локал х�
 //
 
 // состояние разработки сайта
-const production = true
-// папка на хостинге
-const project_folder = 'www'
-const template_folder = 'geovr.ru'
-const folder = `${project_folder}/${template_folder}`
+const production = false
+// папка локальной сборки
+const local_dist = 'dist'
+// папка, куда складываются css/js/images/files/json/html
+const folder = local_dist
 
 //
 // SRC правила
@@ -80,11 +79,11 @@ const file_names = [
 ]
 
 const file_folders = [
-	`${folder}/html/`,
-	`${folder}/html/${file_names[1]}`,
-	`${folder}/html/${file_names[2]}`,
-	`${folder}/html/${file_names[3]}`,
-	`${folder}/html/${file_names[4]}`,
+	`${folder}/`,
+	`${folder}/${file_names[1]}/`,
+	`${folder}/${file_names[2]}/`,
+	`${folder}/${file_names[3]}/`,
+	`${folder}/${file_names[4]}/`,
 ]
 
 // main
@@ -773,35 +772,13 @@ const images_src = [
 const json_src = ['app/**/*.json'] // json
 const files_src = ['app/**/*.doc', 'app/**/*.pdf'] // files
 
-// доступы к хостингу
-const geovr = {
-	host: '91.236.136.138',
-	login: 'u299220',
-	pass: 'ea95424f75',
-}
-const base_ftp = geovr
-
 //
 // основное тело галпа
 //
 
-// функция подключения к ФТП
-const get_ftp_access = () => {
-	return ftp.create({
-		host: `${base_ftp.host}`,
-		user: `${base_ftp.login}`,
-		pass: `${base_ftp.pass}`,
-	})
-}
-const access = get_ftp_access()
-
-//
-// clear all folders in ftp
-//
-const clear_ftp = async () => {
-	return await access.rmdir(`${folder}`, function (err) {
-		console.log(err, 'clear folders')
-	})
+// очистка папки локальной сборки
+const del_dist = () => {
+	return del(`${local_dist}/`)
 }
 
 //
@@ -834,6 +811,46 @@ const build_meta = async () => {
 }
 
 //
+// очистка php-вставок (<?php ... ?>, <?= ... ?>) для статического просмотра
+//
+const clean_tags = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				content = content
+					.replace(/<\?php[\s\S]*?\?>/g, '')
+					.replace(/<\?=[\s\S]*?\?>/g, '')
+					.replace(/<\?[\s\S]*?\?>/g, '')
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
+	})
+}
+
+//
+// исправление постоянных ссылок на статические .html (для локального просмотра)
+//
+const fix_links = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				content = content
+					.replace(/href="\/"/g, 'href="/index.html"')
+					.replace(/href="\/([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+)"/g, 'href="/$1/$2.html"')
+					.replace(/href="\/([a-zA-Z0-9-_]+)"/g, 'href="/$1.html"')
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
+	})
+}
+
+//
 // создание html
 //
 const build_page = async (i) => {
@@ -849,8 +866,10 @@ const build_page = async (i) => {
 		],
 		{ allowEmpty: true }
 	)
-		.pipe(concat(`${main_src[i].file_name}.php`))
-		.pipe(access.dest(`${main_src[i].file_folder}`))
+		.pipe(concat(`${main_src[i].file_name}.html`))
+		.pipe(clean_tags())
+		.pipe(fix_links())
+		.pipe(dest(`${main_src[i].file_folder}`))
 }
 const build_pages = async () => {
 	for (let i = 0; i < main_src.length; i++) {
@@ -872,7 +891,7 @@ const build_css = () => {
 		)
 		.pipe(concat('assets.min.css'))
 		.pipe(csso())
-		.pipe(access.dest(`${folder}/css`))
+		.pipe(dest(`${folder}/css`))
 }
 //
 // сбор всех sass из папки src и перенос css в папку дист
@@ -892,7 +911,7 @@ const build_sass = () => {
 		)
 		.pipe(concat('style.min.css'))
 		.pipe(gulp_if(!production, csso()))
-		.pipe(access.dest(`${folder}/css`))
+		.pipe(dest(`${folder}/css`))
 }
 
 //
@@ -902,7 +921,7 @@ const build_js = () => {
 	return src(js_src)
 		.pipe(concat('script.min.js'))
 		.pipe(gulp_if(!production, uglify()))
-		.pipe(access.dest(`${folder}/js`))
+		.pipe(dest(`${folder}/js`))
 }
 
 //
@@ -928,16 +947,16 @@ const export_images = () => {
 				])
 			)
 		)
-		.pipe(access.dest(`${folder}/images`))
+		.pipe(dest(`${folder}/images`))
 }
 const export_json = () => {
-	return src(json_src).pipe(access.dest(`${folder}/json`))
+	return src(json_src).pipe(dest(`${folder}/json`))
 }
 const export_files = () => {
-	return src(files_src).pipe(access.dest(`${folder}/files`))
+	return src(files_src).pipe(dest(`${folder}/files`))
 }
 const export_htaccess = () => {
-	return src(htaccess_src).pipe(access.dest(`${folder}`))
+	return src(htaccess_src).pipe(dest(`${folder}`))
 }
 
 //
@@ -971,20 +990,20 @@ const toWatch = () => {
 	for (let i = 0; i < main_src.length; i++) {
 		watch(
 			main_src[i].src,
-			series(async () => await build_page(i))
+			series(async () => await build_page(i), sync_reload)
 		)
 	}
 	watch(
 		footer_src,
-		series(async () => await build_pages())
+		series(async () => await build_pages(), sync_reload)
 	)
 	watch(
 		header_top_src,
-		series(async () => await build_pages())
+		series(async () => await build_pages(), sync_reload)
 	)
 	watch(
 		header_bottom_src,
-		series(async () => await build_pages())
+		series(async () => await build_pages(), sync_reload)
 	)
 
 	watch(
@@ -992,18 +1011,41 @@ const toWatch = () => {
 		series(async () => {
 			await build_meta()
 			await build_pages()
-		})
+		}, sync_reload)
 	)
 
-	watch(css_src, series(build_css))
-	watch(sass_src, series(build_sass))
-	watch(js_src, series(build_js))
+	watch(css_src, series(build_css, sync_reload))
+	watch(sass_src, series(build_sass, sync_reload))
+	watch(js_src, series(build_js, sync_reload))
 
-	// watch(images_src, series(export_images))
-	watch(json_src, series(export_json))
-	// watch(files_src, series(export_files))
+	watch(images_src, series(export_images, sync_reload))
+	watch(json_src, series(export_json, sync_reload))
+	watch(files_src, series(export_files, sync_reload))
 
-	watch(htaccess_src, series(export_htaccess))
+	watch(htaccess_src, series(export_htaccess, sync_reload))
+}
+
+//
+// локальный сервер (browser-sync)
+//
+
+// запуск локального сервера на папке dist
+const sync_init = (done) => {
+	sync.init({
+		server: {
+			baseDir: local_dist,
+		},
+		port: 3000,
+		notify: false,
+		open: true,
+	})
+	done()
+}
+
+// перезагрузка браузера после изменений
+const sync_reload = (done) => {
+	sync.reload()
+	done()
 }
 
 //
@@ -1011,10 +1053,12 @@ const toWatch = () => {
 //
 
 exports.min = series(get_min_img) // минимизация всех изображений в папке src
-exports.clear = series(clear_ftp) // минимизация всех изображений в папке src
+exports.del = series(del_dist) // очистка папки локальной сборки
 
-// выполнение всех программ и ватчинг
-exports.default = series(
+// сборка на локальный хост (одноразово, без watcher и сервера)
+exports.build = series(
+	del_dist,
+
 	build_meta,
 	build_pages,
 
@@ -1022,11 +1066,28 @@ exports.default = series(
 	build_sass,
 	build_js,
 
-	// export_images,
+	export_images,
 	export_json,
-
+	export_files,
 	export_htaccess,
-	// export_files,
+)
 
+// выполнение всех программ, запуск локального сервера и ватчинг
+exports.default = series(
+	del_dist,
+
+	build_meta,
+	build_pages,
+
+	build_css,
+	build_sass,
+	build_js,
+
+	export_images,
+	export_json,
+	export_files,
+	export_htaccess,
+
+	sync_init,
 	toWatch
 )
