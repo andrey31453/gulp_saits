@@ -3,19 +3,18 @@
 //
 
 // состояние разработки сайта
-const production = true
-// папка на хостинге
-const project_folder = 'astafevayu'
-const template_folder =
-	'public_html/wp-content/themes/twentytwentyone'
-const folder = `${project_folder}/${template_folder}`
+const production = false
+
+// папка локальной сборки
+const local_dist = 'dist'
+// путь к шаблону локально (совпадает с абсолютными путями /wp-content/themes/twentytwentyone/... в разметке)
+const local_template = 'wp-content/themes/twentytwentyone'
+// папка, куда складываются css/js/images/fonts/files/json
+const folder = `${local_dist}/${local_template}`
 
 //
 // SRC правила
 //
-
-// index
-const index_src = ['app/_template/index.php']
 
 // header
 const header_src = [
@@ -24,21 +23,31 @@ const header_src = [
 	'app/_template/header-bottom.php',
 ]
 
-// main
-const main_src = [
-	'app/banner/*.html',
-	'app/about/*.html',
-	'app/products/videouroki.html',
-	'app/products/client.html',
-	'app/products/vody.html',
-	'app/products/treningi.html',
-	'app/products/indi.html',
-	'app/products/sopr.html',
+// страницы (header + main + footer)
+const main_html = [
+	// index
+	{
+		name: 'index',
+		src: [
+			'app/banner/*.html',
+			'app/about/*.html',
+			'app/products/videouroki.html',
+			'app/products/client.html',
+			'app/products/vody.html',
+			'app/products/treningi.html',
+			'app/products/indi.html',
+			'app/products/sopr.html',
+		],
+	},
+	// статьи (имена совпадают с постоянными ссылками сайта)
+	{ name: 'information', src: ['app/_info-page/info.html'] },
+	{ name: 'polz-sogl', src: ['app/_info-page/polz.html'] },
+	{ name: 'conf', src: ['app/_info-page/conf.html'] },
 ]
+
 // footer
 const footer_src = [
 	'app/_template/footer-top.php',
-
 	'app/contacts/*.html',
 	'app/ur-contacts/*.html',
 	// source
@@ -46,18 +55,8 @@ const footer_src = [
 	'app/form__modal-callback/*.html',
 	'app/progress-bar/*.html',
 	'app/go-top--quadr/*.html',
-
 	'app/_template/footer-bottom.php',
 ]
-
-// articles
-const articles_src_info = ['app/_info-page/info.html']
-const articles_src_polz = ['app/_info-page/polz.html']
-const articles_src_conf = ['app/_info-page/conf.html']
-const articles_src_dest = ['app/_info-page/']
-
-// php
-const php_src = ['app/form__modal-callback/index.php']
 
 // js
 const js_src = ['app/_template/*.js', 'app/**/*.js']
@@ -70,7 +69,7 @@ const sass_src = [
 	'app/**/*.sass',
 ]
 
-//images
+// images
 const images_src = [
 	'app/**/*.jpg',
 	'app/**/*.svg',
@@ -91,29 +90,13 @@ const fonts_src = [
 	'app/_template/fonts/**/*.woff2',
 ]
 
-// доступы к хостингу
-const odinpromptt = {
-	host: '188.225.21.131',
-	login: 'odinpromptt',
-	pass: 'RRram73689977368997',
-}
-const balnyishop = {
-	host: '92.53.96.71',
-	login: 'balnyishop',
-	pass: 'Rram73689977368997',
-}
-const co_08858 = {
-	host: '188.225.40.227',
-	login: 'co08858',
-	pass: 'co63466346',
-}
-const base_ftp = odinpromptt
-
 //
 // подключение модулей
 //
 
 const { src, dest, series, watch } = require('gulp') // галп
+const fs = require('fs')
+const { Transform } = require('stream')
 const sass = require('gulp-sass')(require('sass'))
 const csso = require('gulp-csso')
 const html_min = require('gulp-htmlmin')
@@ -121,135 +104,160 @@ const auto_prefixer = require('gulp-autoprefixer')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify-es').default
 const image_min = require('gulp-imagemin')
-const ftp = require('vinyl-ftp')
 const del = require('del')
 const set_header = require('gulp-header')
 const set_footer = require('gulp-footer')
 const gulp_if = require('gulp-if')
-
-// неиспользуемые
-const sync = require('browser-sync').create() // build локал хоста
+const sync = require('browser-sync').create() // создание локал хоста
 
 //
 // основное тело галпа
 //
 
-// функция подключения к ФТП
-const get_ftp_access = () => {
-	return ftp.create({
-		host: `${base_ftp.host}`,
-		user: `${base_ftp.login}`,
-		pass: `${base_ftp.pass}`,
+//
+// заголовки страниц
+//
+
+const get_title = (name) => {
+	const titles = {
+		index: 'Юлия Астафьева — техники из мира бизнеса',
+		information: 'Информация для покупателей',
+		'polz-sogl': 'Пользовательское соглашение',
+		conf: 'Политика конфиденциальности',
+	}
+	return titles[name] || name
+}
+
+//
+// очистка php-вставок (<?php ... ?>, <?= ... ?>) и шаблонных тегов движка для статического просмотра
+//
+
+const clean_tags = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				content = content
+					// php-блоки и короткие вставки
+					.replace(/<\?php[\s\S]*?\?>/g, '')
+					.replace(/<\?=[\s\S]*?\?>/g, '')
+					.replace(/<\?[\s\S]*?\?>/g, '')
+					// smarty-теги (на всякий случай)
+					.replace(/\{php\}[\s\S]*?\{\/php\}/g, '')
+					.replace(/\{\*[\s\S]*?\*\}/g, '')
+					.replace(/\{foreach[^}]*\}/g, '')
+					.replace(/\{\/foreach\}/g, '')
+					.replace(/\{if[^}]*\}/g, '')
+					.replace(/\{\/if\}/g, '')
+					.replace(/\{\$[^}]*\}/g, '')
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
 	})
 }
-const access = get_ftp_access()
 
-// build index.php
-const build_index = () => {
-	return src(index_src)
-		.pipe(concat('index.php'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(access.dest(`${folder}`))
+//
+// исправление постоянных ссылок на статические .html (для локального просмотра)
+//
+
+const fix_links = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				content = content
+					.replace(/href="\/information"/g, 'href="/information.html"')
+					.replace(/href="\/polz-sogl"/g, 'href="/polz-sogl.html"')
+					.replace(/href="\/conf"/g, 'href="/conf.html"')
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
+	})
 }
 
-// build header.php
-const build_header = () => {
+//
+// сборка статических html-страниц
+//
+
+// временная папка для промежуточных файлов
+const tmp_folder = 'local/'
+
+// общий минификатор html
+const html_minify = () =>
+	html_min({
+		collapseWhitespace: true,
+		removeComments: true,
+		removeTagWhitespace: true,
+		ignoreCustomFragments: [/<svg.*\/svg>/],
+	})
+
+// сборка шапки во временный файл (без минификации — соберём полный документ и сожмём его целиком)
+const build_header_html = () => {
 	return src(header_src)
-		.pipe(concat('header.php'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(access.dest(`${folder}`))
+		.pipe(concat('header.html'))
+		.pipe(clean_tags())
+		.pipe(dest(tmp_folder))
 }
 
-// build footer.php
-const build_footer = () => {
+// сборка подвала во временный файл (без минификации — соберём полный документ и сожмём его целиком)
+const build_footer_html = () => {
 	return src(footer_src)
-		.pipe(concat('footer.php'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(access.dest(`${folder}`))
+		.pipe(concat('footer.html'))
+		.pipe(clean_tags())
+		.pipe(dest(tmp_folder))
 }
 
-// build articles html
-const build_articles_info = () => {
-	return src(articles_src_info)
-		.pipe(concat('min_info.html'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(dest(articles_src_dest))
-}
-const build_articles_polz = () => {
-	return src(articles_src_polz)
-		.pipe(concat('min_polz.html'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(dest(articles_src_dest))
-}
-const build_articles_conf = () => {
-	return src(articles_src_conf)
-		.pipe(concat('min_conf.html'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(dest(articles_src_dest))
+//
+// очистка папок сборки
+//
+
+// очистка временной папки
+const del_local = () => {
+	return del(tmp_folder)
 }
 
-// build form.php
-const build_form = () => {
-	return src(php_src)
-		.pipe(concat('form.php'))
-		.pipe(access.dest(`${folder}`))
+// очистка папки локальной сборки
+const del_dist = () => {
+	return del(`${local_dist}/`)
 }
 
-// build main.php
-const build_main = async () => {
-	return src(main_src)
-		.pipe(concat('main.php'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/, /<\?php.*\?>/],
-			})
-		)
-		.pipe(access.dest(`${folder}`))
+// каркас <main> (как в оригинальном index.php: <main class="main" id="site-content" role="main">)
+const main_open = '<main class="main" id="site-content" role="main">'
+const main_close = '</main>'
+
+// сборка одной страницы
+const build_page = (data, header, footer) => {
+	const title = get_title(data.name)
+	// вставляем <title> сразу после <head>
+	const page_header = header.replace('<head>', `<head><title>${title}</title>`)
+	return src(data.src)
+		.pipe(concat('content.html'))
+		.pipe(clean_tags())
+		.pipe(set_header(page_header + main_open))
+		.pipe(set_footer(main_close + footer))
+		.pipe(html_minify())
+		.pipe(fix_links())
+		.pipe(concat(`${data.name}.html`))
+		.pipe(dest(local_dist))
+}
+
+// ожидание завершения потока
+const stream_done = (stream) =>
+	new Promise((resolve, reject) => {
+		stream.on('end', resolve)
+		stream.on('error', reject)
+	})
+
+// сборка всех страниц
+const build_pages = async () => {
+	const header = fs.readFileSync(`${tmp_folder}header.html`, 'utf8')
+	const footer = fs.readFileSync(`${tmp_folder}footer.html`, 'utf8')
+	await Promise.all(main_html.map((data) => stream_done(build_page(data, header, footer))))
+	return true
 }
 
 //
@@ -271,7 +279,7 @@ const build_sass = () => {
 		)
 		.pipe(concat('style.min.css'))
 		.pipe(gulp_if(!production, csso()))
-		.pipe(access.dest(`${folder}/css`))
+		.pipe(dest(`${folder}/css`))
 }
 
 //
@@ -281,7 +289,7 @@ const build_js = () => {
 	return src(js_src)
 		.pipe(concat('script.min.js'))
 		.pipe(gulp_if(!production, uglify()))
-		.pipe(access.dest(`${folder}/js`))
+		.pipe(dest(`${folder}/js`))
 }
 
 //
@@ -307,40 +315,16 @@ const export_images = () => {
 				])
 			)
 		)
-		.pipe(access.dest(`${folder}/images`))
+		.pipe(dest(`${folder}/images`))
 }
 const export_json = () => {
-	return src(json_src).pipe(access.dest(`${folder}/json`))
+	return src(json_src).pipe(dest(`${folder}/json`))
 }
 const export_files = () => {
-	return src(files_src).pipe(access.dest(`${folder}/files`))
+	return src(files_src).pipe(dest(`${folder}/files`))
 }
 const export_fonts = () => {
-	return src(fonts_src).pipe(access.dest(`${folder}/fonts`))
-}
-
-//
-// минимизация всех изображений в папке src/app и записывание их на то же место
-//
-
-const get_min_img = () => {
-	return src('app/**/*')
-		.pipe(
-			image_min([
-				image_min.gifsicle({ interlaced: true }),
-				image_min.mozjpeg({
-					quality: 75,
-					progressive: true,
-				}),
-				image_min.optipng({
-					optimizationLevel: 5,
-				}),
-				image_min.svgo({
-					plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
-				}),
-			])
-		)
-		.pipe(dest('app/'))
+	return src(fonts_src).pipe(dest(`${folder}/fonts`))
 }
 
 //
@@ -348,53 +332,83 @@ const get_min_img = () => {
 //
 
 const toWatch = () => {
-	// html
-	watch(header_src, series(build_header))
-	watch(index_src, series(build_index))
-	watch(main_src, series(build_main))
-	watch(footer_src, series(build_footer))
+	for (let i = 0; i < main_html.length; i++) {
+		watch(main_html[i].src, series(build_pages, sync_reload))
+	}
+	watch(header_src, series(build_header_html, build_pages, sync_reload))
+	watch(footer_src, series(build_footer_html, build_pages, sync_reload))
+	watch(sass_src, series(build_sass, sync_reload))
+	watch(js_src, series(build_js, sync_reload))
 
-	watch(articles_src_info, series(build_articles_info))
-	watch(articles_src_polz, series(build_articles_polz))
-	watch(articles_src_conf, series(build_articles_conf))
+	watch(images_src, series(export_images, sync_reload))
+	watch(json_src, series(export_json, sync_reload))
+	watch(files_src, series(export_files, sync_reload))
+}
 
-	// css, js
-	watch(sass_src, series(build_sass))
-	watch(js_src, series(build_js))
+//
+// локальный сервер (browser-sync)
+//
 
-	// other
-	watch(php_src, series(build_form))
-	watch(images_src, series(export_images))
-	watch(json_src, series(export_json))
-	watch(files_src, series(export_files))
+// запуск локального сервера на папке dist
+const sync_init = (done) => {
+	sync.init({
+		server: {
+			baseDir: local_dist,
+		},
+		port: 3000,
+		notify: false,
+		open: true,
+	})
+	done()
+}
+
+// перезагрузка браузера после изменений
+const sync_reload = (done) => {
+	sync.reload()
+	done()
 }
 
 //
 // объявление функции для консоли
 //
 
-exports.min = series(get_min_img) // минимизация всех изображений в папке src
+exports.del = series(del_local, del_dist) // очистка папок сборки
 
-// выполнение всех программ и ватчинг
-exports.default = series(
+// сборка на локальный хост (одноразово, без watcher и сервера)
+exports.build = series(
+	del_local,
+	del_dist,
 	build_sass,
 	build_js,
 
-	build_index,
-	build_header,
-	build_main,
-	build_footer,
-	build_form,
-
-	// переделать
-	build_articles_info,
-	build_articles_polz,
-	build_articles_conf,
+	build_header_html,
+	build_footer_html,
 
 	export_images,
 	export_json,
 	export_fonts,
 	export_files,
 
+	build_pages
+)
+
+// выполнение всех программ, запуск локального сервера и ватчинг
+exports.default = series(
+	del_local,
+	del_dist,
+	build_sass,
+	build_js,
+
+	build_header_html,
+	build_footer_html,
+
+	export_images,
+	export_json,
+	export_fonts,
+	export_files,
+
+	build_pages,
+	sync_init,
 	toWatch
 )
+
