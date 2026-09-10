@@ -3,12 +3,14 @@
 //
 
 // состояние разработки сайта
-const production = true
+const production = false
 
-// папка на хостинге
-const project_folder = 'simpla_2'
-const template_folder = 'public_html/design/template'
-const folder = `${project_folder}/${template_folder}`
+// папка локальной сборки (корень, который отдаёт browser-sync)
+const local_dist = 'dist'
+// путь к шаблону локально (совпадает с абсолютными путями /design/template/... в разметке)
+const local_template = 'design/template'
+// папка, куда складываются css/js/images/fonts/files/json
+const folder = `${local_dist}/${local_template}`
 
 //
 // SRC правила
@@ -371,6 +373,51 @@ const index_html = [
 	},
 ]
 
+// метаданные страниц для локальной статической сборки
+// (имя файла и <title> для каждой страницы/категории из index_html)
+const page_meta = {
+	'page_1': { name: 'index', title: 'Натяжные потолки' },
+	'page_7': { name: 'portfolio', title: 'Портфолио' },
+	'page_10': { name: 'calculator', title: 'Калькулятор' },
+	'page_12': { name: 'lighting', title: 'Освещение' },
+	'category_9': { name: 'catalog/cat-pvh', title: 'ПВХ потолки' },
+	'category_10': { name: 'catalog/glyanec', title: 'Глянцевые потолки' },
+	'category_11': { name: 'catalog/satin', title: 'Сатиновые потолки' },
+	'category_12': { name: 'catalog/matov', title: 'Матовые потолки' },
+	'category_13': { name: 'catalog/cat-tkan', title: 'Тканевые потолки' },
+	'category_14': { name: 'catalog/descor', title: 'Descor' },
+	'category_15': { name: 'catalog/clipso', title: 'Clipso' },
+	'category_38': { name: 'catalog/natyazhnye-potolki', title: 'Натяжные потолки' },
+	'category_16': { name: 'catalog/prozr', title: 'Прозрачные потолки' },
+	'category_17': { name: 'catalog/ten', title: 'Теневой потолок' },
+	'category_18': { name: 'catalog/light', title: 'Световой потолок' },
+	'category_19': { name: 'catalog/besshel', title: 'Бесщелевой потолок' },
+	'category_20': { name: 'catalog/paryash', title: 'Парящий потолок' },
+	'category_21': { name: 'catalog/dempfer', title: 'Демпферные потолки' },
+	'category_22': { name: 'catalog/nishi', title: 'Ниши в потолке' },
+	'category_23': { name: 'catalog/dvuhurovn', title: 'Двухуровневый потолок' },
+	'category_24': { name: 'catalog/potoloch-nishi', title: 'Потолочные ниши' },
+	'category_25': { name: 'catalog/carniz', title: 'Карниз' },
+	'category_26': { name: 'catalog/carniz-blenda', title: 'Потолочный карниз с блендой' },
+	'category_27': { name: 'catalog/carniz-skryt', title: 'Скрытый потолочный карниз' },
+	'category_28': { name: 'catalog/carniz-shtor-zakr', title: 'Скрытый карниз для штор' },
+	'category_29': { name: 'catalog/carniz-shtor-universal', title: 'Универсальный скрытый карниз' },
+	'category_30': { name: 'catalog/osveshenie', title: 'Освещение' },
+	'category_31': { name: 'catalog/scetilniki', title: 'Светильники' },
+	'category_32': { name: 'catalog/cat-built-in', title: 'Встраиваемые светильники' },
+	'category_33': { name: 'catalog/cat-waybills', title: 'Накладные светильники' },
+	'category_34': { name: 'catalog/cat-trek', title: 'Трековая система' },
+	'category_35': { name: 'catalog/cat-chandelier', title: 'Люстры' },
+	'category_36': { name: 'catalog/svet-lin', title: 'Световые линии' },
+	'category_37': { name: 'catalog/l-box', title: 'Лайт боксы' },
+}
+
+const get_page_meta = (data) =>
+	page_meta[`${data.type}_${data.id}`] || {
+		name: `${data.type}_${data.id}`,
+		title: `Страница ${data.id}`,
+	}
+
 // footer
 const footer_src = [
 	'app/form/*.html',
@@ -429,19 +476,13 @@ const fonts_src = [
 	'template/fonts/**/*.woff2',
 ]
 
-// доступы к хостингу
-const odinpromptt = {
-	host: '188.225.21.131',
-	login: 'odinpromptt',
-	pass: 'RRram73689977368997',
-}
-const base_ftp = odinpromptt
-
 //
 // подключение модулей
 //
 
 const { src, dest, series, watch } = require('gulp') // галп
+const fs = require('fs')
+const { Transform } = require('stream')
 const sass = require('gulp-sass')(require('sass'))
 const csso = require('gulp-csso')
 const html_min = require('gulp-htmlmin')
@@ -449,98 +490,200 @@ const auto_prefixer = require('gulp-autoprefixer')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify-es').default
 const image_min = require('gulp-imagemin')
-const ftp = require('vinyl-ftp')
 const del = require('del')
 const set_header = require('gulp-header')
 const set_footer = require('gulp-footer')
 const gulp_if = require('gulp-if')
-
-// неиспользуемые
 const sync = require('browser-sync').create() // создание локал хоста
 
 //
 // основное тело галпа
 //
 
-// функция подключения к ФТП
-const get_ftp_access = () => {
-	return ftp.create({
-		host: `${base_ftp.host}`,
-		user: `${base_ftp.login}`,
-		pass: `${base_ftp.pass}`,
+//
+// очистка php/smarty-вставок для статического просмотра на локалхосте
+//
+
+const clean_tags = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				content = content
+					// php-блоки и короткие вставки
+					.replace(/<\?php[\s\S]*?\?>/g, '')
+					.replace(/<\?=[\s\S]*?\?>/g, '')
+					.replace(/<\?[\s\S]*?\?>/g, '')
+					// smarty-теги
+					.replace(/\{php\}[\s\S]*?\{\/php\}/g, '')
+					.replace(/\{\*[\s\S]*?\*\}/g, '')
+					.replace(/\{foreach[^}]*\}/g, '')
+					.replace(/\{\/foreach\}/g, '')
+					.replace(/\{if[^}]*\}/g, '')
+					.replace(/\{\/if\}/g, '')
+					.replace(/\{elseif[^}]*\}/g, '')
+					.replace(/\{else\}/g, '')
+					.replace(/\{\$[^}]*\}/g, '')
+					.replace(/\{literal\}/g, '')
+					.replace(/\{\/literal\}/g, '')
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
 	})
 }
-const access = get_ftp_access()
 
-// создание header.tpl
-const build_header = () => {
-	return src(header_src)
-		.pipe(concat('header.tpl'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/],
-			})
-		)
-		.pipe(access.dest(`${folder}/html`))
-}
+//
+// исправление постоянных ссылок на статические .html (для локального просмотра)
+//
 
-// создание footer.tpl
-const build_footer = () => {
-	return src(footer_src)
-		.pipe(concat('footer.tpl'))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/],
-			})
-		)
-		.pipe(access.dest(`${folder}/html`))
+const fix_links = () => {
+	return new Transform({
+		objectMode: true,
+		transform(file, enc, cb) {
+			if (file.isBuffer()) {
+				let content = file.contents.toString()
+				// категории /catalog/{slug} -> /catalog/{slug}.html
+				for (let i = 0; i < index_html.length; i++) {
+					const { name } = get_page_meta(index_html[i])
+					if (name.indexOf('catalog/') === 0) {
+						const slug = name.replace('catalog/', '')
+						content = content.replace(
+							new RegExp(`href="/catalog/${slug}"`, 'g'),
+							`href="/catalog/${slug}.html"`
+						)
+					}
+				}
+				// главная страница
+				content = content.replace(/href="\/"/g, 'href="/index.html"')
+				// остальные страницы (lighting, portfolio, calculator)
+				for (let i = 0; i < index_html.length; i++) {
+					const { name } = get_page_meta(index_html[i])
+					if (name.indexOf('catalog/') !== 0 && name !== 'index') {
+						content = content.replace(
+							new RegExp(`href="/${name}"`, 'g'),
+							`href="/${name}.html"`
+						)
+					}
+				}
+				file.contents = Buffer.from(content)
+			}
+			cb(null, file)
+		},
+	})
 }
 
 //
-// создание index_content.tpl
+// очистка папок сборки
 //
 
-// очистка папки local
+// временная папка для промежуточных файлов
+const tmp_folder = 'local/'
+
 const del_local = () => {
-	return del('local/')
+	return del(tmp_folder)
 }
 
-// создание локальных индексов
+const del_dist = () => {
+	return del(`${local_dist}/`)
+}
+
+//
+// общий минификатор html
+//
+
+const html_minify = () =>
+	html_min({
+		collapseWhitespace: true,
+		removeComments: true,
+		removeTagWhitespace: true,
+		ignoreCustomFragments: [/<svg.*\/svg>/],
+	})
+
+// сборка шапки во временный файл
+const build_header = () => {
+	return src(header_src).pipe(concat('header.html')).pipe(clean_tags()).pipe(dest(tmp_folder))
+}
+
+// сборка подвала во временный файл
+const build_footer = () => {
+	return src(footer_src).pipe(concat('footer.html')).pipe(clean_tags()).pipe(dest(tmp_folder))
+}
+
+//
+// сборка контента страниц во временные файлы
+//
+
 const build_local_file = (data) => {
 	return src(data.src)
 		.pipe(concat(`${data.type}_${data.id}.html`))
-		.pipe(
-			html_min({
-				collapseWhitespace: true,
-				removeComments: true,
-				removeTagWhitespace: true,
-				ignoreCustomFragments: [/<svg.*\/svg>/],
-			})
-		)
-		.pipe(set_header(`{if $${data.type}->id == ${data.id}}`))
-		.pipe(set_footer(`{/if}`))
-		.pipe(dest('local/'))
+		.pipe(clean_tags())
+		.pipe(dest(tmp_folder))
 }
 
-// создание папки local
+const stream_done = (stream) =>
+	new Promise((resolve, reject) => {
+		stream.on('end', resolve)
+		stream.on('error', reject)
+	})
+
 const build_local = async () => {
 	for (let i = 0; i < index_html.length; i++) {
-		await build_local_file(index_html[i])
+		await stream_done(build_local_file(index_html[i]))
 	}
 	return true
 }
 
-// экспорт папки local
-const build_index = () => {
-	return src('local/*.html')
-		.pipe(concat('index_content.tpl'))
-		.pipe(access.dest(`${folder}/html`))
+//
+// сборка статических html-страниц (скелет + шапка + контент + подвал)
+//
+
+const page_skeleton = (title, header, content, footer) => `<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>${title}</title>
+	<link rel="shortcut icon" href="/design/template/images/template-icon/favicon.ico">
+	<link rel="stylesheet" href="/design/template/css/style.min.css">
+</head>
+<body>
+	${header}
+	${content}
+	${footer}
+	<script src="/design/template/js/script.min.js"></script>
+</body>
+</html>`
+
+const build_page = (data, header, footer) => {
+	const { name, title } = get_page_meta(data)
+	return src(`${tmp_folder}${data.type}_${data.id}.html`)
+		.pipe(
+			new Transform({
+				objectMode: true,
+				transform(file, enc, cb) {
+					if (file.isBuffer()) {
+						const html = page_skeleton(title, header, file.contents.toString(), footer)
+						file.contents = Buffer.from(html)
+					}
+					cb(null, file)
+				},
+			})
+		)
+		.pipe(html_minify())
+		.pipe(fix_links())
+		.pipe(concat(`${name}.html`))
+		.pipe(dest(local_dist))
+}
+
+const build_pages = async () => {
+	const header = fs.readFileSync(`${tmp_folder}header.html`, 'utf8')
+	const footer = fs.readFileSync(`${tmp_folder}footer.html`, 'utf8')
+	for (let i = 0; i < index_html.length; i++) {
+		await stream_done(build_page(index_html[i], header, footer))
+	}
+	return true
 }
 
 //
@@ -562,7 +705,7 @@ const build_sass = () => {
 		)
 		.pipe(concat('style.min.css'))
 		.pipe(gulp_if(!production, csso()))
-		.pipe(access.dest(`${folder}/css`))
+		.pipe(dest(`${folder}/css`))
 }
 
 //
@@ -573,29 +716,23 @@ const build_js = () => {
 	return src(js_src)
 		.pipe(concat('script.min.js'))
 		.pipe(gulp_if(!production, uglify()))
-		.pipe(access.dest(`${folder}/js`))
+		.pipe(dest(`${folder}/js`))
 }
 
 //
 // сбор всех фаилов и перенос их в папку дист
 //
-const del_images = async () => {
-	await access.rmdir(`${folder}/images`, (err) => {
-		return export_images()
-	})
-	return export_images()
-}
 const export_images = () => {
-	return src(images_src).pipe(access.dest(`${folder}/images`))
+	return src(images_src).pipe(dest(`${folder}/images`))
 }
 const export_json = () => {
-	return src(json_src).pipe(access.dest(`${folder}/json`))
+	return src(json_src).pipe(dest(`${folder}/json`))
 }
 const export_files = () => {
-	return src(files_src).pipe(access.dest(`${folder}/files`))
+	return src(files_src).pipe(dest(`${folder}/files`))
 }
 const export_fonts = () => {
-	return src(fonts_src).pipe(access.dest(`${folder}/fonts`))
+	return src(fonts_src).pipe(dest(`${folder}/fonts`))
 }
 //
 // минимизация всех изображений в папке src/app и записывание их на то же место
@@ -646,46 +783,84 @@ const get_app_min_img = () => {
 
 const toWatch = () => {
 	for (let i = 0; i < index_html.length; i++) {
-		watch(
-			index_html[i].src,
-			series(build_local, build_index, build_local, build_index)
-		)
+		watch(index_html[i].src, series(build_local, build_pages, sync_reload))
 	}
-	watch(header_src, series(build_header))
-	watch(footer_src, series(build_footer))
-	watch(sass_src, series(build_sass))
-	watch(js_src, series(build_js))
+	watch(header_src, series(build_header, build_pages, sync_reload))
+	watch(footer_src, series(build_footer, build_pages, sync_reload))
+	watch(sass_src, series(build_sass, sync_reload))
+	watch(js_src, series(build_js, sync_reload))
 
-	watch(images_src, series(export_images))
-	watch(json_src, series(export_json))
-	watch(files_src, series(export_files))
+	watch(images_src, series(export_images, sync_reload))
+	watch(json_src, series(export_json, sync_reload))
+	watch(files_src, series(export_files, sync_reload))
+}
+
+//
+// локальный сервер (browser-sync)
+//
+
+// запуск локального сервера на папке dist
+const sync_init = (done) => {
+	sync.init({
+		server: {
+			baseDir: local_dist,
+		},
+		port: 3000,
+		notify: false,
+		open: true,
+	})
+	done()
+}
+
+// перезагрузка браузера после изменений
+const sync_reload = (done) => {
+	sync.reload()
+	done()
 }
 
 //
 // объявление функции для консоли
 //
 
-exports.del = series(del_local) // очистка папки локал
+exports.del = series(del_local, del_dist) // очистка папок сборки
 exports.min = series(get_app_min_img, get_src_min_img) // минимизация всех изображений в папке src
 
-// выполнение всех программ и ватчинг
-exports.default = series(
-	// del_images,
+// сборка на локальный хост (одноразово, без watcher и сервера)
+exports.build = series(
+	del_local,
+	del_dist,
+	build_sass,
+	build_js,
 
 	build_header,
 	build_footer,
 	build_local,
-	build_index,
-	build_local,
-	build_index,
+
+	export_images,
+	export_json,
+	export_fonts,
+	export_files,
+
+	build_pages
+)
+
+// выполнение всех программ, запуск локального сервера и ватчинг
+exports.default = series(
+	del_local,
+	del_dist,
 	build_sass,
 	build_js,
 
-	// del_images,
+	build_header,
+	build_footer,
+	build_local,
+
 	export_images,
 	export_json,
-	export_files,
 	export_fonts,
+	export_files,
 
+	build_pages,
+	sync_init,
 	toWatch
 )
