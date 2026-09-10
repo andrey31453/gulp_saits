@@ -3,50 +3,53 @@
 //
 
 // состояние разработки сайта
-const production = true
-// папка на хостинге
-const project_folder = 'regionaleconomics'
-const template_folder = 'public_html/wp-content/themes/twentytwentyone'
-const folder = `${project_folder}/${template_folder}`
+const production = false
+// папка локальной сборки
+const local_dist = 'dist'
+// путь к шаблону локально (совпадает с абсолютными путями /wp-content/themes/twentytwentyone/... в разметке)
+const local_template = 'wp-content/themes/twentytwentyone'
+// папка, куда складываются css/js/images/fonts/json/files
+const folder = `${local_dist}/${local_template}`
 
 //
 // SRC правила
 //
 
-// index
-const index_src = [
-	'app/_template/index.php', // template
-]
+// header-top (шапка: head + <body> + <header>)
+const header_top_src = ['app/_template/header-top.php']
 
-// header
-const header_src = [
-	'app/_template/header-top.php', // template
+// содержимое шапки (логотип, переключатель языка, баннер)
+const header_body_src = [
 	'app/header__logo/*.html',
 	'app/multy-lang/index.html',
 	'app/header__banner/*.html',
-	'app/_template/header-bottom.php', // template
 ]
 
-// menu
+// header-bottom (закрытие <header>, <menu> с get_template_part('menu'), открытие <main>)
+const header_bottom_src = ['app/_template/header-bottom.php']
+
+// меню (подставляется вместо get_template_part('menu'))
 const menu_src = ['app/header__menu/*.php']
 
-// aside
-const aside_src = ['app/aside__arhivs/*.php', 'app/aside__btn/*.html']
-
-// main
+// main (основной контент страницы)
 const main_src = ['app/index/*.html']
 
-// footer
-const footer_src = [
-	'app/_template/footer-top.php', // template
+// footer-top (закрытие <main>, <aside> с get_template_part('aside'), открытие <footer>)
+const footer_top_src = ['app/_template/footer-top.php']
 
+// aside (подставляется вместо get_template_part('aside'))
+const aside_src = ['app/aside__arhivs/*.php', 'app/aside__btn/*.html']
+
+// содержимое подвала (footer + source + кнопка "наверх")
+const footer_body_src = [
 	'app/footer/*.php',
 	// source
 	'app/_template/*.html',
 	'app/go-top--quadr/*.html',
-
-	'app/_template/footer-bottom.php', // template
 ]
+
+// footer-bottom (get_template_part('form'), закрытие <footer>, </body></html>)
+const footer_bottom_src = ['app/_template/footer-bottom.php']
 
 // js
 const js_src = ['app/_template/*.js', 'app/**/*.js']
@@ -80,103 +83,94 @@ const fonts_src = [
 	'app/_template/fonts/**/*.woff2',
 ]
 
-// доступы к хостингу
-const odinpromptt = {
-	host: '188.225.21.131',
-	login: 'odinpromptt',
-	pass: 'RRram73689977368997',
-}
-const balnyishop = {
-	host: '92.53.96.71',
-	login: 'balnyishop',
-	pass: 'Rram73689977368997',
-}
-const co_08858 = {
-	host: '188.225.40.227',
-	login: 'co08858',
-	pass: 'co63466346',
-}
-const base_ftp = odinpromptt
-
 //
 // подключение модулей
 //
 
 const { src, dest, series, watch } = require('gulp') // галп
+const fs = require('fs')
 const sass = require('gulp-sass')(require('sass'))
 const csso = require('gulp-csso')
-const html_min = require('gulp-htmlmin')
 const auto_prefixer = require('gulp-autoprefixer')
 const concat = require('gulp-concat')
 const uglify = require('gulp-uglify-es').default
 const image_min = require('gulp-imagemin')
-const ftp = require('vinyl-ftp')
 const del = require('del')
-const set_header = require('gulp-header')
-const set_footer = require('gulp-footer')
 const gulp_if = require('gulp-if')
 
-// неиспользуемые
-const sync = require('browser-sync').create() // build локал хоста
+const sync = require('browser-sync').create() // создание локал хоста
 
 //
 // основное тело галпа
 //
 
-// функция подключения к ФТП
-const get_ftp_access = () => {
-	return ftp.create({
-		host: `${base_ftp.host}`,
-		user: `${base_ftp.login}`,
-		pass: `${base_ftp.pass}`,
+// заголовок страницы
+const get_title = () => 'Вопросы региональной экономики'
+
+// чтение всех файлов по glob-шаблонам и склейка в одну строку (в порядке шаблонов)
+const read_files = (globs) =>
+	new Promise((resolve, reject) => {
+		let result = ''
+		src(globs, { allowEmpty: true })
+			.on('data', (file) => {
+				result += file.contents.toString()
+			})
+			.on('end', () => resolve(result))
+			.on('error', reject)
 	})
-}
-const access = get_ftp_access()
 
-// build index.php
-const build_index = () => {
-	return src(index_src)
-		.pipe(concat('index.php'))
-		.pipe(access.dest(`${folder}`))
-}
+// очистка php-вставок (<?php ... ?>, <?= ... ?>) для статического просмотра
+const clean_tags = (str) =>
+	str
+		.replace(/<\?php[\s\S]*?\?>/g, '')
+		.replace(/<\?=[\s\S]*?\?>/g, '')
+		.replace(/<\?[\s\S]*?\?>/g, '')
 
-// build header.php
-const build_header = () => {
-	return src(header_src)
-		.pipe(concat('header.php'))
-		.pipe(access.dest(`${folder}`))
-}
-
-// build footer.php
-const build_footer = () => {
-	return src(footer_src)
-		.pipe(concat('footer.php'))
-		.pipe(access.dest(`${folder}`))
+// подстановка содержимого get_template_part('name') на место вызова
+const inline_partial = (template, name, content) => {
+	const call = `get_template_part('${name}')`
+	const start = template.indexOf(call)
+	if (start === -1) return template
+	const open = template.lastIndexOf('<?php', start)
+	const close = template.indexOf('?>', start) + 2
+	return template.slice(0, open) + content + template.slice(close)
 }
 
-// build menu.php
-const build_menu = async () => {
-	return src(menu_src)
-		.pipe(concat('menu.php'))
-		.pipe(access.dest(`${folder}`))
+// очистка папки локальной сборки
+const del_dist = () => {
+	return del(`${local_dist}/`)
 }
 
-// build aside.php
-const build_aside = async () => {
-	return src(aside_src)
-		.pipe(concat('aside.php'))
-		.pipe(access.dest(`${folder}`))
-}
+// сборка статической страницы index.html
+const build_page = async () => {
+	const header_top = await read_files(header_top_src)
+	const header_body = await read_files(header_body_src)
+	const header_bottom = await read_files(header_bottom_src)
+	const menu = await read_files(menu_src)
+	const main = await read_files(main_src)
+	const footer_top = await read_files(footer_top_src)
+	const aside = await read_files(aside_src)
+	const footer_body = await read_files(footer_body_src)
+	const footer_bottom = await read_files(footer_bottom_src)
 
-// build main.php
-const build_main = async () => {
-	return src(main_src)
-		.pipe(concat('main.php'))
-		.pipe(access.dest(`${folder}`))
+	// шапка: header-top + содержимое + header-bottom (с меню внутри)
+	const header = header_top + header_body + inline_partial(header_bottom, 'menu', menu)
+	// подвал: footer-top (с aside внутри) + содержимое + footer-bottom
+	const footer = inline_partial(footer_top, 'aside', aside) + footer_body + footer_bottom
+
+	const page = header + main + footer
+
+	let html = clean_tags(page)
+	html = html.replace('<head>', `<head><title>${get_title()}</title>`)
+
+	fs.mkdirSync(local_dist, { recursive: true })
+	fs.writeFileSync(`${local_dist}/index.html`, html)
+
+	return true
 }
 
 //
-// сбор всех scss из папки src и перенос css в папку дист
+// сбор всех sass из папки src и перенос css в папку дист
 //
 
 const build_sass = () => {
@@ -194,7 +188,7 @@ const build_sass = () => {
 		)
 		.pipe(concat('style.min.css'))
 		.pipe(gulp_if(!production, csso()))
-		.pipe(access.dest(`${folder}/css`))
+		.pipe(dest(`${folder}/css`))
 }
 
 //
@@ -204,7 +198,7 @@ const build_js = () => {
 	return src(js_src)
 		.pipe(concat('script.min.js'))
 		.pipe(gulp_if(!production, uglify()))
-		.pipe(access.dest(`${folder}/js`))
+		.pipe(dest(`${folder}/js`))
 }
 
 //
@@ -230,16 +224,16 @@ const export_images = () => {
 				])
 			)
 		)
-		.pipe(access.dest(`${folder}/images`))
+		.pipe(dest(`${folder}/images`))
 }
 const export_json = () => {
-	return src(json_src).pipe(access.dest(`${folder}/json`))
+	return src(json_src).pipe(dest(`${folder}/json`))
 }
 const export_files = () => {
-	return src(files_src).pipe(access.dest(`${folder}/files`))
+	return src(files_src).pipe(dest(`${folder}/files`))
 }
 const export_fonts = () => {
-	return src(fonts_src).pipe(access.dest(`${folder}/fonts`))
+	return src(fonts_src).pipe(dest(`${folder}/fonts`))
 }
 
 //
@@ -270,23 +264,54 @@ const get_min_img = () => {
 // to watch
 //
 
+const html_watch_src = [
+	...header_top_src,
+	...header_body_src,
+	...header_bottom_src,
+	...menu_src,
+	...main_src,
+	...footer_top_src,
+	...aside_src,
+	...footer_body_src,
+	...footer_bottom_src,
+]
+
 const toWatch = () => {
 	// html
-	watch(header_src, series(build_header))
-	watch(index_src, series(build_index))
-	watch(menu_src, series(build_menu))
-	watch(aside_src, series(build_aside))
-	watch(main_src, series(build_main))
-	watch(footer_src, series(build_footer))
+	watch(html_watch_src, series(build_page, sync_reload))
 
 	// css, js
-	watch(sass_src, series(build_sass))
-	watch(js_src, series(build_js))
+	watch(sass_src, series(build_sass, sync_reload))
+	watch(js_src, series(build_js, sync_reload))
 
 	// other
-	watch(images_src, series(export_images))
-	watch(json_src, series(export_json))
-	watch(files_src, series(export_files))
+	watch(images_src, series(export_images, sync_reload))
+	watch(json_src, series(export_json, sync_reload))
+	watch(files_src, series(export_files, sync_reload))
+	watch(fonts_src, series(export_fonts, sync_reload))
+}
+
+//
+// локальный сервер (browser-sync)
+//
+
+// запуск локального сервера на папке dist
+const sync_init = (done) => {
+	sync.init({
+		server: {
+			baseDir: local_dist,
+		},
+		port: 3000,
+		notify: false,
+		open: true,
+	})
+	done()
+}
+
+// перезагрузка браузера после изменений
+const sync_reload = (done) => {
+	sync.reload()
+	done()
 }
 
 //
@@ -294,23 +319,30 @@ const toWatch = () => {
 //
 
 exports.min = series(get_min_img) // минимизация всех изображений в папке src
+exports.del = series(del_dist) // очистка папки локальной сборки
 
-// выполнение всех программ и ватчинг
-exports.default = series(
+// сборка на локальный хост (одноразово, без watcher и сервера)
+exports.build = series(
+	del_dist,
+	build_page,
 	build_sass,
 	build_js,
+	export_images,
+	export_json,
+	export_fonts,
+	export_files
+)
 
-	build_index,
-	build_header,
-	build_menu,
-	build_aside,
-	build_main,
-	build_footer,
-
+// выполнение всех программ, запуск локального сервера и ватчинг
+exports.default = series(
+	del_dist,
+	build_page,
+	build_sass,
+	build_js,
 	export_images,
 	export_json,
 	export_fonts,
 	export_files,
-
+	sync_init,
 	toWatch
 )
