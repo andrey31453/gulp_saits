@@ -1,3 +1,8 @@
+// ссылка на элемент <main> — используется в x-init шапки и в классе Ajax
+// (в исходной WordPress-теме main объявлялась на сервере; для локального просмотра
+// берём элемент из DOM — он уже есть в разметке к моменту выполнения defer-скрипта)
+const main = document.querySelector('main')
+
 class Ajax {
 	constructor(main, data) {
 		// params
